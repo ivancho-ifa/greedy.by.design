@@ -1,3 +1,5 @@
+import LogComponent from './components/Log'
+
 const logs = [
    {
       date: new Date('Thu Nov 10 2022 07:19:24 GMT+0200 (Eastern European Standard Time)'),
@@ -26,29 +28,12 @@ const logs = [
    },
 ]
 
-function getLocale() {
-   return navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.language
-}
-
-function Log(params) {
-   return (
-      <div>
-         <header>
-            <p>
-               <time dateTime={params.date}>{params.date.ToLocaleString()}</time>
-            </p>
-            <h2>{params.title}</h2>
-         </header>
-      </div>
-   )
-}
-
-function Journal(params) {
+export default function Journal(params) {
    return (
       <div className='Journal'>
-         {params.logs.forEach((log) => {
+         {logs.map((log) => {
             return (
-               <Log
+               <LogComponent
                   date={log.date}
                   title={log.title}
                />
@@ -57,5 +42,3 @@ function Journal(params) {
       </div>
    )
 }
-
-export default Journal

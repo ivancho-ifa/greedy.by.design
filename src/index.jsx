@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                errorElement: <Error />,
             },
             {
-               path: 'journal',
+               path: '/journal',
                element: <Journal />,
             },
          ])}

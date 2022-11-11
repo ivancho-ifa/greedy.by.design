@@ -1,0 +1,8 @@
+{
+   "extends": [
+      "react-app",
+      "react-app/jest",
+      // Prettier has to be the last one in order to override other extends
+      "prettier"
+   ]
+}

@@ -1,0 +1,31 @@
+name: Format
+
+# This action works with pull requests and pushes
+on:
+  pull_request:
+  push:
+
+jobs:
+  prettier:
+    name: format files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          
+      - name: Prettier Action
+        # You may pin to the exact commit or the version.
+        # uses: creyD/prettier_action@6602189cf8bac1ce73ffe601925f6127ab7f21ac
+        uses: creyD/prettier_action@v4.2
+        with:
+          # Update the current commit instead of creating a new one
+          same_commit: true
+          # Options for the `prettier` command
+          prettier_options: --write .
+          # Specific version of prettier (by default just use the latest version)
+          prettier_version: 2.7.1
+          # Only prettify files changed in the last commit, can't be used with file_pattern!
+          only_changed: true

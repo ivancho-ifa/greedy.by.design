@@ -1,0 +1,61 @@
+.Home {
+   height: 100vh;
+   width: 100vw;
+   max-height: 100vh;
+   max-width: 100vw;
+
+   font-family: Helvetica;
+   color: white;
+   text-transform: uppercase;
+   background: black;
+}
+
+.column {
+   display: flex;
+   flex-flow: column nowrap;
+}
+
+.expandToFill {
+   flex: 1 100%;
+}
+
+/* Spreads the children equally with a child on both sides */
+.spreadChildren {
+   display: flex;
+   justify-content: space-between;
+}
+
+.paddedWithFonstSize {
+   padding: 1em;
+}
+
+.marginedWithFontSize {
+   margin: 1em;
+}
+
+.menu {
+   width: fit-content;
+   height: fit-content;
+}
+
+.menu > ul {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+}
+
+.legals {
+   font-size: 0.3em;
+   text-align: right;
+
+   min-width: 15vw;
+   max-width: 30vw;
+   height: fit-content;
+}
+
+.header {
+   /* Font size is calculated specifically for the current content of the header
+   to fill the bottom row. If header contents change probably this value should too */
+   font-size: 9vw;
+   text-align: center;
+}

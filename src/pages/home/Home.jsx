@@ -52,7 +52,7 @@ function Home() {
                      @greedy.by.design
                   </a>
                   <br />
-                  <time>2022</time>
+                  <time dateTime='2022'>2022</time>
                </small>
             </footer>
          </div>

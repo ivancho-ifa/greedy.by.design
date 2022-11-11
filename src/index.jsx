@@ -2,6 +2,7 @@ import 'the-new-css-reset/css/reset.css'
 
 import Home from './pages/home/Home'
 import Error from './pages/error/Error'
+import Journal from './pages/journal/Journal'
 
 import reportWebVitals from './reportWebVitals'
 
@@ -17,6 +18,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                path: '/',
                element: <Home />,
                errorElement: <Error />,
+            },
+            {
+               path: 'journal',
+               element: <Journal />,
             },
          ])}
       />

@@ -1,41 +1,18 @@
-import LogComponent from './components/Log'
+import Log from './components/Log'
 
-const logs = [
-   {
-      date: new Date('Thu Nov 10 2022 07:19:24 GMT+0200 (Eastern European Standard Time)'),
-      title: 'Maxime veritatis est voluptatibus vero aut qui ut.',
-      titleImage: 'http://placeimg.com/640/480',
-   },
-   {
-      date: new Date('Thu Nov 10 2022 07:19:24 GMT+0200 (Eastern European Standard Time)'),
-      title: 'Maxime veritatis est voluptatibus vero aut qui ut.',
-      titleImage: 'http://placeimg.com/640/480',
-   },
-   {
-      date: new Date('Thu Nov 10 2022 07:19:24 GMT+0200 (Eastern European Standard Time)'),
-      title: 'Maxime veritatis est voluptatibus vero aut qui ut.',
-      titleImage: 'http://placeimg.com/640/480',
-   },
-   {
-      date: new Date('Thu Nov 10 2022 07:19:24 GMT+0200 (Eastern European Standard Time)'),
-      title: 'Maxime veritatis est voluptatibus vero aut qui ut.',
-      titleImage: 'http://placeimg.com/640/480',
-   },
-   {
-      date: new Date('Thu Nov 10 2022 07:19:24 GMT+0200 (Eastern European Standard Time)'),
-      title: 'Maxime veritatis est voluptatibus vero aut qui ut.',
-      titleImage: 'http://placeimg.com/640/480',
-   },
-]
+import { useLoaderData } from "react-router-dom";
 
 export default function Journal(params) {
+   const logs = useLoaderData()
+
    return (
       <div className='Journal'>
-         {logs.map((log) => {
+         {logs.map((log, logId) => {
             return (
-               <LogComponent
+               <Log
                   date={log.date}
                   title={log.title}
+                  key={logId}
                />
             )
          })}

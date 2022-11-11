@@ -9,6 +9,7 @@ import reportWebVitals from './reportWebVitals'
 import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import logsLoader from './pages/journal/utils/loader'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
    <StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             {
                path: '/journal',
                element: <Journal />,
+               loader: logsLoader,
             },
          ])}
       />

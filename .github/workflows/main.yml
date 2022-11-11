@@ -1,7 +1,7 @@
 name: Format
 on:
   pull_request:
-    branches: [master]
+    branches: [master, feature/format-on-push-2]
 jobs:
   format:
     runs-on: ubuntu-latest

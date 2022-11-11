@@ -45,7 +45,7 @@
 }
 
 .legals {
-   font-size: .3em;
+   font-size: 0.3em;
    text-align: right;
 
    min-width: 15vw;
@@ -56,6 +56,6 @@
 .header {
    /* Font size is calculated specifically for the current content of the header
    to fill the bottom row. If header contents change probably this value should too */
-   font-size: 9vw; 
+   font-size: 9vw;
    text-align: center;
 }

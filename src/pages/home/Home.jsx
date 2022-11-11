@@ -1,28 +1,27 @@
 import './Home.css'
+import { Link } from 'react-router-dom'
 
-function Home() {
+export default function Home() {
    return (
       <div className='Home background column'>
          <div className='expandToFill spreadChildren paddedWithFonstSize'>
             <nav className='menu'>
                <ul>
+                  <li>home</li>
                   <li>
-                     <a href=''>home</a>
+                     <Link to='/studio'>studio</Link>
                   </li>
                   <li>
-                     <a href=''>studio</a>
+                     <Link to='/projects'>projects</Link>
                   </li>
                   <li>
-                     <a href=''>projects</a>
+                     <Link to='/journal'>journal</Link>
                   </li>
                   <li>
-                     <a href=''>journal</a>
+                     <Link to='/shop'>shop</Link>
                   </li>
                   <li>
-                     <a href=''>shop</a>
-                  </li>
-                  <li>
-                     <a href=''>contact</a>
+                     <Link to='/contact'>contact</Link>
                   </li>
                </ul>
             </nav>
@@ -71,5 +70,3 @@ function Home() {
       </div>
    )
 }
-
-export default Home

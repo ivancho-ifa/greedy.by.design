@@ -1,14 +1,25 @@
 import 'the-new-css-reset/css/reset.css'
 
-import React, { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import Home from './pages/home/Home'
+import Error from './pages/error/Error'
+
 import reportWebVitals from './reportWebVitals'
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(
+import React, { StrictMode } from 'react'
+import ReactDOM from 'react-dom/client'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
    <StrictMode>
-      <App />
+      <RouterProvider
+         router={createBrowserRouter([
+            {
+               path: '/',
+               element: <Home />,
+               errorElement: <Error />,
+            },
+         ])}
+      />
    </StrictMode>
 )
 

@@ -15,6 +15,7 @@ export default function Journal(params) {
                   <Log
                      date={log.date}
                      title={log.title}
+                     titleImage={log.titleImage}
                      key={logId}
                   />
                )

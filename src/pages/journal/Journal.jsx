@@ -16,6 +16,7 @@ export default function Journal(params) {
                      date={log.date}
                      title={log.title}
                      titleImage={log.titleImage}
+                     titleImageAlt={log.titleImageAlt}
                      key={logId}
                   />
                )

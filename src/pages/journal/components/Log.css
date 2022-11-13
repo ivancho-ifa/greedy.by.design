@@ -1,0 +1,24 @@
+.collapsingTopBottomBorder {
+   box-shadow: 
+      0 0 0 0 white, 
+      0 .1em 0 0 white, 
+      0 .1em 0 0 white, /* Just to fix the corner */
+      0 0 0 0 white inset, 
+      0 .1em 0 0 white inset;
+}
+
+.padded {
+   padding: .8em .5em;
+}
+
+h2 {
+   font-size: 1.2em;
+}
+
+.subtitle {
+   font-size: .6em;
+}
+
+.titleImage {
+   max-width: 12em;
+}

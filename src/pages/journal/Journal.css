@@ -1,0 +1,26 @@
+/* TODO: Deduplicate with .Home */
+.Journal {
+   max-width: 100%;
+   min-width: 100%;
+   min-height: 100vh;
+   overflow: hidden;
+
+   font-family: Helvetica;
+   color: white;
+   text-transform: uppercase;
+   background: black;
+
+   padding-bottom: 8em;
+}
+
+.centralizer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: fit-content;
+}
+
+/* TODO: Handle responsiveness */
+.logs {
+   max-width: 50vw;
+}

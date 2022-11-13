@@ -12,8 +12,12 @@ export default function Log(params) {
    usePreloadImage(params.titleImage)
 
    const handleEnter = (event) => {
-      setIsImageShown(!isImageShown)
+      setIsImageShown(true)
       setMousePos({ x: event.clientX, y: event.clientY })
+   }
+
+   const handleLeave = () => {
+      setIsImageShown(false)
    }
 
    const getImage = () => {
@@ -31,6 +35,7 @@ export default function Log(params) {
          <div
             className='Log collapsingTopBottomBorder padded'
             onMouseEnter={handleEnter}
+            onMouseLeave={handleLeave}
          >
             <header>
                <p className='subtitle'>

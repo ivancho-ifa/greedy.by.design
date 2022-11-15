@@ -1,39 +1,39 @@
 import { clamp } from './math'
 
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 
-function getWindowDimensions() {
+function getBodyDimensions() {
    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
+      width: document.body.clientWidth,
+      height: document.body.clientHeight,
    }
 }
 
-function useWindowDimensions() {
-   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
+function useBodyDimensions() {
+   const [bodyDimensions, setBodyDimensions] = useState(getBodyDimensions())
 
-   useEffect(() => {
+   useLayoutEffect(() => {
       function handleResize() {
-         setWindowDimensions(getWindowDimensions())
+         setBodyDimensions(getBodyDimensions())
       }
 
       window.addEventListener('resize', handleResize)
       return () => window.removeEventListener('resize', handleResize)
    }, [])
 
-   return windowDimensions
+   return bodyDimensions
 }
 
-export function useStylePositionCenter(dimensions, center) {
-   const windowDimensions = useWindowDimensions()
-   const halfHeight = dimensions.height / 2
-   const halfWidth = dimensions.width / 2
-   const yRange = { min: 0, max: windowDimensions.height - dimensions.height }
-   const xRange = { min: 0, max: windowDimensions.width - dimensions.width }
+export function useStylePositionCenter(elementDimensions, targetCenter) {
+   const bodyDimensions = useBodyDimensions()
+   const elementCenterY = elementDimensions.height / 2
+   const elementCenterX = elementDimensions.width / 2
+   const yRange = { min: 0, max: bodyDimensions.height - elementDimensions.height }
+   const xRange = { min: 0, max: bodyDimensions.width - elementDimensions.width }
 
    return {
       position: 'absolute',
-      top: clamp(center.y - halfHeight, yRange),
-      left: clamp(center.x - halfWidth, xRange),
+      top: clamp(targetCenter.y - elementCenterY, yRange),
+      left: clamp(targetCenter.x - elementCenterX, xRange),
    }
 }

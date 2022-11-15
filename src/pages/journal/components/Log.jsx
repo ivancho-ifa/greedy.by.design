@@ -13,7 +13,7 @@ export default function Log(params) {
 
    const handleEnter = (event) => {
       setIsImageShown(true)
-      setMousePos({ x: event.clientX, y: event.clientY })
+      setMousePos({ x: event.pageX, y: event.pageY })
    }
 
    const handleLeave = () => {

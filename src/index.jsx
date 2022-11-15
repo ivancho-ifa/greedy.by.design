@@ -3,12 +3,13 @@ import 'the-new-css-reset/css/reset.css'
 import Home from './pages/home/Home'
 import Error from './pages/error/Error'
 import Journal from './pages/journal/Journal'
+import Navigation from './components/Navigation'
 
 import reportWebVitals from './reportWebVitals'
 
 import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom'
 import logsLoader from './pages/journal/utils/logsLoader'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -17,13 +18,26 @@ ReactDOM.createRoot(document.getElementById('root')).render(
          router={createBrowserRouter([
             {
                path: '/',
-               element: <Home />,
+               element: <Outlet />,
+               // TODO: Improve error page
                errorElement: <Error />,
-            },
-            {
-               path: '/journal',
-               element: <Journal />,
-               loader: logsLoader,
+               children: [
+                  {
+                     index: true,
+                     element: <Home />,
+                  },
+                  {
+                     path: '/',
+                     element: <Navigation />,
+                     children: [
+                        {
+                           path: 'journal',
+                           element: <Journal />,
+                           loader: logsLoader,
+                        },
+                     ],
+                  },
+               ],
             },
          ])}
       />

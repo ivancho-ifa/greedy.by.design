@@ -5,8 +5,10 @@ import { Fragment } from 'react'
 
 export default function Navigation(props) {
    return (
-      <Fragment>
-         <Outlet />
+      <div className='page column spreadChildren '>
+         <div className='expandToFill'>
+            <Outlet />
+         </div>
          <nav className='Navigation row spreadChildren padded'>
             <ul className='row'>
                <li className='marginedSides'>
@@ -58,6 +60,6 @@ export default function Navigation(props) {
                </li>
             </ul>
          </nav>
-      </Fragment>
+      </div>
    )
 }

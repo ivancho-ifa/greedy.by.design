@@ -13,14 +13,19 @@
    text-transform: uppercase;
    font-family: 'Druk Wide Bold';
    font-size: 0.7em;
+
    width: 100%;
-   overflow-x: hidden;
    max-width: 100vw;
-   position: sticky;
-   bottom: 0;
-   left: 0;
-   z-index: 100;
+   overflow-x: hidden;
+
    background: white;
+   color: black;
+}
+
+.page {
+   min-height: 100vh;
+   background: black;
+   color: white;
 }
 
 .row {
@@ -43,4 +48,19 @@
 
 .smallMarginedSides {
    margin: 0 0.2em;
+}
+
+.expandToFill {
+   flex: 1 100%;
+}
+
+.column {
+   display: flex;
+   flex-flow: column nowrap;
+}
+
+/* Spreads the children equally with a child on both sides */
+.spreadChildren {
+   display: flex;
+   justify-content: space-between;
 }

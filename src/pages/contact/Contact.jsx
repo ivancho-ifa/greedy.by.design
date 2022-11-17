@@ -2,24 +2,30 @@ import './Contact.css'
 
 export default function Contact(props) {
    return (
-      <form
-         action='mailto:greedybydesign@gmail.com'
-         method='get'
-         enctype='text/plain'
-      >
-         <div className='row spreadChildren'>
-            <input
-               type='text'
-               placeholder='John Doe'
-               className='expandToFill padded'
-            />
-            <input
-               type='email'
-               placeholder='john.doe@mail.com'
-               className='expandToFill padded'
-            />
-         </div>
-      </form>
+      <div className='centralizer'>
+         <form
+            action='mailto:greedybydesign@gmail.com'
+            method='get'
+            enctype='text/plain'
+            className='fitContent'
+         >
+            <div className='column inputArea'>
+               <div className='row spreadChildren'>
+                  <input
+                     type='text'
+                     placeholder='John Doe'
+                     className='expandToFill padded'
+                  />
+                  <input
+                     type='email'
+                     placeholder='john.doe@mail.com'
+                     className='expandToFill padded'
+                  />
+               </div>
+               <textarea className='letter padded'></textarea>
+            </div>
+         </form>
+      </div>
    )
 }
 

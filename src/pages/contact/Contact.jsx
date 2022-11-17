@@ -2,7 +2,7 @@ import './Contact.css'
 
 export default function Contact(props) {
    return (
-      <div className='centralizer'>
+      <div className='Contact centralizer'>
          <form
             action='mailto:greedybydesign@gmail.com'
             method='get'
@@ -22,7 +22,12 @@ export default function Contact(props) {
                      className='expandToFill padded'
                   />
                </div>
-               <textarea className='letter padded'></textarea>
+               <textarea className='letter padded expandToFill'></textarea>
+               <input
+                  type='submit'
+                  value='Send'
+                  className='sendButton padded '
+               />
             </div>
          </form>
       </div>

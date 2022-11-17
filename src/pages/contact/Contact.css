@@ -1,9 +1,14 @@
+.Contact {
+   font-family: Helvetica;
+}
+
 .row {
    display: flex;
    flex-flow: row nowrap;
 }
 
 .inputArea {
+   /* align-items: center; */
 
 }
 
@@ -61,4 +66,11 @@ input::placeholder {
 .fitContent {
    width: 60%;
    max-width: 27em;
+}
+
+.sendButton {
+   width: 30%;
+   align-self: center;
+   text-transform: uppercase;
+   text-align: center;
 }

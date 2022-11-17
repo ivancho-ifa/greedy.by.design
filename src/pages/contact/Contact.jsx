@@ -2,37 +2,56 @@ import './Contact.css'
 
 export default function Contact(props) {
    return (
-      <div className='Contact'>
-         <form action=''>
-            <div>
-               <div className='row'>
-                  <input
-                     type='text'
-                     className='backgroundColorWhite'
-                  />
-                  <input
-                     type='email'
-                     className='backgroundColorWhite'
-                  />
-               </div>
-               <textarea
-                  name=''
-                  id=''
-                  cols='30'
-                  rows='10'
-                  className='backgroundColorWhite'
-               ></textarea>
-            </div>
+      <form
+         action='mailto:greedybydesign@gmail.com'
+         method='get'
+         enctype='text/plain'
+      >
+         <div className='row spreadChildren'>
             <input
-               type='submit'
-               value=''
-               className='backgroundColorWhite'
+               type='text'
+               placeholder='John Doe'
+               className='expandToFill padded'
             />
-         </form>
-         <p>
-            or message us on <a href='mailto:greedybydesign@gmail.com'>greedybydesign@gmail.com</a>
-         </p>
-         <footer>greedy.by.design @2022</footer>
-      </div>
+            <input
+               type='email'
+               placeholder='john.doe@mail.com'
+               className='expandToFill padded'
+            />
+         </div>
+      </form>
    )
 }
+
+// return (
+//    <div className='Contact'>
+//       <form action=''>
+//          <div className='inputArea'>
+//             <div className='row spreadChildren'>
+//                <input
+//                   type='text'
+//                   className='inputField'
+//                />
+//                <input
+//                   type='email'
+//                   className='inputField'
+//                />
+//             </div>
+//             <textarea
+//                name=''
+//                id=''
+//                cols='30'
+//                rows='10'
+//             ></textarea>
+//          </div>
+//          <input
+//             type='submit'
+//             value=''
+//          />
+//       </form>
+//       <p>
+//          or message us on <a href='mailto:greedybydesign@gmail.com'>greedybydesign@gmail.com</a>
+//       </p>
+//       <footer>greedy.by.design @2022</footer>
+//    </div>
+// )

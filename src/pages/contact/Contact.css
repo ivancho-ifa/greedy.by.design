@@ -1,3 +1,29 @@
-.backgroundColorWhite {
+.row {
+   display: flex;
+   flex-flow: row nowrap;
+}
+
+/* Spreads the children equally with a child on both sides */
+.spreadChildren {
+   display: flex;
+   justify-content: space-between;
+   gap: 1em;
+}
+
+.expandToFill {
+   flex: 1 100%;
+}
+
+input, textarea {
    background: white;
+   color: black;
+}
+
+input::placeholder {
+   color: gray;
+   font-style: italic;
+}
+
+.padded {
+   padding: .5em 1em;
 }

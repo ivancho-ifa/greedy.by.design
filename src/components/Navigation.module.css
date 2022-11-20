@@ -9,6 +9,10 @@
       url('//db.onlinewebfonts.com/t/2206d6cc490084998d531e8c1b2cbb4a.svg#Druk Wide Bold') format('svg');
 }
 
+.rootLayout {
+   display: grid;
+}
+
 .Navigation {
    text-transform: uppercase;
    font-family: 'Druk Wide Bold';

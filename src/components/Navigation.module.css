@@ -14,9 +14,9 @@
 
    display: grid;
    grid-template-rows:
-      1fr 
+      1fr
       auto;
-   grid-template-areas: 
+   grid-template-areas:
       'page'
       'navigation';
 }

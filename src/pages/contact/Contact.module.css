@@ -2,10 +2,10 @@
    min-height: inherit;
 
    display: grid;
-   grid-template-areas: 
+   grid-template-areas:
       'main'
       'footer';
-   grid-template-rows: 
+   grid-template-rows:
       1fr
       auto;
    justify-content: center;
@@ -20,7 +20,7 @@ main {
    grid-area: main;
 
    display: grid;
-   grid-template-areas: 
+   grid-template-areas:
       'form'
       'alternative';
    gap: 1em;
@@ -34,13 +34,12 @@ form {
 
    display: grid;
    gap: 1em;
-   grid-template-rows: 
-      auto 
+   grid-template-rows:
+      auto
       1fr
       auto;
-   grid-template-columns: 
-      1fr 1fr;
-   grid-template-areas: 
+   grid-template-columns: 1fr 1fr;
+   grid-template-areas:
       'name email'
       'letter letter'
       'submit submit';
@@ -50,10 +49,11 @@ form {
    grid-area: alternative;
 }
 
-input, textarea {
-   background-color : white;
+input,
+textarea {
+   background-color: white;
    color: black;
-   padding: .25em .5em;
+   padding: 0.25em 0.5em;
 }
 
 input::placeholder {
@@ -94,16 +94,16 @@ input#submit {
 .footer {
    grid-area: footer;
    font-size: x-small;
-   margin: .5em;
+   margin: 0.5em;
    width: fit-content;
    position: relative;
 }
 
 .footer::after {
-   content:"";
+   content: '';
    background: #ccc;
    position: absolute;
-   top: -.5em;
+   top: -0.5em;
    left: 25%;
    height: 1px;
    width: 50%;

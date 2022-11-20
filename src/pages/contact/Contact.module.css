@@ -8,6 +8,8 @@
    grid-template-rows:
       1fr
       auto;
+   grid-template-columns: 
+      1fr;
    justify-content: center;
    justify-items: center;
 
@@ -25,8 +27,6 @@ main {
       'alternative';
    gap: 1em;
    align-content: center;
-
-   width: min-content;
 }
 
 form {
@@ -54,6 +54,7 @@ textarea {
    background-color: white;
    color: black;
    padding: 0.25em 0.5em;
+   min-width: 0;
 }
 
 input::placeholder {

@@ -6,5 +6,7 @@ body,
    min-height: 100vh;
    height: 100vh;
 
+   font-size: 1.3em;
+
    overflow-x: hidden;
 }

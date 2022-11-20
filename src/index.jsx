@@ -1,4 +1,5 @@
 import 'the-new-css-reset/css/reset.css'
+import './index.module.css'
 
 import Home from './pages/home/Home'
 import Error from './pages/error/Error'

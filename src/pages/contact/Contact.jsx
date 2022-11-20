@@ -1,68 +1,43 @@
-import './Contact.css'
+import contactStyles from './Contact.module.css'
+import commonStyles from '../../css/common.module.css'
 
-export default function Contact(props) {
+export default function Contact() {
    return (
-      <div className='Contact centralizer'>
-         <form
-            action='mailto:greedybydesign@gmail.com'
-            method='get'
-            enctype='text/plain'
-            className='fitContent'
-         >
-            <div className='column inputArea'>
-               <div className='row spreadChildren'>
-                  <input
-                     type='text'
-                     placeholder='John Doe'
-                     className='expandToFill padded'
-                  />
-                  <input
-                     type='email'
-                     placeholder='john.doe@mail.com'
-                     className='expandToFill padded'
-                  />
-               </div>
-               <textarea className='letter padded expandToFill'></textarea>
+      <div className={`${contactStyles.Contact}`}>
+         <main>
+            <form
+               action='mailto:greedybydesign@gmail.com'
+               method='get'
+               enctype='text/plain'
+            >
+               <input
+                  type='text'
+                  placeholder='John Doe'
+                  id={`${contactStyles.name}`}
+               />
+               <input
+                  type='email'
+                  placeholder='john.doe@mail.com'
+                  id={`${contactStyles.email}`}
+               />
+               <textarea></textarea>
                <input
                   type='submit'
                   value='Send'
-                  className='sendButton padded '
+                  id={`${contactStyles.submit}`}
+                  className={`${commonStyles.uppercase}`}
                />
+            </form>
+            <div className={`${contactStyles.alternative} ${commonStyles.centerText} ${commonStyles.uppercase}`}>
+               <span className={`${contactStyles.notImportant}`}>or message us on </span>
+               <span className={`${contactStyles.important}`}>
+                  <a href='mailto:greedybydesign@gmail.com'>greedybydesign@gmail.com</a>
+               </span>
             </div>
-         </form>
+         </main>
+         <footer className={`${contactStyles.footer} ${commonStyles.centerText} ${commonStyles.uppercase}`}>
+            greedy.by.design <span className={`${contactStyles.subfooter}`}>@2022</span>
+         </footer>
       </div>
    )
 }
-
-// return (
-//    <div className='Contact'>
-//       <form action=''>
-//          <div className='inputArea'>
-//             <div className='row spreadChildren'>
-//                <input
-//                   type='text'
-//                   className='inputField'
-//                />
-//                <input
-//                   type='email'
-//                   className='inputField'
-//                />
-//             </div>
-//             <textarea
-//                name=''
-//                id=''
-//                cols='30'
-//                rows='10'
-//             ></textarea>
-//          </div>
-//          <input
-//             type='submit'
-//             value=''
-//          />
-//       </form>
-//       <p>
-//          or message us on <a href='mailto:greedybydesign@gmail.com'>greedybydesign@gmail.com</a>
-//       </p>
-//       <footer>greedy.by.design @2022</footer>
-//    </div>
-// )

@@ -6,6 +6,9 @@ import Journal from './pages/journal/Journal'
 import logsLoader from './pages/journal/utils/logsLoader'
 import Navigation from './components/Navigation'
 import Contact from './pages/contact/Contact'
+import Shop from './pages/shop/Shop'
+import Studio from './pages/studio/Studio'
+import Projects from './pages/projects/Projects'
 
 import reportWebVitals from './reportWebVitals'
 
@@ -39,6 +42,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                         {
                            path: 'contact',
                            element: <Contact />,
+                        },
+                        {
+                           path: 'studio',
+                           element: <Studio />,
+                        },
+                        {
+                           path: 'projects',
+                           element: <Projects />,
+                        },
+                        {
+                           path: 'shop',
+                           element: <Shop />,
                         },
                      ],
                   },

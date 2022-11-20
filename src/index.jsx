@@ -3,14 +3,15 @@ import 'the-new-css-reset/css/reset.css'
 import Home from './pages/home/Home'
 import Error from './pages/error/Error'
 import Journal from './pages/journal/Journal'
+import logsLoader from './pages/journal/utils/logsLoader'
 import Navigation from './components/Navigation'
+import Contact from './pages/contact/Contact'
 
 import reportWebVitals from './reportWebVitals'
 
 import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom'
-import logsLoader from './pages/journal/utils/logsLoader'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
    <StrictMode>
@@ -34,6 +35,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                            path: 'journal',
                            element: <Journal />,
                            loader: logsLoader,
+                        },
+                        {
+                           path: 'contact',
+                           element: <Contact />,
                         },
                      ],
                   },

@@ -1,0 +1,115 @@
+.Contact {
+   min-height: inherit;
+
+   display: grid;
+   grid-template-areas:
+      'main'
+      'footer';
+   grid-template-rows:
+      1fr
+      auto;
+   justify-content: center;
+   justify-items: center;
+
+   background-color: black;
+   color: white;
+   font-family: Helvetica;
+}
+
+main {
+   grid-area: main;
+
+   display: grid;
+   grid-template-areas:
+      'form'
+      'alternative';
+   gap: 1em;
+   align-content: center;
+
+   width: min-content;
+}
+
+form {
+   grid-area: form;
+
+   display: grid;
+   gap: 1em;
+   grid-template-rows:
+      auto
+      1fr
+      auto;
+   grid-template-columns: 1fr 1fr;
+   grid-template-areas:
+      'name email'
+      'letter letter'
+      'submit submit';
+}
+
+.alternative {
+   grid-area: alternative;
+}
+
+input,
+textarea {
+   background-color: white;
+   color: black;
+   padding: 0.25em 0.5em;
+}
+
+input::placeholder {
+   color: gray;
+   font-style: oblique;
+}
+
+input#name {
+   grid-area: name;
+}
+
+input#email {
+   grid-area: email;
+}
+
+textarea {
+   grid-area: letter;
+   height: 12em;
+}
+
+input#submit {
+   grid-area: submit;
+
+   width: 10em;
+   text-align: center;
+   justify-self: center;
+}
+
+.important {
+   display: block;
+   font-size: large;
+}
+
+.notImportant {
+   font-size: x-small;
+}
+
+.footer {
+   grid-area: footer;
+   font-size: x-small;
+   margin: 0.5em;
+   width: fit-content;
+   position: relative;
+}
+
+.footer::after {
+   content: '';
+   background: #ccc;
+   position: absolute;
+   top: -0.5em;
+   left: 25%;
+   height: 1px;
+   width: 50%;
+}
+
+.subfooter {
+   display: block;
+   font-size: xx-small;
+}

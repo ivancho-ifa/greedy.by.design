@@ -12,10 +12,7 @@ export default function Navigation() {
 
    return (
       <Fragment>
-         <div
-            className={`outlet`}
-            style={styleFullscreenExcludingNavigation}
-         >
+         <div style={styleFullscreenExcludingNavigation}>
             <Outlet />
          </div>
 

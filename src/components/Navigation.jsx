@@ -1,15 +1,25 @@
 import './Navigation.css'
 
 import { Link, Outlet } from 'react-router-dom'
-import { Fragment } from 'react'
+import { Fragment, useRef } from 'react'
+import { useStyleFullscreenExcludingNavigation } from './utils/componentManipulation'
 
-export default function Navigation(props) {
+export default function Navigation() {
+   const navigation = useRef()
+   const styleFullscreenExcludingNavigation = useStyleFullscreenExcludingNavigation(navigation)
+
+   console.log(`style: ${JSON.stringify(styleFullscreenExcludingNavigation)}`)
+
    return (
-      <div className='page column spreadChildren '>
-         <div className='expandToFill'>
+      <Fragment>
+         <div style={styleFullscreenExcludingNavigation}>
             <Outlet />
          </div>
-         <nav className='Navigation row spreadChildren padded'>
+
+         <nav
+            ref={navigation}
+            className='Navigation row spreadChildren padded'
+         >
             <ul className='row'>
                <li className='marginedSides'>
                   <Link to='/'>home</Link>
@@ -60,6 +70,6 @@ export default function Navigation(props) {
                </li>
             </ul>
          </nav>
-      </div>
+      </Fragment>
    )
 }

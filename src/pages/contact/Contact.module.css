@@ -78,7 +78,8 @@ textarea {
 input#submit {
    grid-area: submit;
 
-   width: 10em;
+   width: 100%;
+   max-width: 10em;
    text-align: center;
    justify-self: center;
 }
@@ -113,4 +114,24 @@ input#submit {
 .subfooter {
    display: block;
    font-size: xx-small;
+}
+
+@media screen and (max-width: 600px) {
+   form {
+      grid-template-rows: 
+         auto 
+         auto 
+         1fr 
+         auto;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+         'name'
+         'email'
+         'letter'
+         'submit';
+   }
+
+   input#submit {
+      max-width: none;
+   }
 }

@@ -9,11 +9,25 @@
       url('//db.onlinewebfonts.com/t/2206d6cc490084998d531e8c1b2cbb4a.svg#Druk Wide Bold') format('svg');
 }
 
-.rootLayout {
+#root {
+   min-height: 100vh;
+
    display: grid;
+   grid-template-rows:
+      1fr 
+      auto;
+   grid-template-areas: 
+      'page'
+      'navigation';
+}
+
+.page {
+   grid-area: page;
 }
 
 .Navigation {
+   grid-area: navigation;
+
    text-transform: uppercase;
    font-family: 'Druk Wide Bold';
    font-size: 0.7em;
@@ -24,6 +38,9 @@
 
    background: white;
    color: black;
+
+   position: sticky;
+   bottom: 0;
 }
 
 .row {

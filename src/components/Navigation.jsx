@@ -1,10 +1,11 @@
 import navigationStyles from './Navigation.module.css'
+import { useStyleFullscreenExcludingNavigation } from './utils/componentManipulation'
 
 import { Link, Outlet } from 'react-router-dom'
 
 export default function Navigation() {
    return (
-      <div className={`${navigationStyles.rootLayout}`}>
+      <div id={`${navigationStyles.root}`}>
          <div className={`${navigationStyles.page}`}>
             <Outlet />
          </div>

@@ -21,7 +21,7 @@
    background: white;
    color: black;
 
-   position: sticky;
+   position: fixed;
    bottom: 0;
 }
 
@@ -66,4 +66,8 @@
 .spreadChildren {
    display: flex;
    justify-content: space-between;
+}
+
+.outlet {
+   position: relative;
 }

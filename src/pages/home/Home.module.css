@@ -1,4 +1,3 @@
-/* TODO: Deduplicate with .Journal */
 .Home {
    height: 100vh;
    width: 100vw;
@@ -9,54 +8,42 @@
    color: white;
    text-transform: uppercase;
    background: black;
+
+   display: grid;
+   grid-template:
+      "navigation legals" 1fr
+      "header header" auto
+      / 1fr 1fr;
 }
 
-.column {
-   display: flex;
-   flex-flow: column nowrap;
-}
-
-.expandToFill {
-   flex: 1 100%;
-}
-
-/* Spreads the children equally with a child on both sides */
-.spreadChildren {
-   display: flex;
-   justify-content: space-between;
-}
-
-.paddedWithFonstSize {
-   padding: 1em;
-}
-
-.marginedWithFontSize {
-   margin: 1em;
+.marginBottom {
+   display: block;
+   margin-bottom: 1em;
 }
 
 .menu {
+   grid-area: navigation;
+
    width: fit-content;
    height: fit-content;
 }
 
-.menu > ul {
-   list-style-type: none;
-   padding: 0;
-   margin: 0;
-}
-
 .legals {
+   grid-area: legals;
+
    font-size: 0.3em;
    text-align: right;
+   justify-self: end;
 
+   max-width: 30vw; 
    min-width: 15vw;
-   max-width: 30vw;
    height: fit-content;
 }
 
 .header {
-   /* Font size is calculated specifically for the current content of the header
-   to fill the bottom row. If header contents change probably this value should too */
-   font-size: 9vw;
+   grid-area: header;
+
    text-align: center;
+   font-size: calc(100vw / 11); /* Font size is calculated specifically for the
+      current content of the header (greedy.by.design®) to fill the viewport width*/
 }

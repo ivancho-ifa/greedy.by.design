@@ -13,28 +13,28 @@ export default function Navigation() {
          <nav
             className={`${navigationStyles.Navigation} ${navigationStyles.row} ${navigationStyles.spreadChildren} ${navigationStyles.padded}}`}
          >
-            <ul className={`${navigationStyles.row}`}>
-               <li className={`${navigationStyles.marginedSides}`}>
+            <ul className={`${navigationStyles.menu}`}>
+               <li className={`${navigationStyles.home}`}>
                   <Link to='/'>home</Link>
                </li>
-               <li className={`${navigationStyles.marginedSides}`}>
+               <li className={`${navigationStyles.studio}`}>
                   <Link to='/studio'>studio</Link>
                </li>
-               <li className={`${navigationStyles.marginedSides}`}>
+               <li className={`${navigationStyles.projects}`}>
                   <Link to='/projects'>projects</Link>
                </li>
-               <li className={`${navigationStyles.marginedSides}`}>
+               <li className={`${navigationStyles.journal}`}>
                   <Link to='/journal'>journal</Link>
                </li>
-               <li className={`${navigationStyles.marginedSides}`}>
+               <li className={`${navigationStyles.shop}`}>
                   <Link to='/shop'>shop</Link>
                </li>
-               <li className={`${navigationStyles.marginedSides}`}>
+               <li className={`${navigationStyles.contact}`}>
                   <Link to='/contact'>contact</Link>
                </li>
             </ul>
-            <ul className={`${navigationStyles.row}`}>
-               <li className={`${navigationStyles.smallMarginedSides}`}>
+            <ul className={`${navigationStyles.icons}`}>
+               <li className={`${navigationStyles.youtube}`}>
                   <a href='youtube.com'>
                      <img
                         className={`${navigationStyles.icon}`}
@@ -43,7 +43,7 @@ export default function Navigation() {
                      />
                   </a>
                </li>
-               <li className={`${navigationStyles.smallMarginedSides}`}>
+               <li className={`${navigationStyles.twitter}`}>
                   <a href='twitter.com'>
                      <img
                         className={`${navigationStyles.icon}`}
@@ -52,7 +52,7 @@ export default function Navigation() {
                      />
                   </a>
                </li>
-               <li className={`${navigationStyles.smallMarginedSides}`}>
+               <li className={`${navigationStyles.instagram}`}>
                   <a href='instagram.com'>
                      <img
                         className={`${navigationStyles.icon}`}

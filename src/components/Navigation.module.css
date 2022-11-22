@@ -25,6 +25,11 @@
    grid-area: page;
 }
 
+.icon {
+   width: 1em;
+   height: 1em;
+}
+
 .Navigation {
    grid-area: navigation;
 
@@ -40,32 +45,101 @@
 
    position: sticky;
    bottom: 0;
+
+   display: grid;
+   grid-template: 
+      'menu icons';
+   place-content: space-between;   
+
+   padding: 0 1em;
 }
 
-.row {
-   display: flex;
-   flex-flow: row wrap;
+.icons {
+   grid-area: icons;
+
+   display: grid;
+   grid-template:
+      'youtube twitter instagram'
+      / auto   auto    auto;
+   gap: .2em;
 }
 
-.icon {
-   width: 1em;
-   height: 1em;
+.menu {
+   grid-area: menu;
+
+   display: grid;
+   grid-template:
+      'home  studio projects journal shop contact'
+     / auto  auto   auto     auto    auto auto;
+   gap: 1em;
 }
 
-.padded {
-   padding: 0.1em 1em;
+.home {
+   grid-area: home;
+}
+.studio {
+   grid-area: studio;
+}
+.projects {
+   grid-area: projects;
+}
+.journal {
+   grid-area: journal;
+}
+.shop {
+   grid-area: shop;
+}
+.contact {
+   grid-area: contact;
+}
+.youtube {
+   grid-area: youtube;
+}
+.twitter {
+   grid-area: twitter;
+}
+.instagram {
+   grid-area: instagram;
 }
 
-.marginedSides {
-   margin: 0 1.2em;
+@media screen and (max-width: 1080px) {
+   .menu {
+      grid-template:
+         'home  studio projects'
+         'journal shop contact'
+      / auto  auto   auto;
+      gap: unset;
+      column-gap: 1em;
+   }
+
+   .icons {
+      place-items: center;
+      place-content: center;
+   }
 }
 
-.smallMarginedSides {
-   margin: 0 0.2em;
-}
+@media screen and (max-width: 800px) {
+   .Navigation {
+   grid-template: 
+      'menu'
+      'icons'
+      / 1fr;
+   }
 
-/* Spreads the children equally with a child on both sides */
-.spreadChildren {
-   display: flex;
-   justify-content: space-between;
+   .menu {
+      grid-template:
+         'home'
+         'studio'
+         'projects'
+         'journal'
+         'shop'
+         'contact'
+      / 1fr;
+      place-items: center;
+   }
+
+   .icons {
+      place-items: unset;
+      font-size: 1.2em;
+   }
 }

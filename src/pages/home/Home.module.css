@@ -1,13 +1,26 @@
-.Home {
-   height: 100vh;
-   width: 100vw;
-   max-height: 100vh;
-   max-width: 100vw;
+:root {
+  --padding-body: .5em;
+  --title-font-size-ratio-pc: 10.5263157895;
+  --title-font-size-ratio-mobile: 5.2;
+}
 
+.Home {
    font-family: Helvetica;
    color: white;
    text-transform: uppercase;
    background: black;
+
+   max-height: 100vh;
+   min-height: 100vh;
+   height: 100vh;
+
+   padding: var(--padding-body);
+}
+
+.layout {
+   min-width: 100%;
+   max-width: 100%;
+   height: 100%;
 
    display: grid;
    grid-template:
@@ -24,6 +37,8 @@
 .menu {
    grid-area: navigation;
 
+   line-height: .8em;
+
    width: fit-content;
    height: fit-content;
 }
@@ -35,7 +50,7 @@
    text-align: right;
    justify-self: end;
 
-   max-width: 30em; 
+   max-width: 30em;
    min-width: 15em;
    height: fit-content;
 }
@@ -43,8 +58,10 @@
 .header {
    grid-area: header;
 
-   text-align: center;
-   font-size: calc(100vw / 11); /* Font size is calculated specifically for the
+   line-height: .75em;
+
+   /* text-align: center; */
+   font-size: calc((100vw - 2 * var(--padding-body)) / var(--title-font-size-ratio-pc)); /* Font size is calculated specifically for the
       current content of the header (greedy.by.design®) to fill the viewport width*/
 }
 
@@ -53,7 +70,7 @@
 }
 
 @media screen and (max-width: 600px) {
-   .Home {
+   .layout {
       grid-template:
          "navigation" auto
          "legals" 1fr
@@ -64,6 +81,8 @@
 
    .legals {
       min-width: unset;
+      max-width: unset;
+
    }
 
    .dot {
@@ -75,7 +94,10 @@
    }
 
    .header {
-      font-size: calc(100vw / 5); /* Font size is calculated specifically for the
+      line-height: .8em;
+      text-align: center;
+      
+      font-size: calc(100vw / var(--title-font-size-ratio-mobile)); /* Font size is calculated specifically for the
          current content of the header (greedy.by.design®) to fill the viewport width*/
    }
 

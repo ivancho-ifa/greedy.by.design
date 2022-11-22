@@ -1,7 +1,7 @@
 :root {
-  --padding-body: .5em;
-  --title-font-size-ratio-pc: 10.5263157895;
-  --title-font-size-ratio-mobile: 5.2;
+   --padding-body: 0.5em;
+   --title-font-size-ratio-pc: 10.5263157895;
+   --title-font-size-ratio-mobile: 5.2;
 }
 
 .Home {
@@ -24,8 +24,8 @@
 
    display: grid;
    grid-template:
-      "navigation legals" 1fr
-      "header header" auto
+      'navigation legals' 1fr
+      'header header' auto
       / 1fr 1fr;
 }
 
@@ -37,7 +37,7 @@
 .menu {
    grid-area: navigation;
 
-   line-height: .8em;
+   line-height: 0.8em;
 
    width: fit-content;
    height: fit-content;
@@ -58,10 +58,12 @@
 .header {
    grid-area: header;
 
-   line-height: .75em;
+   line-height: 0.75em;
 
    /* text-align: center; */
-   font-size: calc((100vw - 2 * var(--padding-body)) / var(--title-font-size-ratio-pc)); /* Font size is calculated specifically for the
+   font-size: calc(
+      (100vw - 2 * var(--padding-body)) / var(--title-font-size-ratio-pc)
+   ); /* Font size is calculated specifically for the
       current content of the header (greedy.by.design®) to fill the viewport width*/
 }
 
@@ -72,9 +74,9 @@
 @media screen and (max-width: 600px) {
    .layout {
       grid-template:
-         "navigation" auto
-         "legals" 1fr
-         "header" auto
+         'navigation' auto
+         'legals' 1fr
+         'header' auto
          / 1fr;
       gap: 1em;
    }
@@ -82,7 +84,6 @@
    .legals {
       min-width: unset;
       max-width: unset;
-
    }
 
    .dot {
@@ -94,10 +95,12 @@
    }
 
    .header {
-      line-height: .8em;
+      line-height: 0.8em;
       text-align: center;
-      
-      font-size: calc(100vw / var(--title-font-size-ratio-mobile)); /* Font size is calculated specifically for the
+
+      font-size: calc(
+         100vw / var(--title-font-size-ratio-mobile)
+      ); /* Font size is calculated specifically for the
          current content of the header (greedy.by.design®) to fill the viewport width*/
    }
 

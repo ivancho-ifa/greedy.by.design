@@ -35,8 +35,8 @@
    text-align: right;
    justify-self: end;
 
-   max-width: 30vw; 
-   min-width: 15vw;
+   max-width: 30em; 
+   min-width: 15em;
    height: fit-content;
 }
 
@@ -46,4 +46,41 @@
    text-align: center;
    font-size: calc(100vw / 11); /* Font size is calculated specifically for the
       current content of the header (greedy.by.design®) to fill the viewport width*/
+}
+
+.dot::after {
+   content: '.';
+}
+
+@media screen and (max-width: 600px) {
+   .Home {
+      grid-template:
+         "navigation" auto
+         "legals" 1fr
+         "header" auto
+         / 1fr;
+      gap: 1em;
+   }
+
+   .legals {
+      min-width: unset;
+   }
+
+   .dot {
+      display: block;
+   }
+
+   .dot::after {
+      content: none;
+   }
+
+   .header {
+      font-size: calc(100vw / 5); /* Font size is calculated specifically for the
+         current content of the header (greedy.by.design®) to fill the viewport width*/
+   }
+
+   .menu {
+      justify-self: right;
+      text-align: right;
+   }
 }

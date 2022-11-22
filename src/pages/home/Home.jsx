@@ -61,7 +61,11 @@ export default function Home() {
                   target='_blank'
                   rel='author noreferrer'
                >
-                  greedy.by.design®
+                  greedy
+                  <span className={`${styles.dot}`}></span>
+                  by
+                  <span className={`${styles.dot}`}></span>
+                  design®
                </a>
             </h1>
          </header>

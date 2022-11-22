@@ -15,6 +15,7 @@
    height: 100vh;
 
    padding: var(--padding-body);
+   padding-bottom: 0;
 }
 
 .layout {
@@ -58,8 +59,6 @@
 .header {
    grid-area: header;
 
-   line-height: .75em;
-
    /* text-align: center; */
    font-size: calc((100vw - 2 * var(--padding-body)) / var(--title-font-size-ratio-pc)); /* Font size is calculated specifically for the
       current content of the header (greedy.by.design®) to fill the viewport width*/
@@ -70,6 +69,10 @@
 }
 
 @media screen and (max-width: 600px) {
+   .Home {
+      padding-bottom: 1em;
+   }
+
    .layout {
       grid-template:
          "navigation" auto

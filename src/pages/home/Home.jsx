@@ -3,42 +3,10 @@ import styles from './Home.module.css'
 import { Link } from 'react-router-dom'
 import { useRef, useLayoutEffect, useEffect, useState } from 'react'
 
-function useElementDimensions(element) {
-   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
-
-   useLayoutEffect(() => {
-      const bounds = element.current.getBoundingClientRect()
-      setDimensions({ width: bounds.width, height: bounds.height })
-   }, [element])
-
-   return { dimensions, setDimensions }
-}
-
-function useStyleSpreadText(text) {
-   const { dimensions } = useElementDimensions(text)
-
-   console.log(`style: ${JSON.stringify(dimensions)}`)
-
-   return { fontSize: dimensions.width / 10.43 }
-}
-
 export default function Home() {
-   let h = useRef()
-   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
-
-   useEffect(() => {
-      if (h.current) {
-         const bounds = h.current.getBoundingClientRect()
-         setDimensions({ width: bounds.width, height: bounds.height })
-      }
-   }, [])
-
    return (
       <div className={`${styles.Home}`}>
-         <div
-            className={`${styles.layout}`}
-            ref={h}
-         >
+         <div className={`${styles.layout}`}>
             <nav className={`${styles.menu}`}>
                <ul>
                   <li>home</li>
@@ -87,10 +55,7 @@ export default function Home() {
                   <time dateTime='2022'>2022</time>
                </small>
             </footer>
-            <header
-               // style={styleSpreadText}
-               className={`${styles.header}`}
-            >
+            <header className={`${styles.header}`}>
                <h1>
                   <a
                      href='https://www.instagram.com/greedy.by.design/'

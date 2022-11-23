@@ -1,4 +1,5 @@
 import navigationStyles from './Navigation.module.css'
+import './hamburger-menu.css'
 import { useStyleFullscreenExcludingNavigation } from './utils/componentManipulation'
 
 import { Link, Outlet } from 'react-router-dom'
@@ -13,28 +14,39 @@ export default function Navigation() {
          <nav
             className={`${navigationStyles.Navigation} ${navigationStyles.row} ${navigationStyles.spreadChildren} ${navigationStyles.padded}}`}
          >
-            <ul className={`${navigationStyles.row}`}>
-               <li className={`${navigationStyles.marginedSides}`}>
+            <input
+               id={`${navigationStyles.menuToggle}`}
+               type='checkbox'
+            />
+            <label
+               class={`${navigationStyles.menuButtonContainer}`}
+               for={`${navigationStyles.menuToggle}`}
+            >
+               <div class={`${navigationStyles.menuButton}`}></div>
+            </label>
+
+            <ul className={`${navigationStyles.menu} ${navigationStyles.hamburgerMenu}`}>
+               <li className={`${navigationStyles.home}`}>
                   <Link to='/'>home</Link>
                </li>
-               <li className={`${navigationStyles.marginedSides}`}>
+               <li className={`${navigationStyles.studio}`}>
                   <Link to='/studio'>studio</Link>
                </li>
-               <li className={`${navigationStyles.marginedSides}`}>
+               <li className={`${navigationStyles.projects}`}>
                   <Link to='/projects'>projects</Link>
                </li>
-               <li className={`${navigationStyles.marginedSides}`}>
+               <li className={`${navigationStyles.journal}`}>
                   <Link to='/journal'>journal</Link>
                </li>
-               <li className={`${navigationStyles.marginedSides}`}>
+               <li className={`${navigationStyles.shop}`}>
                   <Link to='/shop'>shop</Link>
                </li>
-               <li className={`${navigationStyles.marginedSides}`}>
+               <li className={`${navigationStyles.contact}`}>
                   <Link to='/contact'>contact</Link>
                </li>
             </ul>
-            <ul className={`${navigationStyles.row}`}>
-               <li className={`${navigationStyles.smallMarginedSides}`}>
+            <ul className={`${navigationStyles.icons} ${navigationStyles.hamburgerMenu}`}>
+               <li className={`${navigationStyles.youtube}`}>
                   <a href='youtube.com'>
                      <img
                         className={`${navigationStyles.icon}`}
@@ -43,7 +55,7 @@ export default function Navigation() {
                      />
                   </a>
                </li>
-               <li className={`${navigationStyles.smallMarginedSides}`}>
+               <li className={`${navigationStyles.twitter}`}>
                   <a href='twitter.com'>
                      <img
                         className={`${navigationStyles.icon}`}
@@ -52,7 +64,7 @@ export default function Navigation() {
                      />
                   </a>
                </li>
-               <li className={`${navigationStyles.smallMarginedSides}`}>
+               <li className={`${navigationStyles.instagram}`}>
                   <a href='instagram.com'>
                      <img
                         className={`${navigationStyles.icon}`}

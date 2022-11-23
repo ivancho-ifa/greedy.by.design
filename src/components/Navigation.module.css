@@ -118,12 +118,24 @@
    }
 }
 
+.menuButtonContainer {
+   grid-area: hamburger-icon;
+}
+
+.menuButtonContainer,
+#menuToggle {
+   display: none;
+}
 @media screen and (max-width: 800px) {
    .Navigation {
-   grid-template: 
-      'menu'
-      'icons'
-      / 1fr;
+      grid-template:
+            'menu'
+            'icons'
+         'hamburger-icon'
+         / 1fr;
+            place-items: center;
+               place-content: center;
+               padding: .1em;
    }
 
    .menu {
@@ -136,10 +148,64 @@
          'contact'
       / 1fr;
       place-items: center;
+      place-content: center;
    }
 
    .icons {
       place-items: unset;
       font-size: 1.2em;
    }
+.hamburgerMenu {
+   display: none;
+}
+
+.menuButtonContainer {
+   display: inline-block;
+   position: relative;
+   width: 2em;
+   height: 2em;
+}
+
+.menuButton,
+.menuButton::before,
+.menuButton::after {
+   display: block;
+   position: absolute;
+   background-color: black;
+   height: 5px;
+   width: 35px;
+   transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menuButton {
+   top: calc(50% - 2.5px);
+}
+
+.menuButton::before {
+   content: "";
+   margin-top: -10px;
+}
+
+.menuButton::after {
+   content: "";
+   margin-top: 10px;
+}
+
+#menuToggle:checked+.menuButtonContainer .menuButton::before {
+   margin-top: 0;
+   transform: rotate(45deg);
+}
+
+#menuToggle:checked+.menuButtonContainer .menuButton {
+   background: rgba(255, 255, 255, 0);
+}
+
+#menuToggle:checked+.menuButtonContainer .menuButton::after {
+   margin-top: 0;
+   transform: rotate(-45deg);
+}
+
+#menuToggle:checked~.hamburgerMenu {
+   display: grid;
+}
 }

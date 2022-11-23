@@ -1,4 +1,5 @@
 import navigationStyles from './Navigation.module.css'
+import './hamburger-menu.css'
 import { useStyleFullscreenExcludingNavigation } from './utils/componentManipulation'
 
 import { Link, Outlet } from 'react-router-dom'
@@ -13,7 +14,18 @@ export default function Navigation() {
          <nav
             className={`${navigationStyles.Navigation} ${navigationStyles.row} ${navigationStyles.spreadChildren} ${navigationStyles.padded}}`}
          >
-            <ul className={`${navigationStyles.menu}`}>
+            <input
+               id={`${navigationStyles.menuToggle}`}
+               type='checkbox'
+            />
+            <label
+               class={`${navigationStyles.menuButtonContainer}`}
+               for={`${navigationStyles.menuToggle}`}
+            >
+               <div class={`${navigationStyles.menuButton}`}></div>
+            </label>
+
+            <ul className={`${navigationStyles.menu} ${navigationStyles.hamburgerMenu}`}>
                <li className={`${navigationStyles.home}`}>
                   <Link to='/'>home</Link>
                </li>
@@ -33,7 +45,7 @@ export default function Navigation() {
                   <Link to='/contact'>contact</Link>
                </li>
             </ul>
-            <ul className={`${navigationStyles.icons}`}>
+            <ul className={`${navigationStyles.icons} ${navigationStyles.hamburgerMenu}`}>
                <li className={`${navigationStyles.youtube}`}>
                   <a href='youtube.com'>
                      <img

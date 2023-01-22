@@ -47,9 +47,8 @@
    bottom: 0;
 
    display: grid;
-   grid-template: 
-      'menu icons';
-   place-content: space-between;   
+   grid-template: 'menu icons';
+   place-content: space-between;
 
    padding: 0 1em;
 }
@@ -60,8 +59,8 @@
    display: grid;
    grid-template:
       'youtube twitter instagram'
-      / auto   auto    auto;
-   gap: .2em;
+      / auto auto auto;
+   gap: 0.2em;
 }
 
 .menu {
@@ -70,7 +69,7 @@
    display: grid;
    grid-template:
       'home  studio projects journal shop contact'
-     / auto  auto   auto     auto    auto auto;
+      / auto auto auto auto auto auto;
    gap: 1em;
 }
 
@@ -107,7 +106,7 @@
       grid-template:
          'home  studio projects'
          'journal shop contact'
-      / auto  auto   auto;
+         / auto auto auto;
       gap: unset;
       column-gap: 1em;
    }
@@ -129,13 +128,13 @@
 @media screen and (max-width: 800px) {
    .Navigation {
       grid-template:
-            'menu'
-            'icons'
+         'menu'
+         'icons'
          'hamburger-icon'
          / 1fr;
-            place-items: center;
-               place-content: center;
-               padding: .1em;
+      place-items: center;
+      place-content: center;
+      padding: 0.1em;
    }
 
    .menu {
@@ -146,7 +145,7 @@
          'journal'
          'shop'
          'contact'
-      / 1fr;
+         / 1fr;
       place-items: center;
       place-content: center;
    }
@@ -155,57 +154,59 @@
       place-items: unset;
       font-size: 1.2em;
    }
-.hamburgerMenu {
-   display: none;
-}
 
-.menuButtonContainer {
-   display: inline-block;
-   position: relative;
-   width: 2em;
-   height: 2em;
-}
+   .hamburgerMenu {
+      display: none;
+   }
 
-.menuButton,
-.menuButton::before,
-.menuButton::after {
-   display: block;
-   position: absolute;
-   background-color: black;
-   height: 5px;
-   width: 35px;
-   transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
-}
+   .menuButtonContainer {
+      display: inline-block;
+      position: relative;
+      width: 2em;
+      height: 2em;
+   }
 
-.menuButton {
-   top: calc(50% - 2.5px);
-}
+   .menuButton,
+   .menuButton::before,
+   .menuButton::after {
+      display: block;
+      position: absolute;
+      background-color: black;
+      height: 5px;
+      width: 35px;
+      transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+   }
 
-.menuButton::before {
-   content: "";
-   margin-top: -10px;
-}
+   .menuButton {
+      top: calc(50% - 2.5px);
+   }
 
-.menuButton::after {
-   content: "";
-   margin-top: 10px;
-}
+   .menuButton::before {
+      content: '';
+      margin-top: -10px;
+   }
 
-#menuToggle:checked+.menuButtonContainer .menuButton::before {
-   margin-top: 0;
-   transform: rotate(45deg);
-}
+   .menuButton::after {
+      content: '';
+      margin-top: 10px;
+   }
 
-#menuToggle:checked+.menuButtonContainer .menuButton {
-   background: rgba(255, 255, 255, 0);
-}
+   #menuToggle:checked + .menuButtonContainer .menuButton::before {
+      margin-top: 0;
+      transform: rotate(45deg);
+   }
 
-#menuToggle:checked+.menuButtonContainer .menuButton::after {
-   margin-top: 0;
-   transform: rotate(-45deg);
-}
+   #menuToggle:checked + .menuButtonContainer .menuButton {
+      background: rgba(255, 255, 255, 0);
+   }
 
-#menuToggle:checked~.hamburgerMenu {
-   display: grid;
-}
+   #menuToggle:checked + .menuButtonContainer .menuButton::after {
+      margin-top: 0;
+      transform: rotate(-45deg);
+   }
+
+   #menuToggle:checked ~ .hamburgerMenu {
+      display: grid;
+      position: relative;
+   }
 }

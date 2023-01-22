@@ -2,20 +2,37 @@ import navigationStyles from './Navigation.module.css'
 import './hamburger-menu.css'
 
 import { Link, Outlet } from 'react-router-dom'
+import { useRef, useState, useEffect } from 'react'
 
 export default function Navigation() {
+   const navigation = useRef()
+   const hamburgerMenuToggle = useRef()
+   const [navigationHeight, setNavigationHeight] = useState(0)
+
+   useEffect(() => {
+      if (!hamburgerMenuToggle.current.checked) {
+         setNavigationHeight(navigation.current.clientHeight)
+      }
+   })
+
    return (
       <div id={`${navigationStyles.root}`}>
-         <div className={`${navigationStyles.page}`}>
+         <div
+            className={`${navigationStyles.page}`}
+            style={{ marginBottom: navigationHeight }}
+         >
             <Outlet />
          </div>
 
          <nav
             className={`${navigationStyles.Navigation} ${navigationStyles.row} ${navigationStyles.spreadChildren} ${navigationStyles.padded}}`}
+            ref={navigation}
+            style={{ position: 'fixed', bottom: 0 }}
          >
             <input
                id={`${navigationStyles.menuToggle}`}
                type='checkbox'
+               ref={hamburgerMenuToggle}
             />
             <label
                class={`${navigationStyles.menuButtonContainer}`}

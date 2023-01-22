@@ -43,9 +43,6 @@
    background: white;
    color: black;
 
-   position: sticky;
-   bottom: 0;
-
    display: grid;
    grid-template: 'menu icons';
    place-content: space-between;
@@ -207,6 +204,5 @@
 
    #menuToggle:checked ~ .hamburgerMenu {
       display: grid;
-      position: relative;
    }
 }

@@ -1,6 +1,5 @@
 import navigationStyles from './Navigation.module.css'
 import './hamburger-menu.css'
-import { useStyleFullscreenExcludingNavigation } from './utils/componentManipulation'
 
 import { Link, Outlet } from 'react-router-dom'
 

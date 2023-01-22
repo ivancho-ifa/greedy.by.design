@@ -1,0 +1,112 @@
+:root {
+   --padding-body: 0.5em;
+   --title-font-size-ratio-pc: 10.5263157895;
+   --title-font-size-ratio-mobile: 4.55;
+}
+
+.Home {
+   font-family: Helvetica;
+   color: white;
+   text-transform: uppercase;
+   background: black;
+
+   max-height: 100vh;
+   min-height: 100vh;
+   height: 100vh;
+
+   padding: var(--padding-body);
+   padding-bottom: 0;
+}
+
+.layout {
+   min-width: 100%;
+   max-width: 100%;
+   height: 100%;
+
+   display: grid;
+   grid-template:
+      'navigation legals' 1fr
+      'header header' auto
+      / 1fr 1fr;
+}
+
+.marginBottom {
+   display: block;
+   margin-bottom: 1em;
+}
+
+.menu {
+   grid-area: navigation;
+
+   line-height: 0.85em;
+
+   width: fit-content;
+   height: fit-content;
+}
+
+.legals {
+   grid-area: legals;
+
+   font-size: 0.3em;
+   text-align: right;
+   justify-self: end;
+
+   max-width: 30em;
+   min-width: 15em;
+   height: fit-content;
+}
+
+.header {
+   grid-area: header;
+
+   text-align: center;
+   font-size: calc(
+      (100vw - 2 * var(--padding-body)) / var(--title-font-size-ratio-pc)
+   ); /* Font size is calculated specifically for the current content of the header (greedy.by.design®) to fill the viewport width*/
+}
+
+.dot::after {
+   content: '.';
+}
+
+@media screen and (max-width: 600px) {
+   .Home {
+      padding-bottom: 1em;
+   }
+
+   .layout {
+      grid-template:
+         'navigation' auto
+         'legals' 1fr
+         'header' auto
+         / 1fr;
+      gap: 1em;
+   }
+
+   .legals {
+      min-width: unset;
+      max-width: unset;
+   }
+
+   .dot {
+      display: block;
+   }
+
+   .dot::after {
+      content: none;
+   }
+
+   .header {
+      line-height: 0.85em;
+      text-align: center;
+
+      font-size: calc(
+         (100vw - 2 * var(--padding-body)) / var(--title-font-size-ratio-mobile)
+      ); /* Font size is calculated specifically for the current content of the header (greedy.by.design®) to fill the viewport width*/
+   }
+
+   .menu {
+      justify-self: right;
+      text-align: right;
+   }
+}

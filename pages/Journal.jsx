@@ -1,6 +1,6 @@
 import './Journal.css'
 
-import Log from './components/Log'
+import Log from './journal/components/Log'
 
 import { useLoaderData } from 'react-router-dom'
 

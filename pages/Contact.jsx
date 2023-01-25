@@ -1,5 +1,5 @@
-import contactStyles from './Contact.module.css'
-import commonStyles from '../../css/common.module.css'
+import contactStyles from 'styles/Contact.module.css'
+import commonStyles from 'styles/common.module.css'
 
 export default function Contact() {
    return (

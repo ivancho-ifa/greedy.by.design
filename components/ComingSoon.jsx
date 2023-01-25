@@ -1,5 +1,5 @@
-import styles from './ComingSoon.module.css'
-import commonStyles from '../../css/common.module.css'
+import styles from 'styles/ComingSoon.module.css'
+import commonStyles from 'styles/common.module.css'
 
 export default function ComingSoon() {
    return (

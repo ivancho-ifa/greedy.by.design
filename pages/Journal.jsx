@@ -1,4 +1,4 @@
-import './Journal.css'
+import 'styles/Journal.css'
 
 import Log from './journal/components/Log'
 

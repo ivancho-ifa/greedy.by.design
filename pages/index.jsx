@@ -1,71 +1,75 @@
-import 'the-new-css-reset/css/reset.css'
-import './index.module.css'
+import styles from 'styles/Home.module.css'
 
-import Home from './pages/home/Home'
-import Error from './pages/error/Error'
-import Journal from './pages/journal/Journal'
-import logsLoader from './journal/utils/logsLoader'
-import Navigation from '../components/Navigation'
-import Contact from './pages/contact/Contact'
-import Shop from './pages/shop/Shop'
-import Studio from './pages/studio/Studio'
-import Projects from './pages/projects/Projects'
+import Link from 'next/link'
 
-import reportWebVitals from './reportWebVitals'
-
-import React, { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
-import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-   <StrictMode>
-      <RouterProvider
-         router={createBrowserRouter([
-            {
-               path: '/',
-               element: <Outlet />,
-               // TODO: Improve error page
-               errorElement: <Error />,
-               children: [
-                  {
-                     index: true,
-                     element: <Home />,
-                  },
-                  {
-                     path: '/',
-                     element: <Navigation />,
-                     children: [
-                        {
-                           path: 'journal',
-                           element: <Journal />,
-                           loader: logsLoader,
-                        },
-                        {
-                           path: 'contact',
-                           element: <Contact />,
-                        },
-                        {
-                           path: 'studio',
-                           element: <Studio />,
-                        },
-                        {
-                           path: 'projects',
-                           element: <Projects />,
-                        },
-                        {
-                           path: 'shop',
-                           element: <Shop />,
-                        },
-                     ],
-                  },
-               ],
-            },
-         ])}
-      />
-   </StrictMode>
-)
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
+export default function Home() {
+   return (
+      <div className={`${styles.Home}`}>
+         <div className={`${styles.layout}`}>
+            <nav className={`${styles.menu}`}>
+               <ul>
+                  <li>home</li>
+                  <li>
+                     <Link href='/studio'>studio</Link>
+                  </li>
+                  <li>
+                     <Link href='/projects'>projects</Link>
+                  </li>
+                  <li>
+                     <Link href='/journal'>journal</Link>
+                  </li>
+                  <li>
+                     <Link href='/shop'>shop</Link>
+                  </li>
+                  <li>
+                     <Link href='/contact'>contact</Link>
+                  </li>
+               </ul>
+            </nav>
+            <footer className={`${styles.legals}`}>
+               <small className={`${styles.marginBottom}`}>
+                  greedy.by.design® is a privately owned design studio nulla gravida hendrerit dignissim. Nullam
+                  porttitor accumsan risus, eget venenatis risus pretium
+               </small>
+               <small>
+                  <a href='geo:42.873139,25.310611'>42°52'23.3"N 25°18'38.2"E</a>
+                  <br />
+                  {'❱'}{' '}
+                  <a
+                     href='mailto:greedybydesign@gmail.com'
+                     target='_blank'
+                     rel='author noreferrer'
+                  >
+                     greedybydesign@gmail.com
+                  </a>
+                  <br />
+                  <a
+                     href='https://www.instagram.com/greedy.by.design/'
+                     target='_blank'
+                     rel='author noreferrer'
+                  >
+                     @greedy.by.design
+                  </a>
+                  <br />
+                  <time dateTime='2022'>2022</time>
+               </small>
+            </footer>
+            <header className={`${styles.header}`}>
+               <h1>
+                  <a
+                     href='https://www.instagram.com/greedy.by.design/'
+                     target='_blank'
+                     rel='author noreferrer'
+                  >
+                     greedy
+                     <span className={`${styles.dot}`}></span>
+                     by
+                     <span className={`${styles.dot}`}></span>
+                     design®
+                  </a>
+               </h1>
+            </header>
+         </div>
+      </div>
+   )
+}

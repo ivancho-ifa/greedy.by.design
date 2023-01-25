@@ -1,0 +1,16 @@
+body {
+   font-size: 2em;
+}
+
+#root {
+   min-width: 100vw;
+   max-width: 100vw;
+   min-height: 100vh;
+   height: 100%;
+}
+
+:root {
+   --padding-body: 0.5em;
+   --title-font-size-ratio-pc: 10.5263157895;
+   --title-font-size-ratio-mobile: 4.55;
+}

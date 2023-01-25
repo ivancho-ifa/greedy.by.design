@@ -1,4 +1,4 @@
-import './Log.css'
+import 'styles/Log.css'
 
 import ImageWrapper from './Image'
 import { usePreloadImage } from './utils/image'

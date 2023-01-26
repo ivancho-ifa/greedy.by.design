@@ -1,4 +1,3 @@
-import 'styles/hamburger-menu.css'
 import 'styles/index.css'
 import 'the-new-css-reset/css/reset.css'
 

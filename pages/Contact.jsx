@@ -41,3 +41,7 @@ export default function Contact() {
       </div>
    )
 }
+
+Contact.getLayout = function (page) {
+   return <BottomNavigationLayout>{page}</BottomNavigationLayout>
+}

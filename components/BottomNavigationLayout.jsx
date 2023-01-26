@@ -1,16 +1,15 @@
-import navigationStyles from 'styles/Navigation.module.css'
+import navigationStyles from 'styles/BottomNavigationLayout.module.css'
 
-import { Outlet } from 'react-router-dom'
 import Link from 'next/link'
 import { useRef, useState, useEffect } from 'react'
 
-export default function Navigation() {
+export default function BottomNavigationLayout({ children }) {
    const navigation = useRef()
-   const hamburgerMenuToggle = useRef()
+   const menuToggle = useRef()
    const [navigationHeight, setNavigationHeight] = useState(0)
 
    useEffect(() => {
-      if (!hamburgerMenuToggle.current.checked) {
+      if (!menuToggle.current.checked) {
          setNavigationHeight(navigation.current.clientHeight)
       }
    })
@@ -21,7 +20,7 @@ export default function Navigation() {
             className={`${navigationStyles.page}`}
             style={{ marginBottom: navigationHeight }}
          >
-            <Outlet />
+            {children}
          </div>
 
          <nav
@@ -32,13 +31,13 @@ export default function Navigation() {
             <input
                id={`${navigationStyles.menuToggle}`}
                type='checkbox'
-               ref={hamburgerMenuToggle}
+               ref={menuToggle}
             />
             <label
-               class={`${navigationStyles.menuButtonContainer}`}
-               for={`${navigationStyles.menuToggle}`}
+               className={`${navigationStyles.menuButtonContainer}`}
+               htmlFor={`${navigationStyles.menuToggle}`}
             >
-               <div class={`${navigationStyles.menuButton}`}></div>
+               <div className={`${navigationStyles.menuButton}`}></div>
             </label>
 
             <ul className={`${navigationStyles.menu} ${navigationStyles.hamburgerMenu}`}>

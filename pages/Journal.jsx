@@ -25,3 +25,7 @@ export default function Journal(params) {
       </div>
    )
 }
+
+Journal.getLayout = function (page) {
+   return <BottomNavigationLayout>{page}</BottomNavigationLayout>
+}

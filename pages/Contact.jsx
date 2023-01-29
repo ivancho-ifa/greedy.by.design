@@ -1,31 +1,35 @@
 import contactStyles from 'styles/Contact.module.css'
 import commonStyles from 'styles/common.module.css'
+import BottomNavigationLayout from 'components/BottomNavigationLayout'
 
 export default function Contact() {
    return (
       <div className={`${contactStyles.Contact}`}>
-         <main>
+         <main className={`${contactStyles.main}`}>
             <form
                action='mailto:greedybydesign@gmail.com'
                method='get'
                enctype='text/plain'
+               className={`${contactStyles.form}`}
             >
                <input
                   type='text'
                   placeholder='John Doe'
                   id={`${contactStyles.name}`}
+                  className={`${contactStyles.input}`}
                />
                <input
                   type='email'
                   placeholder='john.doe@mail.com'
                   id={`${contactStyles.email}`}
+                  className={`${contactStyles.input}`}
                />
-               <textarea></textarea>
+               <textarea className={`${contactStyles.textarea}`}></textarea>
                <input
                   type='submit'
                   value='Send'
                   id={`${contactStyles.submit}`}
-                  className={`${commonStyles.uppercase}`}
+                  className={`${commonStyles.uppercase} ${contactStyles.input}`}
                />
             </form>
             <div className={`${contactStyles.alternative} ${commonStyles.centerText} ${commonStyles.uppercase}`}>

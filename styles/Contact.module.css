@@ -17,7 +17,7 @@
    font-family: Helvetica;
 }
 
-main {
+.main {
    grid-area: main;
 
    display: grid;
@@ -28,7 +28,7 @@ main {
    align-content: center;
 }
 
-form {
+.form {
    grid-area: form;
 
    display: grid;
@@ -48,33 +48,33 @@ form {
    grid-area: alternative;
 }
 
-input,
-textarea {
+.input,
+.textarea {
    background-color: white;
    color: black;
    padding: 0.25em 0.5em;
    min-width: 0;
 }
 
-input::placeholder {
+.input::placeholder {
    color: gray;
    font-style: oblique;
 }
 
-input#name {
+.input#name {
    grid-area: name;
 }
 
-input#email {
+.input#email {
    grid-area: email;
 }
 
-textarea {
+.textarea {
    grid-area: letter;
    height: 12em;
 }
 
-input#submit {
+.input#submit {
    grid-area: submit;
 
    width: 100%;
@@ -116,7 +116,7 @@ input#submit {
 }
 
 @media screen and (max-width: 600px) {
-   form {
+   .form {
       grid-template-rows:
          auto
          auto
@@ -130,7 +130,7 @@ input#submit {
          'submit';
    }
 
-   input#submit {
+   .input#submit {
       max-width: none;
    }
 }

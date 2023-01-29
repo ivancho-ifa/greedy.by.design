@@ -1,19 +1,16 @@
-import 'styles/Log.css'
-
-import ImageWrapper from './Image'
-import { usePreloadImage } from './utils/image'
+import logStyles from 'styles/Log.module.css'
 
 import { useState, Fragment } from 'react'
+import Image from 'next/image'
 
 export default function Log(params) {
    const [isImageShown, setIsImageShown] = useState(false)
    const [mousePos, setMousePos] = useState({})
 
-   usePreloadImage(params.titleImage)
-
    const handleEnter = (event) => {
       setIsImageShown(true)
       setMousePos({ x: event.pageX, y: event.pageY })
+      console.log(mousePos)
    }
 
    const handleLeave = () => {
@@ -22,28 +19,42 @@ export default function Log(params) {
 
    const getImage = () => {
       return (
-         <ImageWrapper
-            src={params.titleImage}
-            alt={params.titleImageAlt}
-            center={mousePos}
-         />
+         <div
+            style={{
+               position: 'absolute',
+               // TODO: Handle different sizes
+               top: mousePos.y - 150,
+               left: mousePos.x - 200,
+               width: 400,
+               height: 300,
+            }}
+         >
+            <Image
+               className={`${logStyles.titleImage}`}
+               src={params.titleImage}
+               alt={params.titleImageAlt}
+               fill
+            />
+         </div>
       )
    }
+
+   const date = new Date(params.date)
 
    return (
       <Fragment>
          <div
-            className='Log collapsingTopBottomBorder padded'
+            className={`${logStyles.Log} ${logStyles.collapsingTopBottomBorder} ${logStyles.padded}`}
             onMouseEnter={handleEnter}
             onMouseLeave={handleLeave}
          >
             <header>
-               <p className='subtitle'>
-                  <time dateTime={params.date}>{params.date.toLocaleDateString()}</time>
+               <p className={`${logStyles.subtitle}`}>
+                  <time dateTime={date}>{date.toLocaleDateString()}</time>
                </p>
-               <h2>{params.title}</h2>
+               <h2 className={`${logStyles.title}`}>{params.title}</h2>
+               {isImageShown ? getImage() : null}
             </header>
-            {isImageShown ? getImage() : null}
          </div>
       </Fragment>
    )

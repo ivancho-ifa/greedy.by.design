@@ -32,7 +32,7 @@ export default function Home() {
                   porttitor accumsan risus, eget venenatis risus pretium
                </small>
                <small>
-                  <a href='geo:42.873139,25.310611'>42°52'23.3"N 25°18'38.2"E</a>
+                  <a href='geo:42.873139,25.310611'>42°52&apos;23.3&quot;N 25°18&apos;38.2&quot;E</a>
                   <br />
                   {'❱'}{' '}
                   <a

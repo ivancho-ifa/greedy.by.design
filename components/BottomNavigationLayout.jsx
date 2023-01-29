@@ -12,7 +12,7 @@ export default function BottomNavigationLayout({ children }) {
       if (!menuToggle.current.checked) {
          setNavigationHeight(navigation.current.clientHeight)
       }
-   })
+   }, [navigation])
 
    return (
       <div id={`${navigationStyles.root}`}>

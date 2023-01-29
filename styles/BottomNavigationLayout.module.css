@@ -46,8 +46,6 @@
    display: grid;
    grid-template: 'menu icons';
    place-content: space-between;
-   grid-template: 'menu icons';
-   place-content: space-between;
 
    padding: 0 1em;
 }
@@ -103,8 +101,8 @@
 @media screen and (max-width: 1080px) {
    .menu {
       grid-template:
-         'home  studio projects'
-         'journal shop contact'
+         'home    studio projects'
+         'journal shop   contact'
          / auto auto auto;
       gap: unset;
       column-gap: 1em;

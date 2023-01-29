@@ -1,7 +1,6 @@
-import styles from './Home.module.css'
+import styles from 'styles/Home.module.css'
 
-import { Link } from 'react-router-dom'
-import { useRef, useLayoutEffect, useEffect, useState } from 'react'
+import Link from 'next/link'
 
 export default function Home() {
    return (
@@ -11,19 +10,19 @@ export default function Home() {
                <ul>
                   <li>home</li>
                   <li>
-                     <Link to='/studio'>studio</Link>
+                     <Link href='/studio'>studio</Link>
                   </li>
                   <li>
-                     <Link to='/projects'>projects</Link>
+                     <Link href='/projects'>projects</Link>
                   </li>
                   <li>
-                     <Link to='/journal'>journal</Link>
+                     <Link href='/journal'>journal</Link>
                   </li>
                   <li>
-                     <Link to='/shop'>shop</Link>
+                     <Link href='/shop'>shop</Link>
                   </li>
                   <li>
-                     <Link to='/contact'>contact</Link>
+                     <Link href='/contact'>contact</Link>
                   </li>
                </ul>
             </nav>
@@ -33,7 +32,7 @@ export default function Home() {
                   porttitor accumsan risus, eget venenatis risus pretium
                </small>
                <small>
-                  <a href='geo:42.873139,25.310611'>42°52'23.3"N 25°18'38.2"E</a>
+                  <a href='geo:42.873139,25.310611'>42°52&apos;23.3&quot;N 25°18&apos;38.2&quot;E</a>
                   <br />
                   {'❱'}{' '}
                   <a

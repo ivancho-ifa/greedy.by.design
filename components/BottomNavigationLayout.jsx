@@ -1,19 +1,18 @@
-import navigationStyles from './Navigation.module.css'
-import './hamburger-menu.css'
+import navigationStyles from 'styles/BottomNavigationLayout.module.css'
 
-import { Link, Outlet } from 'react-router-dom'
+import Link from 'next/link'
 import { useRef, useState, useEffect } from 'react'
 
-export default function Navigation() {
+export default function BottomNavigationLayout({ children }) {
    const navigation = useRef()
-   const hamburgerMenuToggle = useRef()
+   const menuToggle = useRef()
    const [navigationHeight, setNavigationHeight] = useState(0)
 
    useEffect(() => {
-      if (!hamburgerMenuToggle.current.checked) {
+      if (!menuToggle.current.checked) {
          setNavigationHeight(navigation.current.clientHeight)
       }
-   })
+   }, [navigation])
 
    return (
       <div id={`${navigationStyles.root}`}>
@@ -21,7 +20,7 @@ export default function Navigation() {
             className={`${navigationStyles.page}`}
             style={{ marginBottom: navigationHeight }}
          >
-            <Outlet />
+            {children}
          </div>
 
          <nav
@@ -32,33 +31,33 @@ export default function Navigation() {
             <input
                id={`${navigationStyles.menuToggle}`}
                type='checkbox'
-               ref={hamburgerMenuToggle}
+               ref={menuToggle}
             />
             <label
-               class={`${navigationStyles.menuButtonContainer}`}
-               for={`${navigationStyles.menuToggle}`}
+               className={`${navigationStyles.menuButtonContainer}`}
+               htmlFor={`${navigationStyles.menuToggle}`}
             >
-               <div class={`${navigationStyles.menuButton}`}></div>
+               <div className={`${navigationStyles.menuButton}`}></div>
             </label>
 
             <ul className={`${navigationStyles.menu} ${navigationStyles.hamburgerMenu}`}>
                <li className={`${navigationStyles.home}`}>
-                  <Link to='/'>home</Link>
+                  <Link href='/'>home</Link>
                </li>
                <li className={`${navigationStyles.studio}`}>
-                  <Link to='/studio'>studio</Link>
+                  <Link href='/studio'>studio</Link>
                </li>
                <li className={`${navigationStyles.projects}`}>
-                  <Link to='/projects'>projects</Link>
+                  <Link href='/projects'>projects</Link>
                </li>
                <li className={`${navigationStyles.journal}`}>
-                  <Link to='/journal'>journal</Link>
+                  <Link href='/journal'>journal</Link>
                </li>
                <li className={`${navigationStyles.shop}`}>
-                  <Link to='/shop'>shop</Link>
+                  <Link href='/shop'>shop</Link>
                </li>
                <li className={`${navigationStyles.contact}`}>
-                  <Link to='/contact'>contact</Link>
+                  <Link href='/contact'>contact</Link>
                </li>
             </ul>
             <ul className={`${navigationStyles.icons} ${navigationStyles.hamburgerMenu}`}>

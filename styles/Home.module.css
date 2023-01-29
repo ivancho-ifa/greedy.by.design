@@ -1,9 +1,3 @@
-:root {
-   --padding-body: 0.5em;
-   --title-font-size-ratio-pc: 10.5263157895;
-   --title-font-size-ratio-mobile: 4.55;
-}
-
 .Home {
    font-family: Helvetica;
    color: white;

@@ -7,7 +7,7 @@
    padding: 0.8em 0.5em;
 }
 
-h2 {
+.title {
    font-size: 1.2em;
 }
 
@@ -17,4 +17,5 @@ h2 {
 
 .titleImage {
    max-width: 12em;
+   height: auto;
 }

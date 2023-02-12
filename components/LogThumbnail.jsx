@@ -1,9 +1,9 @@
-import logStyles from 'styles/Log.module.css'
+import logStyles from 'styles/LogThumbnail.module.css'
 
 import { useState, Fragment } from 'react'
 import Image from 'next/image'
 
-export default function Log(params) {
+export default function LogThumbnail(params) {
    const [isImageShown, setIsImageShown] = useState(false)
    const [mousePos, setMousePos] = useState({})
 

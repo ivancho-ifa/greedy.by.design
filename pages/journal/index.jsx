@@ -1,7 +1,7 @@
 import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import journalStyles from 'styles/Journal.module.css'
 
-import Log from '/components/Log'
+import LogThumbnail from '/components/LogThumbnail'
 
 export default function Journal({ logs }) {
    return (
@@ -9,7 +9,7 @@ export default function Journal({ logs }) {
          <div className={`${journalStyles.logs}`}>
             {logs.map((log, logId) => {
                return (
-                  <Log
+                  <LogThumbnail
                      date={log.date}
                      title={log.title}
                      titleImage={log.titleImage}

@@ -1,21 +1,96 @@
-.collapsingTopBottomBorder {
-   box-shadow: 0 0 0 0 white, 0 0.1em 0 0 white, 0 0.1em 0 0 white, /* Just to fix the corner */ 0 0 0 0 white inset,
-      0 0.1em 0 0 white inset;
+.Log {
+   display: grid;
+   grid-template-areas:
+      'logHeader logTime'
+      'article   logTime';
+   gap: 1em;
+
+   min-height: 100%;
+
+   background-color: black;
+   color: white;
+
+   font-family: Helvetica;
 }
 
-.padded {
-   padding: 0.8em 0.5em;
+.logTimeWrapper {
+   grid-area: logTime;
+
+   font-weight: bold;
+   text-align: center;
 }
 
-.title {
-   font-size: 1.2em;
+.logTimeSeparator {
+   display: block;
 }
 
-.subtitle {
-   font-size: 0.6em;
+.logHeader {
+   grid-area: logHeader;
+
+   display: grid;
+   grid-template-areas:
+      'titleImage titleImage'
+      'title      subtitle';
+   grid-template-columns: 6.5fr 3.5fr;
+
+   padding-bottom: 1em;
+}
+
+.article {
+   grid-area: article;
+
+   padding: 0 2em;
+}
+
+.titleImageWrapper {
+   grid-area: titleImage;
+   position: unset !important;
 }
 
 .titleImage {
-   max-width: 12em;
-   height: auto;
+   object-fit: contain;
+   width: 100% !important;
+   position: relative !important;
+   height: unset !important;
+}
+
+.title {
+   grid-area: title;
+   place-self: center;
+
+   font-size: 3em;
+   font-weight: bolder;
+   text-align: center;
+}
+
+.subtitle {
+   grid-area: subtitle;
+   place-self: center;
+
+   font-size: 1.5em;
+   font-weight: normal;
+   text-align: center;
+}
+
+.collapsingBottomBorder {
+   box-shadow: 0 0 0 0 white, 0 0.1em 0 0 white, 0 0.1em 0 0 white, /* Just to fix the corner */ 0 0 0 0 white inset,
+      0 0 0 0 white inset;
+}
+
+.paragraph {
+   margin: 1em auto;
+}
+
+@media screen and (max-width: 1200px) {
+   .Log {
+      grid-template-areas:
+         'logTime'
+         'logHeader'
+         'article';
+   }
+
+   .logTimeSeparator {
+      display: inline;
+      place-self: center;
+   }
 }

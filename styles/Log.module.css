@@ -45,11 +45,15 @@
 .titleImageWrapper {
    grid-area: titleImage;
    position: unset !important;
+
+   justify-self: center;
+   align-self: center;
 }
 
 .titleImage {
    object-fit: contain;
    width: 100% !important;
+   min-width: 50vw;
    position: relative !important;
    height: unset !important;
 }
@@ -73,7 +77,9 @@
 }
 
 .collapsingBottomBorder {
-   box-shadow: 0 0 0 0 white, 0 0.1em 0 0 white, 0 0.1em 0 0 white, /* Just to fix the corner */ 0 0 0 0 white inset,
+   box-shadow: 0 0 0 0 white, 0 0.1em 0 0 white, 0 0.1em 0 0 white,
+      /* Just to fix the corner */
+      0 0 0 0 white inset,
       0 0 0 0 white inset;
 }
 

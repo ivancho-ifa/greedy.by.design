@@ -45,11 +45,15 @@
 .titleImageWrapper {
    grid-area: titleImage;
    position: unset !important;
+
+   justify-self: center;
+   align-self: center;
 }
 
 .titleImage {
    object-fit: contain;
    width: 100% !important;
+   min-width: 50vw;
    position: relative !important;
    height: unset !important;
 }
@@ -92,5 +96,19 @@
    .logTimeSeparator {
       display: inline;
       place-self: center;
+   }
+
+   .titleImage {
+      min-width: 100% !important;
+      width: 95vw !important;
+   }
+}
+
+@media screen and (max-width: 800px) {
+   .logHeader {
+      grid-template-areas:
+         'titleImage titleImage'
+         'title      title'
+         'subtitle   subtitle';
    }
 }

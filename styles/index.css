@@ -2,6 +2,14 @@ body {
    font-size: 2em;
 }
 
+html::-webkit-scrollbar {
+   background-color: black;
+}
+
+html::-webkit-scrollbar-thumb {
+   background-color: white;
+}
+
 #root {
    min-width: 100vw;
    max-width: 100vw;

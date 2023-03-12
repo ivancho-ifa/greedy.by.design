@@ -1,0 +1,26 @@
+name: Format
+
+on:
+   pull_request:
+      branches: [master]
+
+jobs:
+  format:
+    name: Run formatters
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: write
+    steps:
+      - name: Checkout changes
+        uses: actions/checkout@v3
+      - name: Install node
+        uses: actions/setup-node@v3
+      - name: Install required packages
+        run: npm install
+
+      - name: Run prettier
+        uses: wearerequired/lint-action@v2
+        with:
+          auto_fix: true
+          prettier: true

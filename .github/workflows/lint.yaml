@@ -1,0 +1,19 @@
+name: Format
+
+on:
+   pull_request:
+      branches: [master]
+
+jobs:
+   format:
+      runs-on: ubuntu-latest
+      steps:
+         - name: Checkout changes
+           uses: actions/checkout@v3
+         - name: Install node
+           uses: actions/setup-node@v3
+         - name: Install required packages
+           run: npm install
+
+         - name: Run linter
+           run: npm run lint

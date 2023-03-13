@@ -12,7 +12,8 @@ export default function Log({ log }) {
                dateTime={log.date}
                className={`${logStyles.logTime}`}
             >
-               {logDate.getDate()} {logDate.toLocaleString('default', { month: 'short' })} <span className={`${logStyles.logTimeSeparator}`}></span> 2023
+               {logDate.getDate()} {logDate.toLocaleString('default', { month: 'short' })}{' '}
+               <span className={`${logStyles.logTimeSeparator}`}></span> 2023
             </time>
          </div>
 
@@ -31,7 +32,14 @@ export default function Log({ log }) {
 
          <main className={`${logStyles.article}`}>
             {log.paragraphs.map((paragraph, paragraphId) => {
-               return <p className={`${logStyles.paragraph}`} key={paragraphId} >{paragraph}</p>
+               return (
+                  <p
+                     className={`${logStyles.paragraph}`}
+                     key={paragraphId}
+                  >
+                     {paragraph}
+                  </p>
+               )
             })}
          </main>
       </div>
@@ -44,7 +52,7 @@ Log.getLayout = function (page) {
 
 export async function getStaticPaths() {
    return {
-      paths: [{ params: { log: 'a' } },],
+      paths: [{ params: { log: 'a' } }],
       fallback: false,
    }
 }
@@ -62,7 +70,7 @@ export async function getStaticProps() {
                'Accusamus quam neque non. Quam dolorem aspernatur. Unde voluptas cupiditate est. Qui cupiditate omnis neque molestias est a nemo.',
                'Sed velit numquam recusandae culpa fugit quam ipsum et optio. Molestiae voluptatem sunt porro laboriosam aut hic corrupti. Nulla quia qui eum debitis consequatur.',
                'In aspernatur quia eum ex ipsum est modi est quidem. Et nulla a quidem. Culpa quia praesentium aut dolor molestiae expedita eaque. Occaecati veniam est expedita suscipit aperiam vitae. Ipsam consequuntur commodi sit repellat. Et impedit voluptatem .',
-            ]
+            ],
          },
       },
    }

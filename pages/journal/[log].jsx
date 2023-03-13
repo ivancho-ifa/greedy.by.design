@@ -2,15 +2,17 @@ import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import Image from 'next/image'
 import logStyles from 'styles/Log.module.css'
 
-export default function Log() {
+export default function Log({ log }) {
+   const logDate = new Date(log.date)
+
    return (
       <div className={`${logStyles.Log}`}>
          <div className={`${logStyles.logTimeWrapper}`}>
             <time
-               dateTime='Sun Feb 05 2023'
+               dateTime={log.date}
                className={`${logStyles.logTime}`}
             >
-               Feb 05 <span className={`${logStyles.logTimeSeparator}`}></span> 2023
+               {logDate.getDate()} {logDate.toLocaleString('default', { month: 'short' })} <span className={`${logStyles.logTimeSeparator}`}></span> 2023
             </time>
          </div>
 
@@ -18,29 +20,19 @@ export default function Log() {
             <div className={`${logStyles.titleImageWrapper}`}>
                <Image
                   className={`${logStyles.titleImage}`}
-                  src='http://placeimg.com/640/480/sports'
-                  alt='Title image'
+                  src={log.titleImage}
+                  alt={log.titleImageAlt}
                   fill
                />
             </div>
-            <h1 className={`${logStyles.title}`}>Magnam incidunt unde.</h1>
-            <h2 className={`${logStyles.subtitle}`}>Eaque est debitis quia necessitatibus exercitationem omnis.</h2>
+            <h1 className={`${logStyles.title}`}>{log.title}</h1>
+            <h2 className={`${logStyles.subtitle}`}>{log.subtitle}</h2>
          </header>
 
          <main className={`${logStyles.article}`}>
-            <p className={`${logStyles.paragraph}`}>
-               Accusamus quam neque non. Quam dolorem aspernatur. Unde voluptas cupiditate est. Qui cupiditate omnis
-               neque molestias est a nemo.
-            </p>
-            <p className={`${logStyles.paragraph}`}>
-               Sed velit numquam recusandae culpa fugit quam ipsum et optio. Molestiae voluptatem sunt porro laboriosam
-               aut hic corrupti. Nulla quia qui eum debitis consequatur.
-            </p>
-            <p className={`${logStyles.paragraph}`}>
-               In aspernatur quia eum ex ipsum est modi est quidem. Et nulla a quidem. Culpa quia praesentium aut dolor
-               molestiae expedita eaque. Occaecati veniam est expedita suscipit aperiam vitae. Ipsam consequuntur
-               commodi sit repellat. Et impedit voluptatem .
-            </p>
+            {log.paragraphs.map((paragraph, paragraphId) => {
+               return <p className={`${logStyles.paragraph}`} key={paragraphId} >{paragraph}</p>
+            })}
          </main>
       </div>
    )
@@ -48,4 +40,30 @@ export default function Log() {
 
 Log.getLayout = function (page) {
    return <BottomNavigationLayout>{page}</BottomNavigationLayout>
+}
+
+export async function getStaticPaths() {
+   return {
+      paths: [{ params: { log: 'a' } },],
+      fallback: false,
+   }
+}
+
+export async function getStaticProps() {
+   return {
+      props: {
+         log: {
+            date: new Date('Sun Feb 05 2023 GMT+0200 (Eastern European Standard Time)').toJSON(),
+            title: 'Voluptas voluptatem molestiae fuga vel reprehenderit dolores.',
+            subtitle: 'Eaque est debitis quia necessitatibus exercitationem omnis.',
+            titleImage: 'http://placeimg.com/640/480/fashion',
+            titleImageAlt: 'Alias ipsam delectus non nostrum magnam nemo numquam id doloremque.',
+            paragraphs: [
+               'Accusamus quam neque non. Quam dolorem aspernatur. Unde voluptas cupiditate est. Qui cupiditate omnis neque molestias est a nemo.',
+               'Sed velit numquam recusandae culpa fugit quam ipsum et optio. Molestiae voluptatem sunt porro laboriosam aut hic corrupti. Nulla quia qui eum debitis consequatur.',
+               'In aspernatur quia eum ex ipsum est modi est quidem. Et nulla a quidem. Culpa quia praesentium aut dolor molestiae expedita eaque. Occaecati veniam est expedita suscipit aperiam vitae. Ipsam consequuntur commodi sit repellat. Et impedit voluptatem .',
+            ]
+         },
+      },
+   }
 }

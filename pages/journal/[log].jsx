@@ -1,7 +1,7 @@
 import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import Image from 'next/image'
 import logStyles from 'styles/Log.module.css'
-import { getLogsUris, getLogs } from 'utils/logs'
+import { getLogsUris, getLog } from 'utils/logs'
 
 export default function Log({ log }) {
    const logDate = new Date(log.date)
@@ -58,11 +58,10 @@ export async function getStaticPaths() {
    }
 }
 
-export async function getStaticProps() {
-   const logs = await getLogs()
+export async function getStaticProps({ params }) {
    return {
       props: {
-         log: logs[0]
+         log: await getLog({ uri: params.log })
       }
    }
 }

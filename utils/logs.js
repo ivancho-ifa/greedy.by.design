@@ -32,5 +32,7 @@ export async function getLog(filter = {}) {
 }
 
 export async function getLogsUris() {
-   return (await getLogs()).map((log) => { return { params: { log: log.uri } } })
+   return (await getLogs()).map((log) => {
+      return { params: { log: log.uri } }
+   })
 }

@@ -13,7 +13,10 @@ export default function Journal({ logs }) {
          <div className={`${journalStyles.logs}`}>
             {logs.map((log, logId) => {
                return (
-                  <Link href={`${router.asPath}/${log.uri}`} key={logId}>
+                  <Link
+                     href={`${router.asPath}/${log.uri}`}
+                     key={logId}
+                  >
                      <LogThumbnail
                         date={log.date}
                         title={log.title}
@@ -35,7 +38,7 @@ Journal.getLayout = function (page) {
 export async function getStaticProps() {
    return {
       props: {
-         logs: await getLogs()
-      }
+         logs: await getLogs(),
+      },
    }
 }

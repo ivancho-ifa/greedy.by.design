@@ -2,20 +2,26 @@ import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import journalStyles from 'styles/Journal.module.css'
 import LogThumbnail from 'components/LogThumbnail'
 import { getLogs } from 'utils/logs'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function Journal({ logs }) {
+   const router = useRouter()
+
    return (
       <div className={`${journalStyles.Journal} ${journalStyles.centralizer}`}>
          <div className={`${journalStyles.logs}`}>
             {logs.map((log, logId) => {
                return (
-                  <LogThumbnail
-                     date={log.date}
-                     title={log.title}
-                     titleImage={log.titleImage}
-                     titleImageAlt={log.titleImageAlt}
-                     key={logId}
-                  />
+                  <Link href={`${router.asPath}/${log.uri}`}>
+                     <LogThumbnail
+                        date={log.date}
+                        title={log.title}
+                        titleImage={log.titleImage}
+                        titleImageAlt={log.titleImageAlt}
+                        key={logId}
+                     />
+                  </Link>
                )
             })}
          </div>

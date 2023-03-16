@@ -1,10 +1,7 @@
 import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import Image from 'next/image'
 import logStyles from 'styles/Log.module.css'
-import { MongoClient, ServerApiVersion } from 'mongodb'
-
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@greedy-by-design-cluste.kcmobco.mongodb.net/?retryWrites=true&w=majority`
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
+import { getLogsUris, getLogs } from 'utils/logs'
 
 export default function Log({ log }) {
    const logDate = new Date(log.date)
@@ -56,40 +53,16 @@ Log.getLayout = function (page) {
 
 export async function getStaticPaths() {
    return {
-      paths: (await getLogs()).map((log) => { return { params: { log: log.uri } } }),
+      paths: await getLogsUris(),
       fallback: false,
-   }
-}
-
-async function getLogs() {
-   try {
-      await client.connect()
-
-      const database = client.db('journal')
-      const logs = database.collection('logs')
-      const logIterator = logs.find({})
-
-      return await logIterator.toArray()
-   } finally {
-      await client.close()
    }
 }
 
 export async function getStaticProps() {
    const logs = await getLogs()
-   const log = logs[0]
-
    return {
       props: {
-         log: {
-            uri: log.uri,
-            date: log.date,
-            title: log.title,
-            subtitle: log.subtitle,
-            titleImage: log.titleImage,
-            titleImageAlt: log.titleImageAlt,
-            paragraphs: log.paragraphs
-         }
+         log: logs[0]
       }
    }
 }

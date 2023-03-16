@@ -1,10 +1,7 @@
 import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import journalStyles from 'styles/Journal.module.css'
-import { MongoClient, ServerApiVersion } from 'mongodb'
-import LogThumbnail from '/components/LogThumbnail'
-
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@greedy-by-design-cluste.kcmobco.mongodb.net/?retryWrites=true&w=majority`
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
+import LogThumbnail from 'components/LogThumbnail'
+import { getLogs } from 'utils/logs'
 
 export default function Journal({ logs }) {
    return (
@@ -30,29 +27,10 @@ Journal.getLayout = function (page) {
    return <BottomNavigationLayout>{page}</BottomNavigationLayout>
 }
 
-async function getLogs() {
-   try {
-      await client.connect()
-
-      const database = client.db('journal')
-      const logs = database.collection('logs')
-      const logIterator = logs.find({})
-
-      return await logIterator.toArray()
-   } finally {
-      await client.close()
-   }
-}
-
 export async function getStaticProps() {
-   const logs = await getLogs()
-
    return {
       props: {
-         logs: logs.map((log) => {
-            const { _id, ...logData } = log
-            return logData
-         })
+         logs: await getLogs()
       }
    }
 }

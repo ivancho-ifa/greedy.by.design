@@ -1,6 +1,10 @@
 import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import Image from 'next/image'
 import logStyles from 'styles/Log.module.css'
+import { MongoClient, ServerApiVersion } from 'mongodb'
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@greedy-by-design-cluste.kcmobco.mongodb.net/?retryWrites=true&w=majority`
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
 
 export default function Log({ log }) {
    const logDate = new Date(log.date)
@@ -52,26 +56,40 @@ Log.getLayout = function (page) {
 
 export async function getStaticPaths() {
    return {
-      paths: [{ params: { log: 'a' } }],
+      paths: (await getLogs()).map((log) => { return { params: { log: log.uri } } }),
       fallback: false,
    }
 }
 
+async function getLogs() {
+   try {
+      await client.connect()
+
+      const database = client.db('journal')
+      const logs = database.collection('logs')
+      const logIterator = logs.find({})
+
+      return await logIterator.toArray()
+   } finally {
+      await client.close()
+   }
+}
+
 export async function getStaticProps() {
+   const logs = await getLogs()
+   const log = logs[0]
+
    return {
       props: {
          log: {
-            date: new Date('Sun Feb 05 2023 GMT+0200 (Eastern European Standard Time)').toJSON(),
-            title: 'Voluptas voluptatem molestiae fuga vel reprehenderit dolores.',
-            subtitle: 'Eaque est debitis quia necessitatibus exercitationem omnis.',
-            titleImage: 'http://placeimg.com/640/480/fashion',
-            titleImageAlt: 'Alias ipsam delectus non nostrum magnam nemo numquam id doloremque.',
-            paragraphs: [
-               'Accusamus quam neque non. Quam dolorem aspernatur. Unde voluptas cupiditate est. Qui cupiditate omnis neque molestias est a nemo.',
-               'Sed velit numquam recusandae culpa fugit quam ipsum et optio. Molestiae voluptatem sunt porro laboriosam aut hic corrupti. Nulla quia qui eum debitis consequatur.',
-               'In aspernatur quia eum ex ipsum est modi est quidem. Et nulla a quidem. Culpa quia praesentium aut dolor molestiae expedita eaque. Occaecati veniam est expedita suscipit aperiam vitae. Ipsam consequuntur commodi sit repellat. Et impedit voluptatem .',
-            ],
-         },
-      },
+            uri: log.uri,
+            date: log.date,
+            title: log.title,
+            subtitle: log.subtitle,
+            titleImage: log.titleImage,
+            titleImageAlt: log.titleImageAlt,
+            paragraphs: log.paragraphs
+         }
+      }
    }
 }

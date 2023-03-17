@@ -1,6 +1,7 @@
 import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import Image from 'next/image'
 import logStyles from 'styles/Log.module.css'
+import { getLogsUris, getLog } from 'utils/logs'
 
 export default function Log({ log }) {
    const logDate = new Date(log.date)
@@ -52,26 +53,15 @@ Log.getLayout = function (page) {
 
 export async function getStaticPaths() {
    return {
-      paths: [{ params: { log: 'a' } }],
+      paths: await getLogsUris(),
       fallback: false,
    }
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ params }) {
    return {
       props: {
-         log: {
-            date: new Date('Sun Feb 05 2023 GMT+0200 (Eastern European Standard Time)').toJSON(),
-            title: 'Voluptas voluptatem molestiae fuga vel reprehenderit dolores.',
-            subtitle: 'Eaque est debitis quia necessitatibus exercitationem omnis.',
-            titleImage: 'http://placeimg.com/640/480/fashion',
-            titleImageAlt: 'Alias ipsam delectus non nostrum magnam nemo numquam id doloremque.',
-            paragraphs: [
-               'Accusamus quam neque non. Quam dolorem aspernatur. Unde voluptas cupiditate est. Qui cupiditate omnis neque molestias est a nemo.',
-               'Sed velit numquam recusandae culpa fugit quam ipsum et optio. Molestiae voluptatem sunt porro laboriosam aut hic corrupti. Nulla quia qui eum debitis consequatur.',
-               'In aspernatur quia eum ex ipsum est modi est quidem. Et nulla a quidem. Culpa quia praesentium aut dolor molestiae expedita eaque. Occaecati veniam est expedita suscipit aperiam vitae. Ipsam consequuntur commodi sit repellat. Et impedit voluptatem .',
-            ],
-         },
+         log: await getLog({ uri: params.log }),
       },
    }
 }

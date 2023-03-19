@@ -10,6 +10,7 @@ export default class NewLog extends Component {
    constructor() {
       super()
       this.state = {
+         // Log data
          uri: '',
          draft: true,
          date: new Date(),
@@ -17,7 +18,7 @@ export default class NewLog extends Component {
          subtitle: 'Click to edit subtitle',
          titleImage: '',
          titleImageAlt: 'Title image alternative text',
-         paragraphs: ['Click to edit paragraph']
+         paragraphs: ['Click to edit paragraph'],
       }
    }
 
@@ -197,7 +198,7 @@ export default class NewLog extends Component {
 
       const response = await fetch("/api/logs", {
          method: "POST",
-         body: JSON.stringify(this.state),
+         body: this.stringifyLogData(),
       })
 
       if (response.status === 201) {
@@ -205,6 +206,19 @@ export default class NewLog extends Component {
       } else {
          alert(`Failed to submit content, error: ${response.status}, ${response.body.what}`)
       }
+   }
+
+   stringifyLogData() {
+      return JSON.stringify({
+         uri: this.state.uri,
+         draft: this.state.draft,
+         date: this.state.date,
+         title: this.state.title,
+         subtitle: this.state.subtitle,
+         titleImage: this.state.titleImage,
+         titleImageAlt: this.state.titleImageAlt,
+         paragraphs: this.state.paragraphs,
+      })
    }
 }
 

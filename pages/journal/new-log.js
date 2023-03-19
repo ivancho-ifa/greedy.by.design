@@ -19,7 +19,23 @@ export default class NewLog extends Component {
          titleImage: '',
          titleImageAlt: 'Title image alternative text',
          paragraphs: ['Click to edit paragraph'],
+         // Component state
+         showPreview: true,
       }
+   }
+
+   togglePreview = (event) => {
+      if (event.key === "Escape") {
+         this.setState({ showPreview: !this.state.showPreview })
+      }
+   }
+
+   componentDidMount() {
+      document.addEventListener("keydown", this.togglePreview, false);
+   }
+
+   componentWillUnmount() {
+      document.removeEventListener("keydown", this.togglePreview, false);
    }
 
    render() {
@@ -45,7 +61,7 @@ export default class NewLog extends Component {
                      fill
                   />
 
-                  <form id={`${editLogStyles.titleImageForm}`}>
+                  {!this.state.showPreview && (<form id={`${editLogStyles.titleImageForm}`}>
                      <label
                         id={`${editLogStyles.titleImageLabel}`}
                         htmlFor={`${editLogStyles.titleImageInput}`}
@@ -73,7 +89,7 @@ export default class NewLog extends Component {
                         value={this.state.titleImageAlt}
                         onChange={(event) => this.handleChange(event)}
                      />
-                  </form>
+                  </form>)}
                </div>
 
                <ContentEditable
@@ -81,12 +97,14 @@ export default class NewLog extends Component {
                   className={`${logStyles.title}`}
                   onChange={(event) => this.handleTitleChange(event)}
                   html={this.state.title}
+                  disabled={this.state.showPreview}
                />
                <ContentEditable
                   tagName='h2'
                   className={`${logStyles.subtitle}`}
                   onChange={(event) => this.handleSubtitleChange(event)}
                   html={this.state.subtitle}
+                  disabled={this.state.showPreview}
                />
             </header>
 
@@ -99,28 +117,29 @@ export default class NewLog extends Component {
                            className={`${logStyles.paragraph}`}
                            onChange={(event) => this.handleParagraphChange(event, paragraphId)}
                            html={this.state.paragraphs[paragraphId]}
+                           disabled={this.state.showPreview}
                         />
 
-                        <input
+                        {!this.state.showPreview && (<input
                            type="button"
                            className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
                            value='Remove paragraph'
                            onClick={() => this.removeParagraph(paragraphId)}
-                        />
+                        />)}
                      </div>
                   )
                })}
 
-               <input
+               {!this.state.showPreview && (<input
                   type='button'
                   id={`${editLogStyles.addParagraphButton}`}
                   className={`${editLogStyles.button}`}
                   value='Add new paragrpah'
                   onClick={() => this.addParagraph()}
-               />
+               />)}
             </main>
 
-            <form id={`${editLogStyles.editPageForm}`}>
+            {!this.state.showPreview && (<form id={`${editLogStyles.editPageForm}`}>
                <label
                   id={`${editLogStyles.urlLabel}`}
                   htmlFor={`${editLogStyles.urlInput}`}
@@ -150,7 +169,7 @@ export default class NewLog extends Component {
                   value='Publish page'
                   onClick={() => this.submit({ draft: false })}
                />
-            </form>
+            </form>)}
          </div >
       )
    }

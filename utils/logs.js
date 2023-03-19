@@ -36,3 +36,16 @@ export async function getLogsUris() {
       return { params: { log: log.uri } }
    })
 }
+
+export async function insertLog(log) {
+   try {
+      await client.connect()
+
+      const database = client.db('journal')
+      const logs = database.collection('logs')
+
+      return await logs.insertOne(log)
+   } finally {
+      await client.close()
+   }
+}

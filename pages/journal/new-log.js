@@ -1,7 +1,8 @@
 import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import Image from 'next/image'
 import logStyles from 'styles/Log.module.css'
-import { Component } from 'react'
+import editLogStyles from 'styles/EditLog.module.css'
+import { Component, Fragment } from 'react'
 import sanitizeHtml from 'sanitize-html'
 import ContentEditable from 'react-contenteditable'
 
@@ -29,9 +30,11 @@ export default class NewLog extends Component {
                   className={`${logStyles.logTime}`}
                >
                   {this.state.date.getDate()} {this.state.date.toLocaleString('default', { month: 'short' })}{' '}
-                  <span className={`${logStyles.logTimeSeparator}`}></span> 2023
+                  <span className={`${logStyles.logTimeSeparator}`}></span>
+                  {this.state.date.getFullYear()}
                </time>
             </div>
+
             <header className={`${logStyles.logHeader} ${logStyles.collapsingBottomBorder}`}>
                <div className={`${logStyles.titleImageWrapper}`}>
                   <Image
@@ -40,149 +43,112 @@ export default class NewLog extends Component {
                      alt={this.state.titleImageAlt}
                      fill
                   />
-                  <form style={{
-                     color: 'gray',
-                     display: 'grid',
-                     gridTemplateAreas:
-                        `'label1 input1'
-                            'label2 input2'`
-                  }}>
+
+                  <form id={`${editLogStyles.titleImageForm}`}>
                      <label
-                        htmlFor="titleImage"
-                        style={{
-                           gridArea: 'label1'
-                        }}>
+                        id={`${editLogStyles.titleImageLabel}`}
+                        htmlFor={`${editLogStyles.titleImageInput}`}
+                     >
                         Title image URL:
                      </label>
                      <input
                         type="text"
-                        id='titleImage'
+                        id={`${editLogStyles.titleImageInput}`}
                         name='titleImage'
                         value={this.state.titleImage}
                         onChange={(event) => this.handleChange(event)}
-                        style={{
-                           gridArea: 'input1'
-                        }}
                      />
+
                      <label
-                        htmlFor="titleImageAlt"
-                        style={{
-                           gridArea: 'label2'
-                        }}>
+                        id={`${editLogStyles.titleImageAltLabel}`}
+                        htmlFor={`${editLogStyles.titleImageAltInput}`}
+                     >
                         Title image alt text:
                      </label>
                      <input
                         type="text"
-                        id='titleImageAlt'
+                        id={`${editLogStyles.titleImageAltInput}`}
                         name='titleImageAlt'
                         value={this.state.titleImageAlt}
                         onChange={(event) => this.handleChange(event)}
-                        style={{
-                           gridArea: 'input2'
-                        }} />
+                     />
                   </form>
                </div>
+
                <ContentEditable
+                  tagName='h1'
                   className={`${logStyles.title}`}
                   onChange={(event) => this.handleTitleChange(event)}
-                  html={this.state.title} />
+                  html={this.state.title}
+               />
                <ContentEditable
+                  tagName='h2'
                   className={`${logStyles.subtitle}`}
                   onChange={(event) => this.handleSubtitleChange(event)}
-                  html={this.state.subtitle} />
+                  html={this.state.subtitle}
+               />
             </header>
+
             <main className={`${logStyles.article}`}>
                {this.state.paragraphs.map((_paragraph, paragraphId) => {
                   return (
-                     <div>
+                     <div key={paragraphId}>
                         <ContentEditable
+                           tagName='p'
                            className={`${logStyles.paragraph}`}
-                           key={paragraphId}
                            onChange={(event) => this.handleParagraphChange(event, paragraphId)}
-                           html={this.state.paragraphs[paragraphId]} />
+                           html={this.state.paragraphs[paragraphId]}
+                        />
+
                         <input
                            type="button"
-                           key={`button-${paragraphId}`}
+                           className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
                            value='Remove paragraph'
                            onClick={() => this.removeParagraph(paragraphId)}
-                           style={{
-                              color: 'gray',
-                              fontSize: '.5em',
-                              border: '1px solid gray',
-                              padding: '1em 1.5em'
-                           }} />
+                        />
                      </div>
                   )
                })}
+
                <input
                   type='button'
+                  id={`${editLogStyles.addParagraphButton}`}
+                  className={`${editLogStyles.button}`}
                   value='Add new paragrpah'
                   onClick={() => this.addParagraph()}
-                  style={{
-                     color: 'gray',
-                     border: '1px solid gray',
-                     padding: '1em 1.5em',
-                     marginTop: '2em'
-                  }} />
+               />
             </main>
 
-            <form
-               style={{
-                  color: 'gray',
-                  display: 'grid',
-                  gridTemplateAreas:
-                     `'label1 input1'
-                        'input2 input3'`,
-                  justifyItems: 'stretch',
-                  alignItems: 'center',
-                  justifyContent: 'stretch',
-                  alignContent: 'center',
-               }}>
+            <form id={`${editLogStyles.editPageForm}`}>
                <label
-                  htmlFor="urlInput"
-                  style={{
-                     gridArea: 'label1',
-                     justifySelf: 'right',
-                  }}
+                  id={`${editLogStyles.urlLabel}`}
+                  htmlFor={`${editLogStyles.urlInput}`}
                >
                   URL of the page: http://.../journal/
                </label>
                <input
                   type="text"
-                  id='urlInput'
+                  id={`${editLogStyles.urlInput}`}
                   name='uri'
                   value={this.state.uri}
                   onChange={(event) => this.handleChange(event)}
-                  style={{
-                     justifySelf: 'left',
-                     gridArea: 'input1',
-                  }}
                />
 
                <input
                   type='button'
+                  id={`${editLogStyles.saveDraftButton}`}
+                  className={`${editLogStyles.button} ${editLogStyles.editPageButton}`}
                   value='Save draft'
                   onClick={() => this.submit({ draft: true })}
-                  style={{
-                     gridArea: 'input2',
-                     color: 'gray',
-                     border: '1px solid gray',
-                     padding: '1em 1.5em',
-                     marginTop: '1em',
-                     textAlign: 'center',
-                  }} />
+               />
 
-               <input type='button'
+               <input
+                  type='button'
+                  id={`${editLogStyles.publishButton}`}
+                  className={`${editLogStyles.button} ${editLogStyles.editPageButton}`}
                   value='Publish page'
                   onClick={() => this.submit({ draft: false })}
-                  style={{
-                     gridArea: 'input3',
-                     color: 'gray',
-                     border: '1px solid gray',
-                     padding: '1em 1.5em',
-                     textAlign: 'center',
-                     marginTop: '1em',
-                  }} />
+               />
             </form>
          </div >
       )

@@ -11,7 +11,7 @@ export default class NewLog extends Component {
       super()
       this.state = {
          // Log data
-         uri: '',
+         _id: 'new-log',
          draft: true,
          date: new Date(),
          title: 'Click to edit title',
@@ -149,8 +149,8 @@ export default class NewLog extends Component {
                <input
                   type="text"
                   id={`${editLogStyles.urlInput}`}
-                  name='uri'
-                  value={this.state.uri}
+                  name='_id'
+                  value={this.state._id}
                   onChange={(event) => this.handleChange(event)}
                />
 
@@ -229,7 +229,7 @@ export default class NewLog extends Component {
 
    stringifyLogData() {
       return JSON.stringify({
-         uri: this.state.uri,
+         _id: this.state._id,
          draft: this.state.draft,
          date: this.state.date,
          title: this.state.title,

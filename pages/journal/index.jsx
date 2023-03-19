@@ -14,7 +14,7 @@ export default function Journal({ logs }) {
             {logs.map((log, logId) => {
                return (
                   <Link
-                     href={`${router.asPath}/${log.uri}`}
+                     href={`${router.asPath}/${log._id}`}
                      key={logId}
                   >
                      <LogThumbnail

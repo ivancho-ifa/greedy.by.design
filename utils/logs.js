@@ -9,7 +9,7 @@ export async function getLogs(filter = {}) {
 
       const database = client.db('journal')
       const logs = database.collection('logs')
-      const logIterator = logs.find(filter).project({ _id: 0 })
+      const logIterator = logs.find(filter)
 
       return await logIterator.toArray()
    } finally {
@@ -24,8 +24,7 @@ export async function getLog(filter = {}) {
       const database = client.db('journal')
       const logs = database.collection('logs')
 
-      const { _id, ...log } = await logs.findOne(filter) // TODO: Projection doesn't work for some reason
-      return log
+      return await logs.findOne(filter)
    } finally {
       await client.close()
    }
@@ -33,7 +32,7 @@ export async function getLog(filter = {}) {
 
 export async function getLogsUris() {
    return (await getLogs()).map((log) => {
-      return { params: { log: log.uri } }
+      return { params: { log: log._id } }
    })
 }
 

@@ -61,7 +61,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
    return {
       props: {
-         log: await getLog({ uri: params.log }),
+         log: await getLog({ _id: params.log }),
       },
    }
 }

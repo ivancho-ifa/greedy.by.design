@@ -2,7 +2,7 @@ import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import Image from 'next/image'
 import logStyles from 'styles/Log.module.css'
 import editLogStyles from 'styles/EditLog.module.css'
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import sanitizeHtml from 'sanitize-html'
 import ContentEditable from 'react-contenteditable'
 
@@ -140,20 +140,6 @@ export default class NewLog extends Component {
             </main>
 
             {!this.state.showPreview && (<form id={`${editLogStyles.editPageForm}`}>
-               <label
-                  id={`${editLogStyles.urlLabel}`}
-                  htmlFor={`${editLogStyles.urlInput}`}
-               >
-                  URL of the page: http://.../journal/
-               </label>
-               <input
-                  type="text"
-                  id={`${editLogStyles.urlInput}`}
-                  name='_id'
-                  value={this.state._id}
-                  onChange={(event) => this.handleChange(event)}
-               />
-
                <input
                   type='button'
                   id={`${editLogStyles.saveDraftButton}`}
@@ -212,19 +198,19 @@ export default class NewLog extends Component {
       this.setState({ paragraphs: this.state.paragraphs.filter((_paragraph, index) => index !== key) })
    }
 
-   async submit({ draft = true }) {
-      this.setState({ draft: draft })
+   submit({ draft = true }) {
+      this.setState({ draft: draft }, async () => {
+         const response = await fetch("/api/update-log", {
+            method: "POST",
+            body: this.stringifyLogData(),
+         })
 
-      const response = await fetch("/api/logs", {
-         method: "POST",
-         body: this.stringifyLogData(),
+         if (response.status === 200) {
+            alert('Successfully updated content')
+         } else {
+            alert(`Failed to submit content, error: ${response.status}, ${JSON.stringify(response.body)}`)
+         }
       })
-
-      if (response.status === 201) {
-         alert('Successfully submitted content')
-      } else {
-         alert(`Failed to submit content, error: ${response.status}, ${response.body.what}`)
-      }
    }
 
    stringifyLogData() {
@@ -239,8 +225,8 @@ export default class NewLog extends Component {
          paragraphs: this.state.paragraphs,
       })
    }
-}
 
-NewLog.getLayout = function (page) {
-   return <BottomNavigationLayout>{page}</BottomNavigationLayout>
+   static getLayout(page) {
+      return <BottomNavigationLayout>{page}</BottomNavigationLayout>
+   }
 }

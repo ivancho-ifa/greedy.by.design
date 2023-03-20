@@ -55,3 +55,53 @@ function parseInsertResponse(insertResult) {
       null
 }
 
+export async function updateLog(id, log) {
+   try {
+      await client.connect()
+
+      const database = client.db('journal')
+      const logs = database.collection('logs')
+
+      // Ignore _id of log if passed
+      if (Object.hasOwn(log, '_id')) {
+         delete log._id
+      }
+
+      const query = { _id: id }
+      const update = { $set: log }
+      const options = {}
+      const updateResult = await logs.updateOne(query, update, options)
+      return updateResult.acknowledged && updateResult.modifiedCount === 1 ?
+         null :
+         { error: `Failed to update log ${id} with ${log}` }
+   } finally {
+      await client.close()
+   }
+}
+
+export async function changeLogId(currentId, newId) {
+   try {
+      await client.connect()
+
+      const database = client.db('journal')
+      const logs = database.collection('logs')
+
+      const log = await logs.findOne({ _id: currentId })
+      if (log === null) {
+         return { error: `Missing log with id ${currentId}` }
+      }
+      log._id = newId
+
+      const insertedId = parseInsertResponse(await logs.insertOne(log))
+      if (!insertedId) {
+         return { error: `Failed to insert the log ${log}` }
+      }
+
+      const deleteResult = await logs.deleteOne({ _id: currentId })
+      return deleteResult.acknowledged && deleteResult.deletedCount === 1 ?
+         null :
+         { error: `Failed to delete log ${currentId}` }
+   } finally {
+      await client.close()
+   }
+}

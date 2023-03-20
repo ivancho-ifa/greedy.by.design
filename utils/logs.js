@@ -43,8 +43,15 @@ export async function insertLog(log) {
       const database = client.db('journal')
       const logs = database.collection('logs')
 
-      return await logs.insertOne(log)
+      return parseInsertResponse(await logs.insertOne(log))
    } finally {
       await client.close()
    }
 }
+
+function parseInsertResponse(insertResult) {
+   return insertResult.acknowledged ?
+      insertResult.insertedId :
+      null
+}
+

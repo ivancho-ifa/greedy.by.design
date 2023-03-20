@@ -10,11 +10,10 @@ export default async function handler(request, response) {
         return response.status(400).json({ what: 'Can not submit a log with URI /new-log, it is reserved' })
     }
 
-    const result = await insertLog(log)
-
-    if (result.acknowledged) {
-        return response.status(201).json(result)
+    const insertedId = await insertLog(log)
+    if (insertedId) {
+        return response.status(201).json(insertedId)
     } else {
-        return response.status(500).json({ what: 'MongoDB request wasn\'t aknowledged' })
+        return response.status(500).json({ error: `Failed to insert ${log}` })
     }
 }

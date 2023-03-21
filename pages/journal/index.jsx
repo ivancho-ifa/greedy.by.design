@@ -26,7 +26,6 @@ class Journal extends Component {
                      </Link>
                   )
                })}
-
             </div>
          </div>
       )

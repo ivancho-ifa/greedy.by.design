@@ -4,18 +4,42 @@ import LogThumbnail from 'components/LogThumbnail'
 import { getLogs } from 'utils/logs'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
-import { Component } from 'react'
+import { Component, Fragment } from 'react'
 
 class Journal extends Component {
+   constructor(props) {
+      super(props)
+
+      this.state = {
+         showPreview: true,
+      }
+   }
+
+   togglePreview = (event) => {
+      if (event.key === 'Escape') {
+         this.setState({ showPreview: !this.state.showPreview })
+         console.log(this.state.showPreview)
+      }
+   }
+
+   componentDidMount() {
+      document.addEventListener('keydown', this.togglePreview, false)
+   }
+
+   componentWillUnmount() {
+      document.removeEventListener('keydown', this.togglePreview, false)
+   }
+
    render() {
       return (
          <div className={`${journalStyles.Journal} ${journalStyles.centralizer}`}>
             <div className={`${journalStyles.logs}`}>
                {this.props.logs.map((log, logId) => {
-                  return (
-                     <Link
+                  return (<Fragment
+                     key={logId}
+                  >
+                     {(!log.draft || log.draft && !this.state.showPreview) && (<Link
                         href={`${this.props.router.asPath}/${log._id}`}
-                        key={logId}
                      >
                         <LogThumbnail
                            date={log.date}
@@ -23,7 +47,8 @@ class Journal extends Component {
                            titleImage={log.titleImage}
                            titleImageAlt={log.titleImageAlt}
                         />
-                     </Link>
+                     </Link>)}
+                  </Fragment>
                   )
                })}
 

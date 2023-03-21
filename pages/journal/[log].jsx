@@ -27,17 +27,17 @@ export default class Log extends Component {
    }
 
    togglePreview = (event) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
          this.setState({ showPreview: !this.state.showPreview })
       }
    }
 
    componentDidMount() {
-      document.addEventListener("keydown", this.togglePreview, false);
+      document.addEventListener('keydown', this.togglePreview, false)
    }
 
    componentWillUnmount() {
-      document.removeEventListener("keydown", this.togglePreview, false);
+      document.removeEventListener('keydown', this.togglePreview, false)
    }
 
    render() {
@@ -63,35 +63,37 @@ export default class Log extends Component {
                      fill
                   />
 
-                  {!this.state.showPreview && (<form id={`${editLogStyles.titleImageForm}`}>
-                     <label
-                        id={`${editLogStyles.titleImageLabel}`}
-                        htmlFor={`${editLogStyles.titleImageInput}`}
-                     >
-                        Title image URL:
-                     </label>
-                     <input
-                        type="text"
-                        id={`${editLogStyles.titleImageInput}`}
-                        name='titleImage'
-                        value={this.state.titleImage}
-                        onChange={(event) => this.handleChange(event)}
-                     />
+                  {!this.state.showPreview && (
+                     <form id={`${editLogStyles.titleImageForm}`}>
+                        <label
+                           id={`${editLogStyles.titleImageLabel}`}
+                           htmlFor={`${editLogStyles.titleImageInput}`}
+                        >
+                           Title image URL:
+                        </label>
+                        <input
+                           type='text'
+                           id={`${editLogStyles.titleImageInput}`}
+                           name='titleImage'
+                           value={this.state.titleImage}
+                           onChange={(event) => this.handleChange(event)}
+                        />
 
-                     <label
-                        id={`${editLogStyles.titleImageAltLabel}`}
-                        htmlFor={`${editLogStyles.titleImageAltInput}`}
-                     >
-                        Title image alt text:
-                     </label>
-                     <input
-                        type="text"
-                        id={`${editLogStyles.titleImageAltInput}`}
-                        name='titleImageAlt'
-                        value={this.state.titleImageAlt}
-                        onChange={(event) => this.handleChange(event)}
-                     />
-                  </form>)}
+                        <label
+                           id={`${editLogStyles.titleImageAltLabel}`}
+                           htmlFor={`${editLogStyles.titleImageAltInput}`}
+                        >
+                           Title image alt text:
+                        </label>
+                        <input
+                           type='text'
+                           id={`${editLogStyles.titleImageAltInput}`}
+                           name='titleImageAlt'
+                           value={this.state.titleImageAlt}
+                           onChange={(event) => this.handleChange(event)}
+                        />
+                     </form>
+                  )}
                </div>
 
                <ContentEditable
@@ -122,43 +124,49 @@ export default class Log extends Component {
                            disabled={this.state.showPreview}
                         />
 
-                        {!this.state.showPreview && (<input
-                           type="button"
-                           className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
-                           value='Remove paragraph'
-                           onClick={() => this.removeParagraph(paragraphId)}
-                        />)}
+                        {!this.state.showPreview && (
+                           <input
+                              type='button'
+                              className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
+                              value='Remove paragraph'
+                              onClick={() => this.removeParagraph(paragraphId)}
+                           />
+                        )}
                      </div>
                   )
                })}
 
-               {!this.state.showPreview && (<input
-                  type='button'
-                  id={`${editLogStyles.addParagraphButton}`}
-                  className={`${editLogStyles.button}`}
-                  value='Add new paragrpah'
-                  onClick={() => this.addParagraph()}
-               />)}
+               {!this.state.showPreview && (
+                  <input
+                     type='button'
+                     id={`${editLogStyles.addParagraphButton}`}
+                     className={`${editLogStyles.button}`}
+                     value='Add new paragrpah'
+                     onClick={() => this.addParagraph()}
+                  />
+               )}
             </main>
 
-            {!this.state.showPreview && (<form id={`${editLogStyles.editPageForm}`}>
-               <input
-                  type='button'
-                  id={`${editLogStyles.saveDraftButton}`}
-                  className={`${editLogStyles.button} ${editLogStyles.editPageButton}`}
-                  value='Save draft'
-                  onClick={() => this.submit({ draft: true })}
-               />
+            {!this.state.showPreview && (
+               <form id={`${editLogStyles.editPageForm}`}>
+                  <input
+                     type='button'
+                     id={`${editLogStyles.saveDraftButton}`}
+                     className={`${editLogStyles.button} ${editLogStyles.editPageButton}`}
+                     value='Save draft'
+                     onClick={() => this.submit({ draft: true })}
+                  />
 
-               <input
-                  type='button'
-                  id={`${editLogStyles.publishButton}`}
-                  className={`${editLogStyles.button} ${editLogStyles.editPageButton}`}
-                  value='Publish page'
-                  onClick={() => this.submit({ draft: false })}
-               />
-            </form>)}
-         </div >
+                  <input
+                     type='button'
+                     id={`${editLogStyles.publishButton}`}
+                     className={`${editLogStyles.button} ${editLogStyles.editPageButton}`}
+                     value='Publish page'
+                     onClick={() => this.submit({ draft: false })}
+                  />
+               </form>
+            )}
+         </div>
       )
    }
 
@@ -178,7 +186,7 @@ export default class Log extends Component {
    handleParagraphChange(event, key) {
       const sanitizeConf = {
          allowedTags: ['b', 'i', 'a'],
-         allowedAttributes: { a: ['href'] }
+         allowedAttributes: { a: ['href'] },
       }
       const sanitizedContent = sanitizeHtml(event.target.value, sanitizeConf)
 
@@ -202,15 +210,17 @@ export default class Log extends Component {
 
    submit({ draft = true }) {
       this.setState({ draft: draft }, async () => {
-         const response = await fetch("/api/update-log", {
-            method: "POST",
+         const response = await fetch('/api/update-log', {
+            method: 'POST',
             body: this.stringifyLogData(),
          })
 
          if (response.status === 200) {
             alert('Successfully updated log')
          } else {
-            alert(`Failed to submit changes to log, error: ${response.status}, ${JSON.stringify(await response.json())}`)
+            alert(
+               `Failed to submit changes to log, error: ${response.status}, ${JSON.stringify(await response.json())}`
+            )
          }
       })
    }

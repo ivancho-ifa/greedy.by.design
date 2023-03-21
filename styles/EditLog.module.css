@@ -7,11 +7,11 @@
 }
 
 #titleImageLabel {
-   grid-area: 'titleImageLabel'
+   grid-area: 'titleImageLabel';
 }
 
 #titleImageAltLabel {
-   grid-area: 'titleImageAltLabel'
+   grid-area: 'titleImageAltLabel';
 }
 
 #titleImageInput {
@@ -29,7 +29,7 @@
 }
 
 .editParagraphButton {
-   font-size: .5em;
+   font-size: 0.5em;
 }
 
 #addParagraphButton {

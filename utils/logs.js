@@ -50,9 +50,7 @@ export async function insertLog(log) {
 }
 
 function parseInsertResponse(insertResult) {
-   return insertResult.acknowledged ?
-      insertResult.insertedId :
-      null
+   return insertResult.acknowledged ? insertResult.insertedId : null
 }
 
 export async function updateLog(id, log) {
@@ -72,9 +70,9 @@ export async function updateLog(id, log) {
       const options = {}
       const updateResult = await logs.updateOne(query, update, options)
 
-      return updateResult.acknowledged && updateResult.modifiedCount === 1 ?
-         null :
-         { error: `Failed to update log ${id} with ${JSON.stringify(log)}` }
+      return updateResult.acknowledged && updateResult.modifiedCount === 1
+         ? null
+         : { error: `Failed to update log ${id} with ${JSON.stringify(log)}` }
    } finally {
       await client.close()
    }
@@ -99,9 +97,9 @@ export async function changeLogId(currentId, newId) {
       }
 
       const deleteResult = await logs.deleteOne({ _id: currentId })
-      return deleteResult.acknowledged && deleteResult.deletedCount === 1 ?
-         null :
-         { error: `Failed to delete log ${currentId}` }
+      return deleteResult.acknowledged && deleteResult.deletedCount === 1
+         ? null
+         : { error: `Failed to delete log ${currentId}` }
    } finally {
       await client.close()
    }

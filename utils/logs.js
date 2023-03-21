@@ -72,7 +72,6 @@ export async function updateLog(id, log) {
       const options = {}
       const updateResult = await logs.updateOne(query, update, options)
 
-      console.log(`updateResult: ${JSON.stringify(updateResult)}`)
       return updateResult.acknowledged && updateResult.modifiedCount === 1 ?
          null :
          { error: `Failed to update log ${id} with ${JSON.stringify(log)}` }

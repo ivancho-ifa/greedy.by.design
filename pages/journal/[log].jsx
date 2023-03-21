@@ -11,15 +11,11 @@ export default class Log extends Component {
    constructor(props) {
       super(props)
 
-      console.log(`log.date: ${this.props.log.date}`)
-      const date = new Date(this.props.log.date)
-      console.log(`date: ${date.toString()}`)
-
       this.state = {
          // Log data
          _id: this.props.log._id,
          draft: true,
-         date: date,
+         date: new Date(this.props.log.date),
          title: this.props.log.title,
          subtitle: this.props.log.subtitle,
          titleImage: this.props.log.titleImage,
@@ -212,9 +208,9 @@ export default class Log extends Component {
          })
 
          if (response.status === 200) {
-            alert('Successfully updated content')
+            alert('Successfully updated log')
          } else {
-            alert(`Failed to submit content, error: ${response.status}, ${JSON.stringify(await response.json())}`)
+            alert(`Failed to submit changes to log, error: ${response.status}, ${JSON.stringify(await response.json())}`)
          }
       })
    }

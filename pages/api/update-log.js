@@ -12,7 +12,7 @@ export default async function handler(request, response) {
 
     const updateError = await updateLog(log._id, log)
     if (!updateError) {
-        return response.status(200)
+        return response.status(200).send()
     } else {
         return response.status(500).json({ error: updateError.error })
     }

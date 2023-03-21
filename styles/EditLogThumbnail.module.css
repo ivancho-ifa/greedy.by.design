@@ -1,0 +1,17 @@
+.uriChange {
+    font-size: .75em;
+    padding: 1em 2em 2em 2em;
+    color: gray;
+}
+
+.button {
+    color: gray;
+    border: 1px solid gray;
+    padding: .5em .75em;
+
+    width: 100%;
+    margin-top: .5em;
+    text-align: center;
+}
+
+#uriChangeInput {}

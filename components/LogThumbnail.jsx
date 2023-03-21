@@ -3,7 +3,7 @@ import logStyles from 'styles/LogThumbnail.module.css'
 import { useState, Fragment } from 'react'
 import Image from 'next/image'
 
-export default function LogThumbnail(params) {
+export default function LogThumbnail({ log }) {
    const [isImageShown, setIsImageShown] = useState(false)
    const [mousePos, setMousePos] = useState({})
 
@@ -31,20 +31,27 @@ export default function LogThumbnail(params) {
          >
             <Image
                className={`${logStyles.titleImage}`}
-               src={params.titleImage}
-               alt={params.titleImageAlt}
+               src={log.titleImage}
+               alt={log.titleImageAlt}
                fill
             />
          </div>
       )
    }
 
-   const date = new Date(params.date)
+   const date = new Date(log.date)
 
    return (
       <Fragment>
          <div
-            className={`${logStyles.Log} ${logStyles.collapsingTopBottomBorder} ${logStyles.padded}`}
+            className={`
+               ${logStyles.Log}
+               ${logStyles.padded}
+               ${logStyles.collapsingTopBottomBorder}
+               ${log.draft ?
+                  logStyles.draft :
+                  logStyles.published}
+            `}
             onMouseEnter={handleEnter}
             onMouseLeave={handleLeave}
          >
@@ -52,7 +59,7 @@ export default function LogThumbnail(params) {
                <p className={`${logStyles.subtitle}`}>
                   <time dateTime={date}>{date.toLocaleDateString()}</time>
                </p>
-               <h2 className={`${logStyles.title}`}>{params.title}</h2>
+               <h2 className={`${logStyles.title}`}>{log.title}</h2>
                {isImageShown ? getImage() : null}
             </header>
          </div>

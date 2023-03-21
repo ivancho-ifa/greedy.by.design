@@ -42,10 +42,7 @@ class Journal extends Component {
                         href={`${this.props.router.asPath}/${log._id}`}
                      >
                         <LogThumbnail
-                           date={log.date}
-                           title={log.title}
-                           titleImage={log.titleImage}
-                           titleImageAlt={log.titleImageAlt}
+                           log={log}
                         />
                      </Link>)}
                   </Fragment>

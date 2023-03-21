@@ -14,4 +14,10 @@
     text-align: center;
 }
 
-#uriChangeInput {}
+#uriChangeInput,
+#uriChangeInput::placeholder,
+.dangerous {
+    color: red;
+    border-color: red;
+    text-overflow: ellipsis;
+}

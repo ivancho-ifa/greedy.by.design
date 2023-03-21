@@ -2,7 +2,6 @@ import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import journalStyles from 'styles/Journal.module.css'
 import LogThumbnail from 'components/LogThumbnail'
 import { getLogs } from 'utils/logs'
-import Link from 'next/link'
 import { withRouter } from 'next/router'
 import { Component, Fragment } from 'react'
 
@@ -38,13 +37,12 @@ class Journal extends Component {
                   return (<Fragment
                      key={logId}
                   >
-                     {(!log.draft || log.draft && !this.state.showPreview) && (<Link
-                        href={`${this.props.router.asPath}/${log._id}`}
-                     >
+                     {(!log.draft || log.draft && !this.state.showPreview) && (
                         <LogThumbnail
                            log={log}
+                           showPreview={this.state.showPreview}
                         />
-                     </Link>)}
+                     )}
                   </Fragment>
                   )
                })}

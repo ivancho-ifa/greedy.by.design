@@ -19,19 +19,24 @@
    height: fit-content;
 }
 
-/* TODO: Handle responsiveness */
 .logs {
-   max-width: 50vw;
+   width: 35vw;
+}
+
+@media screen and (max-width: 1200px) {
+   .logs {
+      width: 50vw;
+   }
 }
 
 @media screen and (max-width: 800px) {
    .logs {
-      max-width: 75vw;
+      width: 75vw;
    }
 }
 
 @media screen and (max-width: 450px) {
    .logs {
-      max-width: 95vw;
+      width: 95vw;
    }
 }

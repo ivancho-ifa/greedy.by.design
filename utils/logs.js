@@ -104,3 +104,19 @@ export async function changeLogId(currentId, newId) {
       await client.close()
    }
 }
+
+export async function deleteLog(id) {
+   try {
+      await client.connect()
+
+      const database = client.db('journal')
+      const logs = database.collection('logs')
+
+      const deleteResult = await logs.deleteOne({ _id: id })
+      return deleteResult.acknowledged && deleteResult.deletedCount === 1
+         ? null
+         : { error: `Failed to delete log ${id}` }
+   } finally {
+      await client.close()
+   }
+}

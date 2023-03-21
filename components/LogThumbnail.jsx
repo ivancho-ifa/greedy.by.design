@@ -10,6 +10,7 @@ export default function LogThumbnail({ log, showPreview }) {
    const [isImageShown, setIsImageShown] = useState(false)
    const [mousePos, setMousePos] = useState({})
    const [uri, setUri] = useState(log._id)
+   const [deleted, setDeleted] = useState(false)
    const router = useRouter()
 
    const handleUriChange = (event) => {
@@ -32,6 +33,25 @@ export default function LogThumbnail({ log, showPreview }) {
       } else {
          alert(
             `Failed to rename log, error: ${response.status}, ${JSON.stringify(await response.json())}`
+         )
+      }
+   }
+
+   const deleteLog = async (_event) => {
+      const response = await fetch('/api/delete-log', {
+         method: 'DELETE',
+         body: JSON.stringify({
+            id: log._id,
+         }),
+      })
+
+      setDeleted(true)
+
+      if (response.status === 200) {
+         alert('Successfully deleted log')
+      } else {
+         alert(
+            `Failed to delete log, error: ${response.status}, ${JSON.stringify(await response.json())}`
          )
       }
    }
@@ -70,6 +90,10 @@ export default function LogThumbnail({ log, showPreview }) {
 
    const date = new Date(log.date)
 
+   if (deleted) {
+      return null
+   }
+
    return (
       <Fragment>
          <Link
@@ -104,7 +128,7 @@ export default function LogThumbnail({ log, showPreview }) {
                   <input type="text" id={`${editLogStyles.uriChangeInput}`} value={uri} onChange={handleUriChange} />
                </div>
                <input type="submit" className={`${editLogStyles.button}`} value="Change URI" />
-               <input type="button" className={`${editLogStyles.button} ${editLogStyles.dangerous}`} value="Delete log" />
+               <input type="button" className={`${editLogStyles.button} ${editLogStyles.dangerous}`} value="Delete log" onClick={deleteLog} />
             </form> :
             null}
       </Fragment>

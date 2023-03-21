@@ -2,7 +2,7 @@ import { changeLogId } from 'utils/logs'
 
 // TODO: Validate incoming URI
 export default async function handler(request, response) {
-    if (request.method !== 'POST') {
+    if (request.method !== 'PUT') {
         return response.status(405).json({ error: `Method ${request.method} not allowed` })
     }
 

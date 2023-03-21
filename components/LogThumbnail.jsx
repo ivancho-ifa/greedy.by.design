@@ -20,7 +20,7 @@ export default function LogThumbnail({ log, showPreview }) {
       event.preventDefault()
 
       const response = await fetch('/api/rename-log', {
-         method: 'POST',
+         method: 'PUT',
          body: JSON.stringify({
             currentId: log._id,
             newId: uri

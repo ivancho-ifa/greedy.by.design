@@ -115,27 +115,27 @@ export default class Log extends Component {
             <main className={`${logStyles.article}`}>
                {this.state.paragraphs
                   ? this.state.paragraphs.map((_paragraph, paragraphId) => {
-                     return (
-                        <div key={paragraphId}>
-                           <ContentEditable
-                              tagName='p'
-                              className={`${logStyles.paragraph}`}
-                              onChange={(event) => this.handleParagraphChange(event, paragraphId)}
-                              html={this.state.paragraphs[paragraphId]}
-                              disabled={this.state.showPreview}
-                           />
+                       return (
+                          <div key={paragraphId}>
+                             <ContentEditable
+                                tagName='p'
+                                className={`${logStyles.paragraph}`}
+                                onChange={(event) => this.handleParagraphChange(event, paragraphId)}
+                                html={this.state.paragraphs[paragraphId]}
+                                disabled={this.state.showPreview}
+                             />
 
-                           {!this.state.showPreview && (
-                              <input
-                                 type='button'
-                                 className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
-                                 value='Remove paragraph'
-                                 onClick={() => this.removeParagraph(paragraphId)}
-                              />
-                           )}
-                        </div>
-                     )
-                  })
+                             {!this.state.showPreview && (
+                                <input
+                                   type='button'
+                                   className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
+                                   value='Remove paragraph'
+                                   onClick={() => this.removeParagraph(paragraphId)}
+                                />
+                             )}
+                          </div>
+                       )
+                    })
                   : null}
 
                {!this.state.showPreview && (
@@ -194,12 +194,12 @@ export default class Log extends Component {
 
       const paragraphs = this.state.paragraphs
          ? this.state.paragraphs.map((paragraph, paragraphId) => {
-            if (paragraphId === key) {
-               return sanitizedContent
-            }
+              if (paragraphId === key) {
+                 return sanitizedContent
+              }
 
-            return paragraph
-         })
+              return paragraph
+           })
          : []
       this.setState({ paragraphs: paragraphs })
    }

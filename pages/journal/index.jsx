@@ -83,7 +83,6 @@ class Journal extends Component {
                   </Fragment>
                   )
                })}
-
                {!this.state.showPreview ?
                   <form className={`${editJournalStyles.addLog}`} onSubmit={this.addLog}>
                      <div>

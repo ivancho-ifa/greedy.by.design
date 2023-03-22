@@ -89,7 +89,7 @@ export async function changeLogId(currentId, newId) {
       if (log === null) {
          return { error: `Missing log with id ${currentId}` }
       }
-      log._id = newId
+      log._id = encodeURIComponent(newId)
 
       const insertedId = parseInsertResponse(await logs.insertOne(log))
       if (!insertedId) {
@@ -98,8 +98,14 @@ export async function changeLogId(currentId, newId) {
 
       const deleteResult = await logs.deleteOne({ _id: currentId })
       return deleteResult.acknowledged && deleteResult.deletedCount === 1
-         ? null
-         : { error: `Failed to delete log ${currentId}` }
+         ? {
+            success: true,
+            insertedId: insertedId,
+         }
+         : {
+            error: `Failed to delete log ${currentId}, but created log ${insertedId}`,
+            insertedId: insertedId,
+         }
    } finally {
       await client.close()
    }

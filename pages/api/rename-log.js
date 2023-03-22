@@ -8,10 +8,10 @@ export default async function handler(request, response) {
 
    const { currentId, newId } = JSON.parse(request.body)
 
-   const renameError = await changeLogId(currentId, newId)
-   if (!renameError) {
-      return response.status(200).send()
+   const renameResult = await changeLogId(currentId, newId)
+   if (renameResult.success) {
+      return response.status(200).json({ insertedId: renameResult.insertedId })
    } else {
-      return response.status(500).json({ error: renameError.error })
+      return response.status(500).json({ error: renameResult.error })
    }
 }

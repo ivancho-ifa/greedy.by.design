@@ -29,12 +29,14 @@ export default function LogThumbnail({ log, showPreview }) {
          }),
       })
 
+      const responseBody = await response.json()
       if (response.status === 200) {
-         setUri(newUri)
+         const oldUri = uri
+         setUri(responseBody.insertedId)
 
-         alert(`Successfully renamed log from ${uri} to ${newUri}`)
+         alert(`Successfully renamed log from ${oldUri} to ${responseBody.insertedId}`)
       } else {
-         alert(`Failed to rename log, error: ${response.status}, ${JSON.stringify(await response.json())}`)
+         alert(`Failed to rename log, error: ${response.status}, ${responseBody.error}`)
       }
    }
 

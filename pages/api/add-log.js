@@ -12,7 +12,7 @@ export default async function handler(request, response) {
 
    const insertedId = await insertLog(log)
    if (insertedId) {
-      return response.status(201).json(insertedId)
+      return response.status(201).send(insertedId)
    } else {
       return response.status(500).json({ error: `Failed to insert ${log}` })
    }

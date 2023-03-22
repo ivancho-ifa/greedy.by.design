@@ -4,6 +4,7 @@ import LogThumbnail from 'components/LogThumbnail'
 import { getLogs } from 'utils/logs'
 import { withRouter } from 'next/router'
 import { Component, Fragment } from 'react'
+import editJournalStyles from 'styles/EditJournal.module.css'
 
 class Journal extends Component {
    constructor(props) {
@@ -11,6 +12,7 @@ class Journal extends Component {
 
       this.state = {
          showPreview: true,
+         uri: 'example-id',
       }
    }
 
@@ -27,6 +29,41 @@ class Journal extends Component {
 
    componentWillUnmount() {
       document.removeEventListener('keydown', this.togglePreview, false)
+   }
+
+   handleUriChange = (event) => {
+      this.setState({ uri: event.target.value })
+   }
+
+   addLog = async (event) => {
+      event.preventDefault()
+
+      const response = await fetch('/api/add-log', {
+         method: 'POST',
+         body: JSON.stringify({
+            _id: this.state.uri,
+            draft: true,
+            date: new Date(),
+            title: 'Title',
+            subtitle: 'Subtitle',
+            titleImage: 'https://i49.vbox7.com/o/5f5/5f52f1b40.jpg',
+            titleImageAlt: 'Title image alternative text',
+            paragraphs: [
+               'Paragraph'
+            ]
+         }),
+      })
+
+      const responseBody = await response.text()
+      if (response.status === 201) {
+         alert('Successfully added log')
+
+         this.props.router.push(`${this.props.router.asPath}/${responseBody}`)
+      } else {
+         alert(
+            `Failed to add log, error: ${response.status}, ${JSON.stringify(responseBody)}`
+         )
+      }
    }
 
    render() {
@@ -47,6 +84,17 @@ class Journal extends Component {
                   )
                })}
 
+               {!this.state.showPreview ?
+                  <form className={`${editJournalStyles.addLog}`} onSubmit={this.addLog}>
+                     <div>
+                        <label htmlFor={`${editJournalStyles.addLogInput}`} className={`${editJournalStyles.label}`}>Create log:</label>
+                        <label htmlFor={`${editJournalStyles.addLogInput}`}>{this.props.router.asPath}/</label>
+                        <input type="text" id={`${editJournalStyles.addLogInput}`} value={this.state.uri} onChange={this.handleUriChange} />
+                     </div>
+                     <input type="submit" className={`${editJournalStyles.button}`} value="Add URI" />
+                  </form> :
+                  null
+               }
             </div>
          </div>
       )

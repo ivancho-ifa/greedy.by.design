@@ -250,7 +250,7 @@ export default class Log extends Component {
 export async function getStaticPaths() {
    return {
       paths: await getLogsUris(),
-      fallback: false,
+      fallback: 'blocking',
    }
 }
 

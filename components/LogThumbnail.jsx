@@ -9,12 +9,13 @@ import { useRouter } from 'next/router'
 export default function LogThumbnail({ log, showPreview }) {
    const [isImageShown, setIsImageShown] = useState(false)
    const [mousePos, setMousePos] = useState({})
+   const [newUri, setNewUri] = useState(log._id)
    const [uri, setUri] = useState(log._id)
    const [deleted, setDeleted] = useState(false)
    const router = useRouter()
 
    const handleUriChange = (event) => {
-      setUri(event.target.value)
+      setNewUri(event.target.value)
    }
 
    const submitUriChange = async (event) => {
@@ -23,13 +24,15 @@ export default function LogThumbnail({ log, showPreview }) {
       const response = await fetch('/api/rename-log', {
          method: 'PUT',
          body: JSON.stringify({
-            currentId: log._id,
-            newId: uri,
+            currentId: uri,
+            newId: newUri,
          }),
       })
 
       if (response.status === 200) {
-         alert('Successfully renamed log')
+         setUri(newUri)
+
+         alert(`Successfully renamed log from ${uri} to ${newUri}`)
       } else {
          alert(`Failed to rename log, error: ${response.status}, ${JSON.stringify(await response.json())}`)
       }
@@ -39,14 +42,14 @@ export default function LogThumbnail({ log, showPreview }) {
       const response = await fetch('/api/delete-log', {
          method: 'DELETE',
          body: JSON.stringify({
-            id: log._id,
+            id: uri,
          }),
       })
 
       setDeleted(true)
 
       if (response.status === 200) {
-         alert('Successfully deleted log')
+         alert(`Successfully deleted log ${uri}`)
       } else {
          alert(`Failed to delete log, error: ${response.status}, ${JSON.stringify(await response.json())}`)
       }
@@ -92,7 +95,7 @@ export default function LogThumbnail({ log, showPreview }) {
 
    return (
       <Fragment>
-         <Link href={`${router.asPath}/${log._id}`}>
+         <Link href={`${router.asPath}/${uri}`}>
             <div
                className={`
                ${logStyles.Log}
@@ -123,7 +126,7 @@ export default function LogThumbnail({ log, showPreview }) {
                   <input
                      type='text'
                      id={`${editLogStyles.uriChangeInput}`}
-                     value={uri}
+                     value={newUri}
                      onChange={handleUriChange}
                   />
                </div>

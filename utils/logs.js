@@ -99,13 +99,13 @@ export async function changeLogId(currentId, newId) {
       const deleteResult = await logs.deleteOne({ _id: currentId })
       return deleteResult.acknowledged && deleteResult.deletedCount === 1
          ? {
-            success: true,
-            insertedId: insertedId,
-         }
+              success: true,
+              insertedId: insertedId,
+           }
          : {
-            error: `Failed to delete log ${currentId}, but created log ${insertedId}`,
-            insertedId: insertedId,
-         }
+              error: `Failed to delete log ${currentId}, but created log ${insertedId}`,
+              insertedId: insertedId,
+           }
    } finally {
       await client.close()
    }

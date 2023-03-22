@@ -24,16 +24,14 @@ export default function LogThumbnail({ log, showPreview }) {
          method: 'PUT',
          body: JSON.stringify({
             currentId: log._id,
-            newId: uri
+            newId: uri,
          }),
       })
 
       if (response.status === 200) {
          alert('Successfully renamed log')
       } else {
-         alert(
-            `Failed to rename log, error: ${response.status}, ${JSON.stringify(await response.json())}`
-         )
+         alert(`Failed to rename log, error: ${response.status}, ${JSON.stringify(await response.json())}`)
       }
    }
 
@@ -50,9 +48,7 @@ export default function LogThumbnail({ log, showPreview }) {
       if (response.status === 200) {
          alert('Successfully deleted log')
       } else {
-         alert(
-            `Failed to delete log, error: ${response.status}, ${JSON.stringify(await response.json())}`
-         )
+         alert(`Failed to delete log, error: ${response.status}, ${JSON.stringify(await response.json())}`)
       }
    }
 
@@ -96,17 +92,13 @@ export default function LogThumbnail({ log, showPreview }) {
 
    return (
       <Fragment>
-         <Link
-            href={`${router.asPath}/${log._id}`}
-         >
+         <Link href={`${router.asPath}/${log._id}`}>
             <div
                className={`
                ${logStyles.Log}
                ${logStyles.padded}
                ${logStyles.collapsingTopBottomBorder}
-               ${log.draft ?
-                     logStyles.draft :
-                     logStyles.published}
+               ${log.draft ? logStyles.draft : logStyles.published}
             `}
                onMouseEnter={handleEnter}
                onMouseLeave={handleLeave}
@@ -121,16 +113,33 @@ export default function LogThumbnail({ log, showPreview }) {
             </div>
          </Link>
 
-         {!showPreview ?
-            <form className={`${editLogStyles.uriChange}`} onSubmit={submitUriChange}>
+         {!showPreview ? (
+            <form
+               className={`${editLogStyles.uriChange}`}
+               onSubmit={submitUriChange}
+            >
                <div>
                   <label htmlFor={`${editLogStyles.uriChangeInput}`}>URI: {router.asPath}/</label>
-                  <input type="text" id={`${editLogStyles.uriChangeInput}`} value={uri} onChange={handleUriChange} />
+                  <input
+                     type='text'
+                     id={`${editLogStyles.uriChangeInput}`}
+                     value={uri}
+                     onChange={handleUriChange}
+                  />
                </div>
-               <input type="submit" className={`${editLogStyles.button}`} value="Change URI" />
-               <input type="button" className={`${editLogStyles.button} ${editLogStyles.dangerous}`} value="Delete log" onClick={deleteLog} />
-            </form> :
-            null}
+               <input
+                  type='submit'
+                  className={`${editLogStyles.button}`}
+                  value='Change URI'
+               />
+               <input
+                  type='button'
+                  className={`${editLogStyles.button} ${editLogStyles.dangerous}`}
+                  value='Delete log'
+                  onClick={deleteLog}
+               />
+            </form>
+         ) : null}
       </Fragment>
    )
 }

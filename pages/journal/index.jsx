@@ -48,9 +48,7 @@ class Journal extends Component {
             subtitle: 'Subtitle',
             titleImage: 'https://i49.vbox7.com/o/5f5/5f52f1b40.jpg',
             titleImageAlt: 'Title image alternative text',
-            paragraphs: [
-               'Paragraph'
-            ]
+            paragraphs: ['Paragraph'],
          }),
       })
 
@@ -60,9 +58,7 @@ class Journal extends Component {
 
          this.props.router.push(`${this.props.router.asPath}/${responseBody}`)
       } else {
-         alert(
-            `Failed to add log, error: ${response.status}, ${JSON.stringify(responseBody)}`
-         )
+         alert(`Failed to add log, error: ${response.status}, ${JSON.stringify(responseBody)}`)
       }
    }
 
@@ -71,29 +67,44 @@ class Journal extends Component {
          <div className={`${journalStyles.Journal} ${journalStyles.centralizer}`}>
             <div className={`${journalStyles.logs}`}>
                {this.props.logs.map((log, logId) => {
-                  return (<Fragment
-                     key={logId}
-                  >
-                     {(!log.draft || log.draft && !this.state.showPreview) && (
-                        <LogThumbnail
-                           log={log}
-                           showPreview={this.state.showPreview}
-                        />
-                     )}
-                  </Fragment>
+                  return (
+                     <Fragment key={logId}>
+                        {(!log.draft || (log.draft && !this.state.showPreview)) && (
+                           <LogThumbnail
+                              log={log}
+                              showPreview={this.state.showPreview}
+                           />
+                        )}
+                     </Fragment>
                   )
                })}
-               {!this.state.showPreview ?
-                  <form className={`${editJournalStyles.addLog}`} onSubmit={this.addLog}>
+               {!this.state.showPreview ? (
+                  <form
+                     className={`${editJournalStyles.addLog}`}
+                     onSubmit={this.addLog}
+                  >
                      <div>
-                        <label htmlFor={`${editJournalStyles.addLogInput}`} className={`${editJournalStyles.label}`}>Create log:</label>
+                        <label
+                           htmlFor={`${editJournalStyles.addLogInput}`}
+                           className={`${editJournalStyles.label}`}
+                        >
+                           Create log:
+                        </label>
                         <label htmlFor={`${editJournalStyles.addLogInput}`}>{this.props.router.asPath}/</label>
-                        <input type="text" id={`${editJournalStyles.addLogInput}`} value={this.state.uri} onChange={this.handleUriChange} />
+                        <input
+                           type='text'
+                           id={`${editJournalStyles.addLogInput}`}
+                           value={this.state.uri}
+                           onChange={this.handleUriChange}
+                        />
                      </div>
-                     <input type="submit" className={`${editJournalStyles.button}`} value="Add URI" />
-                  </form> :
-                  null
-               }
+                     <input
+                        type='submit'
+                        className={`${editJournalStyles.button}`}
+                        value='Add URI'
+                     />
+                  </form>
+               ) : null}
             </div>
          </div>
       )

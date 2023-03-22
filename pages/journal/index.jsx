@@ -120,7 +120,7 @@ WithRouterWrapper.getLayout = Journal.getLayout
 
 export default WithRouterWrapper
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
    return {
       props: {
          logs: await getLogs(),

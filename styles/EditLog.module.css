@@ -1,0 +1,74 @@
+#titleImageForm {
+   color: gray;
+   display: grid;
+   grid-template-areas:
+      'titleImageLabel    titleImageInput'
+      'titleImageAltLabel titleImageAltInput';
+}
+
+#titleImageLabel {
+   grid-area: 'titleImageLabel';
+}
+
+#titleImageAltLabel {
+   grid-area: 'titleImageAltLabel';
+}
+
+#titleImageInput {
+   grid-area: 'titleImageInput';
+}
+
+#titleImageAltInput {
+   grid-area: 'titleImageAltInput';
+}
+
+.button {
+   color: gray;
+   border: 1px solid gray;
+   padding: 1em 1.5em;
+}
+
+.editParagraphButton {
+   font-size: 0.5em;
+}
+
+#addParagraphButton {
+   margin-top: 2em;
+}
+
+#editPageForm {
+   color: gray;
+   display: grid;
+   grid-template-areas:
+      'urlLabel urlInput'
+      'saveDraftButton publishButton';
+   justify-items: stretch;
+   align-items: center;
+   justify-content: stretch;
+   align-content: center;
+}
+
+#urlLabel {
+   grid-area: 'urlLabel';
+   justify-self: right;
+}
+
+#urlInput {
+   grid-area: 'urlInput';
+   justify-self: left;
+}
+
+.editPageButton {
+   margin-top: 1em;
+   text-align: center;
+}
+
+#saveDraftButton {
+   grid-area: 'saveDraftButton';
+}
+
+#publishButton {
+   grid-area: 'publishButton';
+   color: red;
+   border-color: red;
+}

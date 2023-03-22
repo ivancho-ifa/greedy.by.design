@@ -9,7 +9,7 @@ export async function getLogs(filter = {}) {
 
       const database = client.db('journal')
       const logs = database.collection('logs')
-      const logIterator = logs.find(filter).project({ _id: 0 })
+      const logIterator = logs.find(filter)
 
       return await logIterator.toArray()
    } finally {
@@ -24,8 +24,7 @@ export async function getLog(filter = {}) {
       const database = client.db('journal')
       const logs = database.collection('logs')
 
-      const { _id, ...log } = await logs.findOne(filter) // TODO: Projection doesn't work for some reason
-      return log
+      return await logs.findOne(filter)
    } finally {
       await client.close()
    }
@@ -33,6 +32,91 @@ export async function getLog(filter = {}) {
 
 export async function getLogsUris() {
    return (await getLogs()).map((log) => {
-      return { params: { log: log.uri } }
+      return { params: { log: log._id } }
    })
+}
+
+export async function insertLog(log) {
+   try {
+      await client.connect()
+
+      const database = client.db('journal')
+      const logs = database.collection('logs')
+
+      return parseInsertResponse(await logs.insertOne(log))
+   } finally {
+      await client.close()
+   }
+}
+
+function parseInsertResponse(insertResult) {
+   return insertResult.acknowledged ? insertResult.insertedId : null
+}
+
+export async function updateLog(id, log) {
+   try {
+      await client.connect()
+
+      const database = client.db('journal')
+      const logs = database.collection('logs')
+
+      // Ignore _id of log if passed
+      if (Object.hasOwn(log, '_id')) {
+         delete log._id
+      }
+
+      const query = { _id: id }
+      const update = { $set: log }
+      const options = {}
+      const updateResult = await logs.updateOne(query, update, options)
+
+      return updateResult.acknowledged && updateResult.modifiedCount === 1
+         ? null
+         : { error: `Failed to update log ${id} with ${JSON.stringify(log)}` }
+   } finally {
+      await client.close()
+   }
+}
+
+export async function changeLogId(currentId, newId) {
+   try {
+      await client.connect()
+
+      const database = client.db('journal')
+      const logs = database.collection('logs')
+
+      const log = await logs.findOne({ _id: currentId })
+      if (log === null) {
+         return { error: `Missing log with id ${currentId}` }
+      }
+      log._id = newId
+
+      const insertedId = parseInsertResponse(await logs.insertOne(log))
+      if (!insertedId) {
+         return { error: `Failed to insert the log ${log}` }
+      }
+
+      const deleteResult = await logs.deleteOne({ _id: currentId })
+      return deleteResult.acknowledged && deleteResult.deletedCount === 1
+         ? null
+         : { error: `Failed to delete log ${currentId}` }
+   } finally {
+      await client.close()
+   }
+}
+
+export async function deleteLog(id) {
+   try {
+      await client.connect()
+
+      const database = client.db('journal')
+      const logs = database.collection('logs')
+
+      const deleteResult = await logs.deleteOne({ _id: id })
+      return deleteResult.acknowledged && deleteResult.deletedCount === 1
+         ? null
+         : { error: `Failed to delete log ${id}` }
+   } finally {
+      await client.close()
+   }
 }

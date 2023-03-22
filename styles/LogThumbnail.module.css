@@ -1,6 +1,13 @@
 .collapsingTopBottomBorder {
-   box-shadow: 0 0 0 0 white, 0 0.1em 0 0 white, 0 0.1em 0 0 white, /* Just to fix the corner */ 0 0 0 0 white inset,
-      0 0.1em 0 0 white inset;
+   box-shadow: 0 0 0 0, 0 0.1em 0 0, 0 0.1em 0 0, /* Just to fix the corner */ 0 0 0 0 inset, 0 0.1em 0 0 inset;
+}
+
+.draft {
+   color: gray;
+}
+
+.published {
+   color: white;
 }
 
 .padded {

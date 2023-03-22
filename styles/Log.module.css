@@ -3,9 +3,11 @@
    grid-template-areas:
       'logHeader logTime'
       'article   logTime';
+   grid-template-columns: 1fr auto;
    gap: 1em;
 
    min-height: 100%;
+   max-width: 100%;
 
    background-color: black;
    color: white;
@@ -31,7 +33,12 @@
    grid-template-areas:
       'titleImage titleImage'
       'title      subtitle';
-   grid-template-columns: 6.5fr 3.5fr;
+   grid-template-columns: 3fr 2fr;
+
+   justify-items: center;
+   align-items: center;
+   justify-content: center;
+   align-content: center;
 
    padding-bottom: 1em;
 }
@@ -46,21 +53,18 @@
    grid-area: titleImage;
    position: unset !important;
 
-   justify-self: center;
-   align-self: center;
+   min-width: 50vw;
 }
 
 .titleImage {
    object-fit: contain;
    width: 100% !important;
-   min-width: 50vw;
    position: relative !important;
    height: unset !important;
 }
 
 .title {
    grid-area: title;
-   place-self: center;
 
    font-size: 3em;
    font-weight: bolder;
@@ -69,7 +73,6 @@
 
 .subtitle {
    grid-area: subtitle;
-   place-self: center;
 
    font-size: 1.5em;
    font-weight: normal;
@@ -91,6 +94,8 @@
          'logTime'
          'logHeader'
          'article';
+
+      grid-template-columns: 1fr;
    }
 
    .logTimeSeparator {
@@ -104,7 +109,7 @@
    }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
    .logHeader {
       grid-template-areas:
          'titleImage titleImage'

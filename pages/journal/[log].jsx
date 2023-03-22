@@ -113,7 +113,7 @@ export default class Log extends Component {
             </header>
 
             <main className={`${logStyles.article}`}>
-               {this.state.paragraphs.map((_paragraph, paragraphId) => {
+               {this.state.paragraphs ? this.state.paragraphs.map((_paragraph, paragraphId) => {
                   return (
                      <div key={paragraphId}>
                         <ContentEditable
@@ -134,7 +134,7 @@ export default class Log extends Component {
                         )}
                      </div>
                   )
-               })}
+               }) : null}
 
                {!this.state.showPreview && (
                   <input
@@ -190,13 +190,13 @@ export default class Log extends Component {
       }
       const sanitizedContent = sanitizeHtml(event.target.value, sanitizeConf)
 
-      const paragraphs = this.state.paragraphs.map((paragraph, paragraphId) => {
+      const paragraphs = this.state.paragraphs ? this.state.paragraphs.map((paragraph, paragraphId) => {
          if (paragraphId === key) {
             return sanitizedContent
          }
 
          return paragraph
-      })
+      }) : []
       this.setState({ paragraphs: paragraphs })
    }
 

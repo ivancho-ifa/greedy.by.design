@@ -101,7 +101,7 @@ class Journal extends Component {
                      <input
                         type='submit'
                         className={`${editJournalStyles.button}`}
-                        value='Add URI'
+                        value='Add log'
                      />
                   </form>
                ) : null}

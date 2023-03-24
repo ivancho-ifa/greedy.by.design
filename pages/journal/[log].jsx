@@ -6,8 +6,9 @@ import { Component } from 'react'
 import sanitizeHtml from 'sanitize-html'
 import ContentEditable from 'react-contenteditable'
 import { getLogsUris, getLog } from 'utils/logs'
+import { withRouter } from 'next/router'
 
-export default class Log extends Component {
+class Log extends Component {
    constructor(props) {
       super(props)
 
@@ -220,7 +221,23 @@ export default class Log extends Component {
          })
 
          if (response.status === 200) {
-            alert('Successfully updated log')
+            alert(`Successfully updated log ${this.state._id} in DB`)
+
+            const revalidateResponse = await fetch(
+               '/api/revalidate?' +
+                  new URLSearchParams({
+                     path: this.props.router.asPath,
+                     secret: process.env.NEXT_PUBLIC_REVALIDATE_TOKEN,
+                  })
+            )
+            const revalidateResponseBody = await revalidateResponse.json()
+            if (revalidateResponse.status === 200 && revalidateResponseBody.revalidated) {
+               alert(`Successfully generated web page for log ${this.state._id}`)
+            } else {
+               alert(
+                  `Successfully updated log ${this.state._id} data, but failed to generate the page and it will show the old page. Contact tech support`
+               )
+            }
          } else {
             alert(
                `Failed to submit changes to log, error: ${response.status}, ${JSON.stringify(await response.json())}`
@@ -246,6 +263,11 @@ export default class Log extends Component {
       return <BottomNavigationLayout>{page}</BottomNavigationLayout>
    }
 }
+
+const WithRouterWrapper = withRouter(Log)
+WithRouterWrapper.getLayout = Log.getLayout
+
+export default WithRouterWrapper
 
 export async function getStaticPaths() {
    return {

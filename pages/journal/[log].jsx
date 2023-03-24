@@ -6,8 +6,9 @@ import { Component } from 'react'
 import sanitizeHtml from 'sanitize-html'
 import ContentEditable from 'react-contenteditable'
 import { getLogsUris, getLog } from 'utils/logs'
+import { withRouter } from 'next/router'
 
-export default class Log extends Component {
+class Log extends Component {
    constructor(props) {
       super(props)
 
@@ -115,27 +116,27 @@ export default class Log extends Component {
             <main className={`${logStyles.article}`}>
                {this.state.paragraphs
                   ? this.state.paragraphs.map((_paragraph, paragraphId) => {
-                       return (
-                          <div key={paragraphId}>
-                             <ContentEditable
-                                tagName='p'
-                                className={`${logStyles.paragraph}`}
-                                onChange={(event) => this.handleParagraphChange(event, paragraphId)}
-                                html={this.state.paragraphs[paragraphId]}
-                                disabled={this.state.showPreview}
-                             />
+                     return (
+                        <div key={paragraphId}>
+                           <ContentEditable
+                              tagName='p'
+                              className={`${logStyles.paragraph}`}
+                              onChange={(event) => this.handleParagraphChange(event, paragraphId)}
+                              html={this.state.paragraphs[paragraphId]}
+                              disabled={this.state.showPreview}
+                           />
 
-                             {!this.state.showPreview && (
-                                <input
-                                   type='button'
-                                   className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
-                                   value='Remove paragraph'
-                                   onClick={() => this.removeParagraph(paragraphId)}
-                                />
-                             )}
-                          </div>
-                       )
-                    })
+                           {!this.state.showPreview && (
+                              <input
+                                 type='button'
+                                 className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
+                                 value='Remove paragraph'
+                                 onClick={() => this.removeParagraph(paragraphId)}
+                              />
+                           )}
+                        </div>
+                     )
+                  })
                   : null}
 
                {!this.state.showPreview && (
@@ -194,12 +195,12 @@ export default class Log extends Component {
 
       const paragraphs = this.state.paragraphs
          ? this.state.paragraphs.map((paragraph, paragraphId) => {
-              if (paragraphId === key) {
-                 return sanitizedContent
-              }
+            if (paragraphId === key) {
+               return sanitizedContent
+            }
 
-              return paragraph
-           })
+            return paragraph
+         })
          : []
       this.setState({ paragraphs: paragraphs })
    }
@@ -220,7 +221,18 @@ export default class Log extends Component {
          })
 
          if (response.status === 200) {
-            alert('Successfully updated log')
+            alert(`Successfully updated log ${this.state._id}. Secret is ${process.env.NEXT_REVALIDATE_TOKEN}`)
+
+            const revalidateResponse = await fetch('/api/revalidate?' + new URLSearchParams({
+               path: this.props.router.asPath,
+               secret: process.env.NEXT_PUBLIC_REVALIDATE_TOKEN,
+            }))
+            const revalidateResponseBody = await revalidateResponse.json()
+            if (revalidateResponse.status === 200 && revalidateResponseBody.revalidated) {
+               alert(`Successfully revalidated ${this.state._id}`)
+            } else {
+               alert(`Successfully updated log ${this.state._id} data, but failed to revalidate the page and it will show the old page. Contact tech support`)
+            }
          } else {
             alert(
                `Failed to submit changes to log, error: ${response.status}, ${JSON.stringify(await response.json())}`
@@ -246,6 +258,11 @@ export default class Log extends Component {
       return <BottomNavigationLayout>{page}</BottomNavigationLayout>
    }
 }
+
+const WithRouterWrapper = withRouter(Log)
+WithRouterWrapper.getLayout = Log.getLayout
+
+export default WithRouterWrapper
 
 export async function getStaticPaths() {
    return {

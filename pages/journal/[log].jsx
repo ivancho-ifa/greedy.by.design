@@ -116,27 +116,27 @@ class Log extends Component {
             <main className={`${logStyles.article}`}>
                {this.state.paragraphs
                   ? this.state.paragraphs.map((_paragraph, paragraphId) => {
-                     return (
-                        <div key={paragraphId}>
-                           <ContentEditable
-                              tagName='p'
-                              className={`${logStyles.paragraph}`}
-                              onChange={(event) => this.handleParagraphChange(event, paragraphId)}
-                              html={this.state.paragraphs[paragraphId]}
-                              disabled={this.state.showPreview}
-                           />
+                       return (
+                          <div key={paragraphId}>
+                             <ContentEditable
+                                tagName='p'
+                                className={`${logStyles.paragraph}`}
+                                onChange={(event) => this.handleParagraphChange(event, paragraphId)}
+                                html={this.state.paragraphs[paragraphId]}
+                                disabled={this.state.showPreview}
+                             />
 
-                           {!this.state.showPreview && (
-                              <input
-                                 type='button'
-                                 className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
-                                 value='Remove paragraph'
-                                 onClick={() => this.removeParagraph(paragraphId)}
-                              />
-                           )}
-                        </div>
-                     )
-                  })
+                             {!this.state.showPreview && (
+                                <input
+                                   type='button'
+                                   className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
+                                   value='Remove paragraph'
+                                   onClick={() => this.removeParagraph(paragraphId)}
+                                />
+                             )}
+                          </div>
+                       )
+                    })
                   : null}
 
                {!this.state.showPreview && (
@@ -195,12 +195,12 @@ class Log extends Component {
 
       const paragraphs = this.state.paragraphs
          ? this.state.paragraphs.map((paragraph, paragraphId) => {
-            if (paragraphId === key) {
-               return sanitizedContent
-            }
+              if (paragraphId === key) {
+                 return sanitizedContent
+              }
 
-            return paragraph
-         })
+              return paragraph
+           })
          : []
       this.setState({ paragraphs: paragraphs })
    }
@@ -223,15 +223,20 @@ class Log extends Component {
          if (response.status === 200) {
             alert(`Successfully updated log ${this.state._id} in DB`)
 
-            const revalidateResponse = await fetch('/api/revalidate?' + new URLSearchParams({
-               path: this.props.router.asPath,
-               secret: process.env.NEXT_PUBLIC_REVALIDATE_TOKEN,
-            }))
+            const revalidateResponse = await fetch(
+               '/api/revalidate?' +
+                  new URLSearchParams({
+                     path: this.props.router.asPath,
+                     secret: process.env.NEXT_PUBLIC_REVALIDATE_TOKEN,
+                  })
+            )
             const revalidateResponseBody = await revalidateResponse.json()
             if (revalidateResponse.status === 200 && revalidateResponseBody.revalidated) {
                alert(`Successfully generated web page for log ${this.state._id}`)
             } else {
-               alert(`Successfully updated log ${this.state._id} data, but failed to generate the page and it will show the old page. Contact tech support`)
+               alert(
+                  `Successfully updated log ${this.state._id} data, but failed to generate the page and it will show the old page. Contact tech support`
+               )
             }
          } else {
             alert(

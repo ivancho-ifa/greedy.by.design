@@ -221,7 +221,7 @@ class Log extends Component {
          })
 
          if (response.status === 200) {
-            alert(`Successfully updated log ${this.state._id}. Secret is ${process.env.NEXT_REVALIDATE_TOKEN}`)
+            alert(`Successfully updated log ${this.state._id} in DB`)
 
             const revalidateResponse = await fetch('/api/revalidate?' + new URLSearchParams({
                path: this.props.router.asPath,
@@ -229,9 +229,9 @@ class Log extends Component {
             }))
             const revalidateResponseBody = await revalidateResponse.json()
             if (revalidateResponse.status === 200 && revalidateResponseBody.revalidated) {
-               alert(`Successfully revalidated ${this.state._id}`)
+               alert(`Successfully generated web page for log ${this.state._id}`)
             } else {
-               alert(`Successfully updated log ${this.state._id} data, but failed to revalidate the page and it will show the old page. Contact tech support`)
+               alert(`Successfully updated log ${this.state._id} data, but failed to generate the page and it will show the old page. Contact tech support`)
             }
          } else {
             alert(

@@ -7,6 +7,9 @@ import sanitizeHtml from 'sanitize-html'
 import ContentEditable from 'react-contenteditable'
 import { getLogsUris, getLog } from 'utils/logs'
 import { withRouter } from 'next/router'
+import { Parser } from 'html-to-react'
+
+const htmlToReact = new Parser()
 
 import { Fragment } from 'react'
 import dynamic from 'next/dynamic'
@@ -125,15 +128,9 @@ class Log extends Component {
                   ? this.state.paragraphs.map((_paragraph, paragraphId) => {
                        return (
                           <div key={paragraphId}>
-                             <ContentEditable
-                                tagName='p'
-                                className={`${logStyles.paragraph}`}
-                                //   onChange={(event) => this.handleParagraphChange(event, paragraphId)}
-                                html={this.state.paragraphs[paragraphId]}
-                                //   disabled={this.state.showPreview}
-                                disabled={true}
-                             />
-
+                             <div className={`${logStyles.paragraph}`}>
+                                {htmlToReact.parse(this.state.paragraphs[paragraphId])}
+                             </div>
                              {!this.state.showPreview && (
                                 <Fragment>
                                    <QuillNoSSRWrapper

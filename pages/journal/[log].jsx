@@ -8,6 +8,13 @@ import ContentEditable from 'react-contenteditable'
 import { getLogsUris, getLog } from 'utils/logs'
 import { withRouter } from 'next/router'
 
+import { Fragment } from 'react'
+import dynamic from 'next/dynamic'
+const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+   ssr: false,
+   loading: () => <p>Loading ...</p>,
+})
+
 class Log extends Component {
    constructor(props) {
       super(props)
@@ -121,18 +128,37 @@ class Log extends Component {
                              <ContentEditable
                                 tagName='p'
                                 className={`${logStyles.paragraph}`}
-                                onChange={(event) => this.handleParagraphChange(event, paragraphId)}
+                                //   onChange={(event) => this.handleParagraphChange(event, paragraphId)}
                                 html={this.state.paragraphs[paragraphId]}
-                                disabled={this.state.showPreview}
+                                //   disabled={this.state.showPreview}
+                                disabled={true}
                              />
 
                              {!this.state.showPreview && (
-                                <input
-                                   type='button'
-                                   className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
-                                   value='Remove paragraph'
-                                   onClick={() => this.removeParagraph(paragraphId)}
-                                />
+                                <Fragment>
+                                   <QuillNoSSRWrapper
+                                      theme='snow'
+                                      value={this.state.paragraphs[paragraphId]}
+                                      onChange={(content) => {
+                                         const paragraphs = this.state.paragraphs
+                                            ? this.state.paragraphs.map((paragraph, id) => {
+                                                 if (id === paragraphId) {
+                                                    return content
+                                                 }
+
+                                                 return paragraph
+                                              })
+                                            : []
+                                         this.setState({ paragraphs: paragraphs })
+                                      }}
+                                   />
+                                   <input
+                                      type='button'
+                                      className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
+                                      value='Remove paragraph'
+                                      onClick={() => this.removeParagraph(paragraphId)}
+                                   />
+                                </Fragment>
                              )}
                           </div>
                        )

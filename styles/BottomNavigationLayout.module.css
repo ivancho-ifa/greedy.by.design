@@ -50,6 +50,10 @@
    padding: 0 1em;
 }
 
+.Navigation a {
+   text-decoration: none;
+}
+
 .icons {
    grid-area: icons;
 

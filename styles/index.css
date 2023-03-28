@@ -22,3 +22,20 @@ html::-webkit-scrollbar-thumb {
    --title-font-size-ratio-pc: 10.5263157895;
    --title-font-size-ratio-mobile: 4.55;
 }
+
+strong {
+   font-weight: bold;
+}
+
+em {
+   font-style: italic;
+}
+
+u {
+   text-decoration: underline;
+}
+
+a {
+   text-decoration: underline;
+   font-weight: bold;
+}

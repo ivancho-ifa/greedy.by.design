@@ -12,6 +12,10 @@
    padding-bottom: 8em;
 }
 
+.Journal a {
+   text-decoration: none;
+}
+
 .centralizer {
    display: flex;
    align-items: center;

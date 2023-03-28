@@ -12,6 +12,10 @@
    padding-bottom: 0;
 }
 
+.Home a {
+   text-decoration: none;
+}
+
 .layout {
    min-width: 100%;
    max-width: 100%;

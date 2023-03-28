@@ -8,15 +8,9 @@ import ContentEditable from 'react-contenteditable'
 import { getLogsUris, getLog } from 'utils/logs'
 import { withRouter } from 'next/router'
 import { Parser } from 'html-to-react'
+import QuillNoSSRWrapper from 'components/editors/Default'
 
 const htmlToReact = new Parser()
-
-import { Fragment } from 'react'
-import dynamic from 'next/dynamic'
-const QuillNoSSRWrapper = dynamic(import('react-quill'), {
-   ssr: false,
-   loading: () => <p>Loading ...</p>,
-})
 
 class Log extends Component {
    constructor(props) {
@@ -128,11 +122,13 @@ class Log extends Component {
                   ? this.state.paragraphs.map((_paragraph, paragraphId) => {
                        return (
                           <div key={paragraphId}>
-                             <div className={`${logStyles.paragraph}`}>
-                                {htmlToReact.parse(this.state.paragraphs[paragraphId])}
-                             </div>
+                             {this.state.showPreview && (
+                                <div className={`${logStyles.paragraph}`}>
+                                   {htmlToReact.parse(this.state.paragraphs[paragraphId])}
+                                </div>
+                             )}
                              {!this.state.showPreview && (
-                                <Fragment>
+                                <div className={`${logStyles.paragraph}`}>
                                    <QuillNoSSRWrapper
                                       theme='snow'
                                       value={this.state.paragraphs[paragraphId]}
@@ -155,7 +151,7 @@ class Log extends Component {
                                       value='Remove paragraph'
                                       onClick={() => this.removeParagraph(paragraphId)}
                                    />
-                                </Fragment>
+                                </div>
                              )}
                           </div>
                        )

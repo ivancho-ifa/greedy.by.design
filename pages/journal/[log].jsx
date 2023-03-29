@@ -8,7 +8,7 @@ import ContentEditable from 'react-contenteditable'
 import { getLogsUris, getLog } from 'utils/logs'
 import { withRouter } from 'next/router'
 import { Parser } from 'html-to-react'
-import QuillNoSSRWrapper from 'components/editors/Default'
+import ParagraphEditor from 'components/editors/Paragraph'
 
 const htmlToReact = new Parser()
 
@@ -129,8 +129,7 @@ class Log extends Component {
                              )}
                              {!this.state.showPreview && (
                                 <div className={`${logStyles.paragraph}`}>
-                                   <QuillNoSSRWrapper
-                                      theme='snow'
+                                   <ParagraphEditor
                                       value={this.state.paragraphs[paragraphId]}
                                       onChange={(content) => {
                                          const paragraphs = this.state.paragraphs

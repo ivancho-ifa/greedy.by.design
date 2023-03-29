@@ -9,7 +9,6 @@ export default function Paragraph({ value, onChange }) {
                [{ color: [] }, { background: [] }],
                ['bold', 'italic', 'underline', 'strike'],
                [{ list: 'ordered' }, { list: 'bullet' }],
-               [{ align: [] }],
                ['link'],
             ],
          }}

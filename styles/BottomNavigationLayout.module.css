@@ -9,11 +9,6 @@
          url('http://db.onlinewebfonts.com/t/2206d6cc490084998d531e8c1b2cbb4a.svg#Druk Wide Bold') format('svg'); /* iOS 4.1- */
 }
 
-.Navigation ul {
-   margin-left: 0;
-   list-style-type: none;
-}
-
 #root {
    min-height: 100vh;
 
@@ -53,10 +48,6 @@
    place-content: space-between;
 
    padding: 0 1em;
-}
-
-.Navigation a {
-   text-decoration: none;
 }
 
 .icons {

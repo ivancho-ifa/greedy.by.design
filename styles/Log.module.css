@@ -88,6 +88,36 @@
    margin: 1em auto;
 }
 
+.Log strong {
+   font-weight: bold;
+}
+
+.Log em {
+   font-style: italic;
+}
+
+.Log u {
+   text-decoration: underline;
+}
+
+.Log a {
+   text-decoration: underline;
+   font-weight: bold;
+}
+
+.Log ul,
+.Log ol {
+   margin-left: 1em;
+}
+
+.Log ul {
+   list-style-type: square;
+}
+
+.Log ol {
+   list-style-type: upper-roman;
+}
+
 @media screen and (max-width: 1200px) {
    .Log {
       grid-template-areas:

@@ -5,7 +5,6 @@ export default function Paragraph({ value, onChange }) {
       <Default
          modules={{
             toolbar: [
-               [{ font: [] }],
                [{ color: [] }, { background: [] }],
                ['bold', 'italic', 'underline', 'strike'],
                [{ list: 'ordered' }, { list: 'bullet' }],

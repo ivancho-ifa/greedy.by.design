@@ -100,7 +100,7 @@
    text-decoration: underline;
 }
 
-.Log a {
+.a {
    text-decoration: underline;
    font-weight: bold;
 }
@@ -116,6 +116,18 @@
 
 .Log ol {
    list-style-type: upper-roman;
+}
+
+.ql-font-serif {
+   font-family: 'Times New Roman', Times, serif;
+}
+
+.ql-font-sans-serif {
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+.ql-font-monospace {
+   font-family: 'Courier New', Courier, monospace;
 }
 
 @media screen and (max-width: 1200px) {

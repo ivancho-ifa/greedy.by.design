@@ -17,6 +17,10 @@ html::-webkit-scrollbar-thumb {
    height: 100%;
 }
 
+.ce-popover {
+   color: black;
+}
+
 :root {
    --padding-body: 0.5em;
    --title-font-size-ratio-pc: 10.5263157895;

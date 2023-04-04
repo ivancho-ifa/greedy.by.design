@@ -7,6 +7,11 @@ import sanitizeHtml from 'sanitize-html'
 import ContentEditable from 'react-contenteditable'
 import { getLogsUris, getLog } from 'utils/logs'
 import { withRouter } from 'next/router'
+import dynamic from 'next/dynamic'
+
+const Editor = dynamic(() => import('components/Editor'), {
+   ssr: false,
+})
 
 class Log extends Component {
    constructor(props) {
@@ -21,10 +26,14 @@ class Log extends Component {
          subtitle: this.props.log.subtitle,
          titleImage: this.props.log.titleImage,
          titleImageAlt: this.props.log.titleImageAlt,
-         paragraphs: this.props.log.paragraphs,
+         articleContent: this.props.log.articleContent || 'Write here',
          // Component state
          showPreview: true,
       }
+   }
+
+   setArticleContent = (articleContent) => {
+      this.setState({ articleContent: articleContent })
    }
 
    togglePreview = (event) => {
@@ -114,6 +123,14 @@ class Log extends Component {
             </header>
 
             <main className={`${logStyles.article}`}>
+               <Editor
+                  data={this.state.articleContent}
+                  onChange={this.setArticleContent}
+                  holder='editorjs-container'
+               />
+            </main>
+
+            {/* <main className={`${logStyles.article}`}>
                {this.state.paragraphs
                   ? this.state.paragraphs.map((_paragraph, paragraphId) => {
                        return (
@@ -148,7 +165,7 @@ class Log extends Component {
                      onClick={() => this.addParagraph()}
                   />
                )}
-            </main>
+            </main> */}
 
             {!this.state.showPreview && (
                <form id={`${editLogStyles.editPageForm}`}>

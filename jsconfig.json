@@ -1,5 +1,12 @@
 {
    "compilerOptions": {
       "baseUrl": "."
-   }
+   },
+   "exclude": [
+      "interface/web/.git",
+      "interface/web/.github",
+      "interface/web/.next",
+      "interface/web/build",
+      "interface/web/node_modules",
+   ],
 }

@@ -3,6 +3,7 @@ import Header from '@editorjs/header'
 import NestedList from '@editorjs/nested-list'
 import Quote from '@editorjs/quote'
 import Delimiter from '@editorjs/delimiter'
+import SimpleImage from '@editorjs/simple-image'
 
 export const EDITOR_TOOLS = {
    paragraph: Paragraph,
@@ -10,4 +11,5 @@ export const EDITOR_TOOLS = {
    list: { class: NestedList, inlineToolbar: true },
    delimiter: Delimiter,
    quote: Quote,
+   image: SimpleImage,
 }

@@ -8,7 +8,7 @@ import ContentEditable from 'react-contenteditable'
 import { getLogsUris, getLog } from 'utils/logs'
 import { withRouter } from 'next/router'
 import dynamic from 'next/dynamic'
-import Blocks from 'editorjs-blocks-react-renderer'
+import ArticleRenderer from 'components/editors/article/Renderer'
 
 const Editor = dynamic(() => import('components/editors/article/Editor'), {
    ssr: false,
@@ -136,7 +136,7 @@ class Log extends Component {
                      holder='editorjs-container'
                   />
                ) : (
-                  <Blocks data={this.state.articleContent} />
+                  <ArticleRenderer data={this.state.articleContent} />
                )}
             </main>
 

@@ -10,6 +10,9 @@ export default function Renderer({ data, config }) {
             paragraph: {
                className: logStyles.paragraph,
             },
+            header: {
+               className: logStyles.paragraphHeader,
+            },
          }}
       />
    )

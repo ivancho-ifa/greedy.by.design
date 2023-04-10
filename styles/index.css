@@ -21,6 +21,11 @@ html::-webkit-scrollbar-thumb {
    color: black;
 }
 
+.ce-header {
+   font-size: 1.5em;
+   font-weight: bolder;
+}
+
 :root {
    --padding-body: 0.5em;
    --title-font-size-ratio-pc: 10.5263157895;

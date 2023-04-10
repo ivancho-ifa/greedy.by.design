@@ -107,6 +107,11 @@ ol.list  {
    list-style: lower-roman;
 }
 
+.delimiter {
+   height: 1px;
+   margin: 1em auto;
+}
+
 @media screen and (max-width: 1200px) {
    .Log {
       grid-template-areas:

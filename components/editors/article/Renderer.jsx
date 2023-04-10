@@ -16,6 +16,9 @@ export default function Renderer({ data, config }) {
             list: {
                className: logStyles.list,
             },
+            delimiter: {
+               className: `${logStyles.collapsingBottomBorder} ${logStyles.delimiter}`,
+            },
          }}
       />
    )

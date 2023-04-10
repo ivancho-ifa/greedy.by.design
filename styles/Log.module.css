@@ -132,6 +132,7 @@ ol.list  {
 
 .image {
    text-align: center;
+   margin: 1em;
 }
 
 @media screen and (max-width: 1200px) {

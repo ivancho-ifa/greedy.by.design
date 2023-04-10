@@ -112,6 +112,24 @@ ol.list  {
    margin: 1em auto;
 }
 
+.quote {
+   border-left: 1px solid white;
+   padding-left: .5em;
+   font-style: italic;
+
+   margin: 1em auto;
+   font-size: 1.2em;
+}
+
+.quote footer {
+   font-size: .75em;
+   font-weight: bold;
+}
+
+.quote footer::before {
+   content: "~~";
+}
+
 @media screen and (max-width: 1200px) {
    .Log {
       grid-template-areas:

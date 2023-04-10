@@ -22,6 +22,9 @@ export default function Renderer({ data, config }) {
             quote: {
                className: `${logStyles.paragraph}, ${logStyles.quote}`,
             },
+            image: {
+               className: `${logStyles.image}`,
+            },
          }}
       />
    )

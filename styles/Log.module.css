@@ -130,6 +130,10 @@ ol.list  {
    content: "~~";
 }
 
+.image {
+   text-align: center;
+}
+
 @media screen and (max-width: 1200px) {
    .Log {
       grid-template-areas:

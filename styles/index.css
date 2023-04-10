@@ -26,6 +26,11 @@ html::-webkit-scrollbar-thumb {
    font-weight: bolder;
 }
 
+.cdx-nested-list {
+   list-style-position: outside;
+   padding-left: 2em;
+}
+
 :root {
    --padding-body: 0.5em;
    --title-font-size-ratio-pc: 10.5263157895;

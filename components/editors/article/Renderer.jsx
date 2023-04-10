@@ -13,6 +13,9 @@ export default function Renderer({ data, config }) {
             header: {
                className: logStyles.paragraphHeader,
             },
+            list: {
+               className: logStyles.list,
+            },
          }}
       />
    )

@@ -94,6 +94,19 @@
    font-weight: bolder;
 }
 
+.list {
+   list-style-position: outside;
+   padding-left: 2em;
+}
+
+ul.list  {
+   list-style: disc;
+}
+
+ol.list  {
+   list-style: lower-roman;
+}
+
 @media screen and (max-width: 1200px) {
    .Log {
       grid-template-areas:

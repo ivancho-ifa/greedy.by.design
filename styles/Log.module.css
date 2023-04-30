@@ -99,11 +99,11 @@
    padding-left: 2em;
 }
 
-ul.list  {
+ul.list {
    list-style: disc;
 }
 
-ol.list  {
+ol.list {
    list-style: lower-roman;
 }
 
@@ -114,7 +114,7 @@ ol.list  {
 
 .quote {
    border-left: 1px solid white;
-   padding-left: .5em;
+   padding-left: 0.5em;
    font-style: italic;
 
    margin: 1em auto;
@@ -122,12 +122,12 @@ ol.list  {
 }
 
 .quote footer {
-   font-size: .75em;
+   font-size: 0.75em;
    font-weight: bold;
 }
 
 .quote footer::before {
-   content: "~~";
+   content: '~~';
 }
 
 .image {

@@ -7,6 +7,12 @@ import sanitizeHtml from 'sanitize-html'
 import ContentEditable from 'react-contenteditable'
 import { getLogsUris, getLog } from 'utils/logs'
 import { withRouter } from 'next/router'
+import dynamic from 'next/dynamic'
+import ArticleRenderer from 'components/editors/article/Renderer'
+
+const Editor = dynamic(() => import('components/editors/article/Editor'), {
+   ssr: false,
+})
 
 class Log extends Component {
    constructor(props) {
@@ -22,9 +28,18 @@ class Log extends Component {
          titleImage: this.props.log.titleImage,
          titleImageAlt: this.props.log.titleImageAlt,
          paragraphs: this.props.log.paragraphs,
+         articleContent: this.props.log.articleContent,
          // Component state
          showPreview: true,
       }
+   }
+
+   setArticleContent = (articleContent) => {
+      console.log(`Current state: ${JSON.stringify(this.state.articleContent)}`)
+
+      this.setState({ articleContent: articleContent })
+
+      console.log(`Current state: ${JSON.stringify(this.state.articleContent)}`)
    }
 
    togglePreview = (event) => {
@@ -114,39 +129,14 @@ class Log extends Component {
             </header>
 
             <main className={`${logStyles.article}`}>
-               {this.state.paragraphs
-                  ? this.state.paragraphs.map((_paragraph, paragraphId) => {
-                       return (
-                          <div key={paragraphId}>
-                             <ContentEditable
-                                tagName='p'
-                                className={`${logStyles.paragraph}`}
-                                onChange={(event) => this.handleParagraphChange(event, paragraphId)}
-                                html={this.state.paragraphs[paragraphId]}
-                                disabled={this.state.showPreview}
-                             />
-
-                             {!this.state.showPreview && (
-                                <input
-                                   type='button'
-                                   className={`${editLogStyles.button} ${editLogStyles.editParagraphButton}`}
-                                   value='Remove paragraph'
-                                   onClick={() => this.removeParagraph(paragraphId)}
-                                />
-                             )}
-                          </div>
-                       )
-                    })
-                  : null}
-
-               {!this.state.showPreview && (
-                  <input
-                     type='button'
-                     id={`${editLogStyles.addParagraphButton}`}
-                     className={`${editLogStyles.button}`}
-                     value='Add new paragrpah'
-                     onClick={() => this.addParagraph()}
+               {!this.state.showPreview ? (
+                  <Editor
+                     data={this.state.articleContent}
+                     onChange={this.setArticleContent}
+                     holder='editorjs-container'
                   />
+               ) : (
+                  <ArticleRenderer data={this.state.articleContent} />
                )}
             </main>
 
@@ -256,6 +246,7 @@ class Log extends Component {
          titleImage: this.state.titleImage,
          titleImageAlt: this.state.titleImageAlt,
          paragraphs: this.state.paragraphs,
+         articleContent: this.state.articleContent,
       })
    }
 

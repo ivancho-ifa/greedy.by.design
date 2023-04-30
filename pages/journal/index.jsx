@@ -49,6 +49,11 @@ class Journal extends Component {
             titleImage: 'https://i49.vbox7.com/o/5f5/5f52f1b40.jpg',
             titleImageAlt: 'Title image alternative text',
             paragraphs: ['Paragraph'],
+            articleContent: {
+               time: Date.now(),
+               blocks: [],
+               version: '2.26.5',
+            },
          }),
       })
 

@@ -48,6 +48,8 @@
    place-content: space-between;
 
    padding: 0 1em;
+
+   z-index: 100;
 }
 
 .icons {

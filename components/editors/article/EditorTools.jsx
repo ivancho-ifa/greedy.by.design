@@ -6,15 +6,28 @@ import Delimiter from '@editorjs/delimiter'
 import SimpleImage from '@editorjs/simple-image'
 
 export const EDITOR_TOOLS = {
-   paragraph: Paragraph,
+   paragraph: {
+      class: Paragraph,
+      inlineToolbar: true,
+   },
    header: {
       class: Header,
+      inlineToolbar: true,
    },
    list: {
       class: NestedList,
       inlineToolbar: true,
    },
-   delimiter: Delimiter,
-   quote: Quote,
-   image: SimpleImage,
+   delimiter: {
+      class: Delimiter,
+      inlineToolbar: true,
+   },
+   quote: {
+      class: Quote,
+      inlineToolbar: true,
+   },
+   image: {
+      class: SimpleImage,
+      inlineToolbar: true,
+   },
 }

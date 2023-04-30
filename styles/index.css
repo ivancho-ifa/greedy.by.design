@@ -21,6 +21,10 @@ html::-webkit-scrollbar-thumb {
    color: black;
 }
 
+.ce-inline-toolbar {
+   color: black;
+}
+
 .ce-header {
    font-size: 1.5em;
    font-weight: bolder;

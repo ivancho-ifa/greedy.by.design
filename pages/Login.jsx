@@ -35,7 +35,9 @@ export default function Login() {
                <div className={loginStyles.signedInText}>
                   <small>Signed in as</small>
                   <br />
-                  <strong>{session.user.email ?? session.user.name}</strong>
+                  <strong>
+                     {session.user.email} {`[${session.user.name}]`}
+                  </strong>
                </div>
                <a
                   href={`/api/auth/signout`}

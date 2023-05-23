@@ -2,12 +2,5 @@
    "compilerOptions": {
       "baseUrl": "."
    },
-   "exclude": [
-      ".git",
-      ".github",
-      ".next",
-      ".vercel",
-      "build",
-      "node_modules"
-   ]
+   "exclude": [".git", ".github", ".next", ".vercel", "build", "node_modules"]
 }

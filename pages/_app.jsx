@@ -11,7 +11,7 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
 
    return (
       <Fragment>
-         <SessionProvider>
+         <SessionProvider session={session}>
             {getLayout(<Component {...pageProps} />)}
             <Analytics />
          </SessionProvider>

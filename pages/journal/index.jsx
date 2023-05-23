@@ -5,6 +5,7 @@ import { getLogs } from 'utils/logs'
 import { withRouter } from 'next/router'
 import { Component, Fragment } from 'react'
 import editJournalStyles from 'styles/EditJournal.module.css'
+import { isAdmin, withSession } from 'utils/auth'
 
 class Journal extends Component {
    constructor(props) {
@@ -19,7 +20,6 @@ class Journal extends Component {
    togglePreview = (event) => {
       if (event.key === 'Escape') {
          this.setState({ showPreview: !this.state.showPreview })
-         console.log(this.state.showPreview)
       }
    }
 
@@ -68,13 +68,16 @@ class Journal extends Component {
    }
 
    render() {
+      const { data: session, status } = this.props.session
+      console.log(`session: ${JSON.stringify(session)}, status: ${status}`)
+
       return (
          <div className={`${journalStyles.Journal} ${journalStyles.centralizer}`}>
             <div className={`${journalStyles.logs}`}>
                {this.props.logs.map((log, logId) => {
                   return (
                      <Fragment key={logId}>
-                        {(!log.draft || (log.draft && !this.state.showPreview)) && (
+                        {(!log.draft || (log.draft && isAdmin(session) && !this.state.showPreview)) && (
                            <LogThumbnail
                               log={log}
                               showPreview={this.state.showPreview}
@@ -83,7 +86,7 @@ class Journal extends Component {
                      </Fragment>
                   )
                })}
-               {!this.state.showPreview ? (
+               {isAdmin(session) && !this.state.showPreview ? (
                   <form
                      className={`${editJournalStyles.addLog}`}
                      onSubmit={this.addLog}
@@ -120,10 +123,11 @@ class Journal extends Component {
    }
 }
 
-const WithRouterWrapper = withRouter(Journal)
-WithRouterWrapper.getLayout = Journal.getLayout
+Journal = withSession(Journal)
+Journal = withRouter(Journal)
+Journal.getLayout = Journal.getLayout
 
-export default WithRouterWrapper
+export default Journal
 
 export async function getServerSideProps() {
    return {

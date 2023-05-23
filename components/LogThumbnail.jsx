@@ -5,6 +5,8 @@ import { useState, Fragment } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
+import { isAdmin } from 'utils/auth'
 
 export default function LogThumbnail({ log, showPreview }) {
    const [isImageShown, setIsImageShown] = useState(false)
@@ -13,6 +15,7 @@ export default function LogThumbnail({ log, showPreview }) {
    const [uri, setUri] = useState(log._id)
    const [deleted, setDeleted] = useState(false)
    const router = useRouter()
+   const { data: session, status } = useSession()
 
    const handleUriChange = (event) => {
       setNewUri(event.target.value)
@@ -118,7 +121,7 @@ export default function LogThumbnail({ log, showPreview }) {
             </div>
          </Link>
 
-         {!showPreview ? (
+         {isAdmin(session) && !showPreview ? (
             <form
                className={`${editLogStyles.uriChange}`}
                onSubmit={submitUriChange}

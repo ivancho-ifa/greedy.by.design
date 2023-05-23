@@ -9,6 +9,7 @@ import { getLogsUris, getLog } from 'utils/logs'
 import { withRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import ArticleRenderer from 'components/editors/article/Renderer'
+import { isAdmin, withSession } from 'utils/auth'
 
 const Editor = dynamic(() => import('components/editors/article/Editor'), {
    ssr: false,
@@ -57,6 +58,8 @@ class Log extends Component {
    }
 
    render() {
+      const { data: session, status } = this.props.session
+
       return (
          <div className={`${logStyles.Log}`}>
             <div className={`${logStyles.logTimeWrapper}`}>
@@ -79,7 +82,7 @@ class Log extends Component {
                      fill
                   />
 
-                  {!this.state.showPreview && (
+                  {isAdmin(session) && !this.state.showPreview && (
                      <form id={`${editLogStyles.titleImageForm}`}>
                         <label
                            id={`${editLogStyles.titleImageLabel}`}
@@ -117,19 +120,19 @@ class Log extends Component {
                   className={`${logStyles.title}`}
                   onChange={(event) => this.handleTitleChange(event)}
                   html={this.state.title}
-                  disabled={this.state.showPreview}
+                  disabled={isAdmin(session) && this.state.showPreview}
                />
                <ContentEditable
                   tagName='h2'
                   className={`${logStyles.subtitle}`}
                   onChange={(event) => this.handleSubtitleChange(event)}
                   html={this.state.subtitle}
-                  disabled={this.state.showPreview}
+                  disabled={isAdmin(session) && this.state.showPreview}
                />
             </header>
 
             <main className={`${logStyles.article}`}>
-               {!this.state.showPreview ? (
+               {isAdmin(session) && !this.state.showPreview ? (
                   <Editor
                      data={this.state.articleContent}
                      onChange={this.setArticleContent}
@@ -140,7 +143,7 @@ class Log extends Component {
                )}
             </main>
 
-            {!this.state.showPreview && (
+            {isAdmin(session) && !this.state.showPreview && (
                <form id={`${editLogStyles.editPageForm}`}>
                   <input
                      type='button'
@@ -255,10 +258,11 @@ class Log extends Component {
    }
 }
 
-const WithRouterWrapper = withRouter(Log)
-WithRouterWrapper.getLayout = Log.getLayout
+Log = withRouter(Log)
+Log = withSession(Log)
+Log.getLayout = Log.getLayout
 
-export default WithRouterWrapper
+export default Log
 
 export async function getStaticPaths() {
    return {

@@ -5,12 +5,20 @@ module.exports = {
     './pages/**/*.jsx',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'red': '#ff0000',
+        'gray': '#808080',
+      },
+    },
     fontFamily: {
       'sans': [
         'Helvetica',
         'sans-serif'
       ],
+    },
+    fontSize: {
+      base: '1.5rem'
     },
   },
   plugins: [],

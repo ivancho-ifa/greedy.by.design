@@ -1,5 +1,4 @@
 import BottomNavigationLayout from 'components/BottomNavigationLayout'
-import journalStyles from 'styles/Journal.module.css'
 import LogThumbnail from 'components/LogThumbnail'
 import { getLogs } from 'utils/logs'
 import { withRouter } from 'next/router'
@@ -72,8 +71,8 @@ class Journal extends Component {
       console.log(`session: ${JSON.stringify(session)}, status: ${status}`)
 
       return (
-         <div className={`${journalStyles.Journal} ${journalStyles.centralizer}`}>
-            <div className={`${journalStyles.logs}`}>
+         <div className='grid h-fit min-h-screen min-w-full max-w-full grid-cols-1 items-center justify-center justify-items-center bg-black pb-8 font-sans uppercase text-white'>
+            <div className='w-11/12 md:w-3/4 xl:w-1/2'>
                {this.props.logs.map((log, logId) => {
                   return (
                      <Fragment key={logId}>

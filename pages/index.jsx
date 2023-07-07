@@ -10,16 +10,7 @@ export default function Home() {
                <ul>
                   <li>home</li>
                   <li>
-                     <Link href='/studio'>studio</Link>
-                  </li>
-                  <li>
-                     <Link href='/projects'>projects</Link>
-                  </li>
-                  <li>
                      <Link href='/journal'>journal</Link>
-                  </li>
-                  <li>
-                     <Link href='/shop'>shop</Link>
                   </li>
                   <li>
                      <Link href='/contact'>contact</Link>

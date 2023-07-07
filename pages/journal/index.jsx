@@ -125,7 +125,9 @@ class Journal extends Component {
 
 Journal = withSession(Journal)
 Journal = withRouter(Journal)
-Journal.getLayout = Journal.getLayout
+Journal.getLayout = (page) => {
+   return <BottomNavigationLayout>{page}</BottomNavigationLayout>
+}
 
 export default Journal
 

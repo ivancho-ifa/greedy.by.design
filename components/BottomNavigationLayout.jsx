@@ -44,17 +44,8 @@ export default function BottomNavigationLayout({ children }) {
                <li className={`${navigationStyles.home}`}>
                   <Link href='/'>home</Link>
                </li>
-               <li className={`${navigationStyles.studio}`}>
-                  <Link href='/studio'>studio</Link>
-               </li>
-               <li className={`${navigationStyles.projects}`}>
-                  <Link href='/projects'>projects</Link>
-               </li>
                <li className={`${navigationStyles.journal}`}>
                   <Link href='/journal'>journal</Link>
-               </li>
-               <li className={`${navigationStyles.shop}`}>
-                  <Link href='/shop'>shop</Link>
                </li>
                <li className={`${navigationStyles.contact}`}>
                   <Link href='/contact'>contact</Link>

@@ -5,8 +5,5 @@ module.exports = {
     autoprefixer: {},
     tailwindcss: {},
     'tailwindcss/nesting': {},
-    'postcss-preset-env': {
-      features: { 'nesting-rules': false },
-    },
   },
 }

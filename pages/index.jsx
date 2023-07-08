@@ -13,6 +13,9 @@ export default function Home() {
                      <Link href='/journal'>journal</Link>
                   </li>
                   <li>
+                     <Link href='/shop'>shop</Link>
+                  </li>
+                  <li>
                      <Link href='/contact'>contact</Link>
                   </li>
                </ul>

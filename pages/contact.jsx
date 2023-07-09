@@ -7,7 +7,7 @@ export default function Contact() {
             <form
                action='mailto:greedybydesign@gmail.com'
                method='get'
-               enctype='text/plain'
+               encType='text/plain'
                className='grid grid-cols-[1fr] grid-rows-[auto_auto_1fr_auto] gap-[1em] md:grid-cols-[1fr_1fr] md:grid-rows-[auto_1fr_auto]'
             >
                <input

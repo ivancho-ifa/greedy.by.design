@@ -1,7 +1,11 @@
 import navigationStyles from 'styles/BottomNavigationLayout.module.css'
-
+import localFont from '@next/font/local'
 import Link from 'next/link'
 import { useRef, useState, useEffect } from 'react'
+
+const drukWideBold = localFont({
+   src: '../public/fonts/Druk-Wide-Bold.ttf',
+})
 
 export default function BottomNavigationLayout({ children }) {
    const navigation = useRef()
@@ -24,7 +28,7 @@ export default function BottomNavigationLayout({ children }) {
          </div>
 
          <nav
-            className={`${navigationStyles.Navigation} ${navigationStyles.row} ${navigationStyles.spreadChildren} ${navigationStyles.padded}}`}
+            className={`${drukWideBold.className} ${navigationStyles.Navigation} ${navigationStyles.row} ${navigationStyles.spreadChildren} ${navigationStyles.padded}}`}
             ref={navigation}
             style={{ position: 'fixed', bottom: 0 }}
          >

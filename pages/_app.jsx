@@ -1,5 +1,4 @@
 import 'styles/global.css'
-import 'styles/fonts.css'
 import { Analytics } from '@vercel/analytics/react'
 import { Fragment } from 'react'
 import { SessionProvider } from 'next-auth/react'

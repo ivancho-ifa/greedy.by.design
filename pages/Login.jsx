@@ -1,19 +1,18 @@
 import BottomNavigationLayout from 'components/BottomNavigationLayout'
 import { useSession, signIn, signOut } from 'next-auth/react'
-import loginStyles from 'styles/Login.module.css'
 
 export default function Login() {
    const { data: session, status } = useSession()
 
    return (
-      <div className={`${loginStyles.Login}`}>
+      <div className='grid h-full place-items-center bg-[black] text-center font-sans text-[white]'>
          {!session && (
             <div>
-               <div className={loginStyles.notSignedInText}>You are not signed in</div>
+               <div>You are not signed in</div>
                <div>
                   <a
                      href={`/api/auth/signin`}
-                     className={loginStyles.button}
+                     className='m-[1em] block border border-solid border-[red] px-[1.5em] py-[1em] text-[red]'
                      onClick={(e) => {
                         e.preventDefault()
                         signIn()
@@ -26,13 +25,8 @@ export default function Login() {
          )}
          {session?.user && (
             <div>
-               {session.user.image && (
-                  <div
-                     style={{ backgroundImage: `url('${session.user.image}')` }}
-                     className={loginStyles.avatar}
-                  />
-               )}
-               <div className={loginStyles.signedInText}>
+               {session.user.image && <div style={{ backgroundImage: `url('${session.user.image}')` }} />}
+               <div>
                   <small>Signed in as</small>
                   <br />
                   <strong>
@@ -41,7 +35,7 @@ export default function Login() {
                </div>
                <a
                   href={`/api/auth/signout`}
-                  className={loginStyles.button}
+                  className='m-[1em] block border border-solid border-[red] px-[1.5em] py-[1em] text-[red]'
                   onClick={(e) => {
                      e.preventDefault()
                      signOut()

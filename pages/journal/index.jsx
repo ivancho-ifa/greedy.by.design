@@ -1,10 +1,8 @@
 import BottomNavigationLayout from 'components/BottomNavigationLayout'
-import journalStyles from 'styles/Journal.module.css'
 import LogThumbnail from 'components/LogThumbnail'
 import { getLogs } from 'utils/logs'
 import { withRouter } from 'next/router'
 import { Component, Fragment } from 'react'
-import editJournalStyles from 'styles/EditJournal.module.css'
 import { isAdmin, withSession } from 'utils/auth'
 
 class Journal extends Component {
@@ -72,8 +70,8 @@ class Journal extends Component {
       console.log(`session: ${JSON.stringify(session)}, status: ${status}`)
 
       return (
-         <div className={`${journalStyles.Journal} ${journalStyles.centralizer}`}>
-            <div className={`${journalStyles.logs}`}>
+         <div className='grid h-fit min-h-screen min-w-full max-w-full grid-cols-1 items-center justify-center justify-items-center bg-black pb-8 font-sans uppercase text-white'>
+            <div className='w-11/12 md:w-3/4 xl:w-1/2'>
                {this.props.logs.map((log, logId) => {
                   return (
                      <Fragment key={logId}>
@@ -88,27 +86,28 @@ class Journal extends Component {
                })}
                {isAdmin(session) && !this.state.showPreview ? (
                   <form
-                     className={`${editJournalStyles.addLog}`}
+                     className='p-2 pt-1 text-base text-gray'
                      onSubmit={this.addLog}
                   >
                      <div>
                         <label
-                           htmlFor={`${editJournalStyles.addLogInput}`}
-                           className={`${editJournalStyles.label}`}
+                           htmlFor='newLogId'
+                           className='block'
                         >
                            Create log:
                         </label>
-                        <label htmlFor={`${editJournalStyles.addLogInput}`}>{this.props.router.asPath}/</label>
+                        <label htmlFor='newLogId'>{this.props.router.asPath}/</label>
                         <input
                            type='text'
-                           id={`${editJournalStyles.addLogInput}`}
+                           id='newLogId'
+                           className='overflow-ellipsis border-red bg-black text-red placeholder:overflow-ellipsis placeholder:border-red placeholder:text-red'
                            value={this.state.uri}
                            onChange={this.handleUriChange}
                         />
                      </div>
                      <input
                         type='submit'
-                        className={`${editJournalStyles.button}`}
+                        className='mt-0.5 w-full border border-solid border-gray px-3 py-3 text-center uppercase text-gray'
                         value='Add log'
                      />
                   </form>

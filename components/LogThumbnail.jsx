@@ -1,4 +1,3 @@
-import logStyles from 'styles/LogThumbnail.module.css'
 import editLogStyles from 'styles/EditLogThumbnail.module.css'
 
 import { useState, Fragment } from 'react'
@@ -83,7 +82,7 @@ export default function LogThumbnail({ log, showPreview }) {
             }}
          >
             <Image
-               className={`${logStyles.titleImage}`}
+               className='h-auto max-w-[12em]'
                src={log.titleImage}
                alt={log.titleImageAlt}
                fill
@@ -102,20 +101,17 @@ export default function LogThumbnail({ log, showPreview }) {
       <Fragment>
          <Link href={`${router.asPath}/${uri}`}>
             <div
-               className={`
-               ${logStyles.Log}
-               ${logStyles.padded}
-               ${logStyles.collapsingTopBottomBorder}
-               ${log.draft ? logStyles.draft : logStyles.published}
-            `}
+               className={`px-[0.5em] py-[0.8em] shadow-[0_0_0_0,0_0.1em_0_0,0_0.1em_0_0,0_0_0_0_inset,0_0.1em_0_0_inset] ${
+                  log.draft ? 'text-[gray]' : 'text-[white]'
+               }`}
                onMouseEnter={handleEnter}
                onMouseLeave={handleLeave}
             >
                <header>
-                  <p className={`${logStyles.subtitle}`}>
+                  <p className='text-[0.6em]'>
                      <time dateTime={date}>{date.toLocaleDateString()}</time>
                   </p>
-                  <h2 className={`${logStyles.title}`}>{log.title}</h2>
+                  <h2 className='text-[1.2em]'>{log.title}</h2>
                   {isImageShown ? getImage() : null}
                </header>
             </div>

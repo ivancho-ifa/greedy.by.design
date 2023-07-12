@@ -252,15 +252,13 @@ class Log extends Component {
          articleContent: this.state.articleContent,
       })
    }
-
-   static getLayout(page) {
-      return <BottomNavigationLayout>{page}</BottomNavigationLayout>
-   }
 }
 
 Log = withRouter(Log)
 Log = withSession(Log)
-Log.getLayout = Log.getLayout
+Log.getLayout = (page) => {
+   return <BottomNavigationLayout>{page}</BottomNavigationLayout>
+}
 
 export default Log
 
